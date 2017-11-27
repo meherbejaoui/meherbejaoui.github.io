@@ -58,7 +58,7 @@ Here is simple math. Go to town!
 ```
 
 ## Challenge for you
-The arithmetic operators in Python are:
+The arithmetic operators in Python are:  
 ```python
     +   -   *   /   **   %   //
 ```
@@ -97,11 +97,11 @@ print("The sin of  90 degrees is:", math.sin(math.radians(90)))
 ```
 
 - The `import` statement imports the module into the namespace
-- Then access functions (or constants) by using:
+- Then access functions (or constants) by using:  
 ```python
 <module>.<function>
 ```      
-- And get help on what is in the module by using:
+- And get help on what is in the module by using:  
 ```python
     help(<module>)
 ```
