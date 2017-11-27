@@ -2,6 +2,8 @@
 title: "Python Intro"
 excerpt: "Intro to Python"
 categories: blog
+header:
+  teaser: /assets/images/python-powered.png
 author_profile: false
 tags:
 - python
