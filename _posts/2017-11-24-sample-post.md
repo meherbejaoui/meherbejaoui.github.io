@@ -2,7 +2,7 @@
 title: "Sample post 1"
 excerpt: "A post for testing purposes."
 header:
-  teaser: /assets/images/site-logo1.jpg
+  teaser: /assets/images/site-logo2.jpg
 categories: blog
 tags:
 - python

@@ -1,6 +1,8 @@
 ---
 title: "Un article"
 excerpt: "Un article en français"
+header:
+  teaser: /assets/images/site-logo1.jpg
 categories: french
 tags:
 - python
