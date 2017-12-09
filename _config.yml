@@ -16,7 +16,7 @@ description              : "Personal and educational blog by Meher Béjaoui - Py
 url                      : "http://meherbejaoui.com" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "meherbejaoui/meherbejaoui.github.io" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
-teaser                   : /assets/images/site-logo.jpg # path of fallback teaser image, e.g. "/assets/images/500x300.png"
+teaser                   : /assets/images/site-logo2.jpg # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
 comments:

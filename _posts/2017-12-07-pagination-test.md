@@ -2,7 +2,7 @@
 title: "Pagination test"
 categories: blog
 header:
-  teaser: /assets/images/python-powered.png
+  teaser: /assets/images/python-powered2.jpg
 author_profile: false
 ---
 
