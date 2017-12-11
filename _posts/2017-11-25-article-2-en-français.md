@@ -2,7 +2,7 @@
 title: "Un article"
 excerpt: "Un article en français"
 header:
-  teaser: /assets/images/site-logo1.jpg
+  teaser: /assets/images/site-logo.jpg
 categories: french
 tags:
 - python

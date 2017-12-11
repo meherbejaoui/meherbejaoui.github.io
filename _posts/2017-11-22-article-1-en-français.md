@@ -2,7 +2,6 @@
 title: "Article en français"
 excerpt: "Une publication en français"
 categories: french
-author_profile: false
 tags:
 - python
 - numpy

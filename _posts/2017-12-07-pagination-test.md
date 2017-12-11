@@ -3,7 +3,6 @@ title: "Pagination test"
 categories: blog
 header:
   teaser: /assets/images/python-powered.jpg
-author_profile: false
 ---
 
 # Bienvenue à Python 101
