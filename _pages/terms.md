@@ -36,8 +36,11 @@ Google Analytics is a web analytics tool used to help understand how visitors en
 #### Google Adsense
 
 Google Adsense, a third party service, uses cookies to track interactions when clicking on a link or ad banner. You can read [Google Adsense Privacy Policy](https://support.google.com/adsense/bin/answer.py?hl=en&answer=48182).  
-***
-All original content available on this website is released under a [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/) (CC BY-SA 4.0) License unless otherwise noted. Basically, this means you are free to share and adapt, even commercially, as long as you give appropriate credit, provide a link to the license, and indicate if changes were made. And If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
+
+***  
+
+All original content available on this website is released under a [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/) (CC BY-SA 4.0) License unless otherwise noted. Basically, this means you are free to share and adapt, even commercially, as long as you give appropriate credit, provide a link to the license, and indicate if changes were made. And If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.  
+
 ***
 
 <p align="center">Your use of this website, in any and all forms, constitutes an acceptance of these terms and policies.  </p>
