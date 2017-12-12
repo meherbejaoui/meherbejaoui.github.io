@@ -6,3 +6,5 @@ main:
     url: /blog/
   - title: "En Français"
     url: /french/
+  - title: "Terms and Privacy Policies"
+    url: /terms/

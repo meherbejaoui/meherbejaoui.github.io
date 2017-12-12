@@ -1,10 +1,9 @@
 ---
 title: "About"
-excerpt: "About me"
-sitemap: false
+excerpt: "About Meher Béjaoui"
 permalink: /about.html
 author_profile: false
 ---
 
-Great things in business are never done by one person. They're done by a team of people. *Steve Jobs.*  
-**Coming Soon.**
+<p align="center"> Great things in business are never done by one person. They're done by a team of people. <i>Steve Jobs.</i>  </p>
+<p align="center"><b>Coming Soon.</b></p>
