@@ -11,12 +11,11 @@ tags:
 ---
 
 ***
-
 ## Sommaire
 
 - [Introduction à Python](#utiliser-python-comme-une-calculatrice) 
 - [Contrôle du flux](#controle-du-flux)
-- [Structures de données](#structures-de-donnees)
+- [Structures de données](#structures-de-données)
 - [Modules](#modules)
 
 ***
