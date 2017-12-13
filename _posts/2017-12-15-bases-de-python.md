@@ -9,12 +9,11 @@ tags:
 - tutoriel
 - python
 ---
-
 ***
 ## Sommaire
 
 - [Introduction à Python](#utiliser-python-comme-une-calculatrice) 
-- [Contrôle du flux](#controle-du-flux)
+- [Contrôle du flux](#contrôle-du-flux)
 - [Structures de données](#structures-de-données)
 - [Modules](#modules)
 
