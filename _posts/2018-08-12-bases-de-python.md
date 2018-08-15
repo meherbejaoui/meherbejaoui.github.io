@@ -19,8 +19,8 @@ tags:
 
 ***
 ### Utiliser Python comme une calculatrice
-Après avoir installé Python, vous pouvez ouvrir une *console* ou *l'invite de commande*, tapez python et un intepréteur Python s'ouvre.
-Pour l'instant, nous utilisons ce notebook.  
+Après avoir [installé Python](https://docs.python.org/3/using/windows.html#installing-python), vous pouvez ouvrir une *console* ou *l'invite de commande*, tapez python et un intepréteur Python s'ouvre.
+Pour l'instant, nous utilisons ce [notebook](/assets/IntroductionPython.ipynb).  
 Essayons quelques commandes Python simples
 
 
@@ -78,7 +78,7 @@ Le signe égal ( `=` ) permet d'affecter une valeur à une variable
 hauteur = 7
 base = 9
 aire_du_triangle = (hauteur * base) / 2
-aire_du_triangl    # pour afficher le résultat {to talk about errors and their importance}
+aire_du_triangl    # parlons des erreurs dans l'affichage des résultats
 ```
 
 ***
