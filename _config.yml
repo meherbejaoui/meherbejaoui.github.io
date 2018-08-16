@@ -53,6 +53,10 @@ atom_feed:
   path                   : # blank (default) uses feed.xml
 
 search: true
+search_full_content      : # true, false (default)
+google:
+  search_engine_id       : # YOUR_SEARCH_ENGINE_ID
+instant_search         : # false (default), true
 
 # SEO Related
 google_site_verification :
