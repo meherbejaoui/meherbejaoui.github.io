@@ -29,6 +29,12 @@
       </div>
     {% endif %}
 
+<!-- adsense snippet -->
+{% if page.adallow != 0 %}
+  {% include adsplaceholder-1.html %}  
+{% endif %}
+<!-- adsense snippet -->
+
     <div class="page__footer">
       <footer>
         {% include footer/custom.html %}
