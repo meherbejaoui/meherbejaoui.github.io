@@ -22,18 +22,17 @@
     <div class="initial-content">
       {{ content }}
     </div>
+<!-- adsense snippet 
+{% if page.adallow != 0 %}
+  {% include adsplace.html %}  
+{% endif %}
+ adsense snippet -->
 
     {% if site.search == true %}
       <div class="search-content">
         {% include search/search_form.html %}
       </div>
     {% endif %}
-
-<!-- adsense snippet -->
-{% if page.adallow != 0 %}
-  {% include adsplace.html %}  
-{% endif %}
-<!-- adsense snippet -->
 
     <div class="page__footer">
       <footer>

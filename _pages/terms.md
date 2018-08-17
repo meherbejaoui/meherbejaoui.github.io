@@ -3,7 +3,7 @@ title: "Terms and Privacy Policies"
 author_profile: false
 permalink: /terms/
 ---
-
+{% include adsplace.html %}
 ## Privacy Policy
 
 The privacy of all visitors is extremely important. This Privacy Policy outlines the types of personal information that is received and collected and how it is used.
