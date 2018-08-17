@@ -504,5 +504,4 @@ from random import randint
 n = randint(1, 100)
 ```  
   
-{% include adsplace.html %}
 Pour plus de détails sur n'importe quel objet,  fonction ou module, utiliser : **`help(<nom>)`** 
