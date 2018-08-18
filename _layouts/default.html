@@ -18,16 +18,14 @@
 
     {% include browser-upgrade.html %}
     {% include masthead.html %}
-    {% include adsplace.html %}
-    <!--{% include adssimple.html %} -->
     <div class="initial-content">
       {{ content }}
     </div>
-<!-- adsense snippet 
+<!-- adsense snippet-->
 {% if page.adallow != 0 %}
-  {% include adsplace.html %}  
+  {% include adssimple.html %}  
 {% endif %}
- adsense snippet -->
+ 
 
     {% if site.search == true %}
       <div class="search-content">
