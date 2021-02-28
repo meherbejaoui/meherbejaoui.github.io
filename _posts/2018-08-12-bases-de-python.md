@@ -5,6 +5,7 @@ categories: french
 header:
   teaser: /assets/images/python-powered.jpg
 author_profile: false
+classes: wide
 tags:
 - tutoriel
 - python
@@ -12,7 +13,7 @@ tags:
 ***
 ## Sommaire
 
-- [Introduction à Python](#utiliser-python-comme-une-calculatrice) 
+- [Introduction à Python](#utiliser-python-comme-une-calculatrice)
 - [Contrôle du flux](#contrôle-du-flux)
 - [Structures de données](#structures-de-données)
 - [Modules](#modules)
@@ -28,14 +29,14 @@ Essayons quelques commandes Python simples
 2+3 # Un commentaire
 ```
 
- 
+
 
 
 ```python
 20 + 11 * 3
 ```
 
- 
+
 
 
 ```python
@@ -49,14 +50,14 @@ Les nombres entiers (comme 2, 3 et 11) sont de type **`int`**, alors que les dé
 19 / 3 # La division (/) donne toujours un nombre de type 'float'
 ```
 
- 
+
 
 
 ```python
 19 // 3 # L'opérateur (//) effectue des divisions entières
 ```
 
- 
+
 
 
 ```python
@@ -67,7 +68,7 @@ Il est possible de calculer des puissances (X<sup> y</sup>) avec l’opérateur 
 
 
 ```python
-3 ** 2 
+3 ** 2
 # 11 ** 12. # les opérations avec des types d'opérandes mélangés donnent un résultat en virgule flottante
 ```
 
@@ -91,7 +92,7 @@ Les chaînes de caractères peuvent être exprimés de différentes manières :
 "Hello" # guillemets doubles
 ```
 
- 
+
 
 
 ```python
@@ -99,7 +100,7 @@ Les chaînes de caractères peuvent être exprimés de différentes manières :
 # "de l'art" # ou utiliser les guillemets doubles
 ```
 
- 
+
 
 
 ```python
@@ -127,7 +128,7 @@ print('C:\Documents\nom')
 ```
 
 Utilisez des triples guillemets : `'''abc'''` ou `"""xyz"""` pour écrire des chaînes de caractères qui s'étalent sur plusieurs lignes.  
-  
+
 Empêcher le retour à la ligne en ajoutant **`\`**
 
 
@@ -179,7 +180,7 @@ phrase[0:2] # caractères de la position 0 (inclut) à 2 (exclu)
 # phrase[5:20] # gérés silencieusement si utilisés dans des tranches
 ```
 
-Les chaînes de caractères sont `immutable` : elles ne peuvent pas être modifiées. 
+Les chaînes de caractères sont `immutable` : elles ne peuvent pas être modifiées.
 
 
 ```python
@@ -235,12 +236,12 @@ Il est possible de changer le contenu des listes : elles sont `mutables`
 
 
 ```python
-nbres = [1, 2, 'c', 4] 
+nbres = [1, 2, 'c', 4]
 # nbres[2] = 3
 nbres
 ```
 
- 
+
 
 
 ```python
@@ -248,12 +249,12 @@ nbres.append(5) # méthode pour ajouter des éléments à la fin
 nbres
 ```
 
- 
+
 
 
 ```python
 nbres[2:4] = [10, 100] # affectation par tranches
-# nbres[:] = [] # supprimer toutes les valeurs 
+# nbres[:] = [] # supprimer toutes les valeurs
 nbres
 ```
 
@@ -277,7 +278,7 @@ Elle consiste en deux crochets contenants une expression suivie par une clause *
 [x for x in range(6) if x % 2 == 0]
 ```
 
- 
+
 
 
 ```python
@@ -298,7 +299,7 @@ else:
     print ('bar')    # x % 2 != 0
 ```
 
- 
+
 
 
 ```python
@@ -321,7 +322,7 @@ for p in pays:
     print (p, len(p))
 ```
 
- 
+
 
 
 ```python
@@ -330,11 +331,11 @@ for c in mot:
     print (c)
 ```
 
- 
+
 
 
 ```python
-for i in range(1, 4): 
+for i in range(1, 4):
     print (i ** 2)
 ```
 
@@ -361,12 +362,12 @@ def add(n):         # calculer la somme des chiffres de 1 à n
 add(3)
 # add(10)
 
-# somme # n'est pas défini 'globalement' 
+# somme # n'est pas défini 'globalement'
 # somme = 100        # variable globale
 # somme
 ```
 
- 
+
 
 
 ```python
@@ -375,13 +376,13 @@ def fib(a, b, n):
     while a < n:
         print(a, end=' ')
         a, b = b, a+b
-fib(5, 8, 2000) '''{même les fonctions sans instruction 
+fib(5, 8, 2000) '''{même les fonctions sans instruction
                  return renvoient une valeur, quoique ennuyeuse. Cette valeur est appelée None }'''
 ```
 
 ***
 ### Structures de données
-#### Tuples 
+#### Tuples
 Une séquence d'éléments séparés par des virgules (et encadrés par des parenthèses si nécessaire)
 
 
@@ -394,21 +395,21 @@ t
 # n
 ```
 
- 
+
 
 
 ```python
 n[1] = 'Guido van Rossum' # ils sont immutables
-# n[3][1] = 100 
+# n[3][1] = 100
 n
 ```
 
- 
+
 
 
 ```python
 vide = () # initier un tuple vide
-# un = 'python', 
+# un = 'python',
 ```
 
 #### Les ensembles (`sets`)
@@ -422,7 +423,7 @@ notes
 # fruits
 ```
 
- 
+
 
 
 ```python
@@ -446,7 +447,7 @@ d = {} # créer un dictionnaire vide
 d
 ```
 
- 
+
 
 
 ```python
@@ -474,7 +475,7 @@ import <module> # importer le module dans la table des symboles
 ```   
 Pour importer les noms d'un **`<module_1>`** directement dans la table des symboles du module qui l'importe (**`<module_2>`**). De ce fait, le nom du **`<module_1>`** n'est pas défini à l'intérieur du **`<module_2>`**
 ```python
-from <module> import <fonction_1>, <fonction_2>, <fonction_n> 
+from <module> import <fonction_1>, <fonction_2>, <fonction_n>
 ```
 Ou bien
 ```python
@@ -503,5 +504,5 @@ Penser à utiliser la fonction **`randint`** du module **`random`** pour génér
 from random import randint
 n = randint(1, 100)
 ```  
-  
-Pour plus de détails sur n'importe quel objet,  fonction ou module, utiliser : **`help(<nom>)`** 
+
+Pour plus de détails sur n'importe quel objet,  fonction ou module, utiliser : **`help(<nom>)`**

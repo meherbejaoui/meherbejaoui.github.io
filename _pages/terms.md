@@ -2,6 +2,7 @@
 title: "Terms and Privacy Policies"
 author_profile: false
 permalink: /terms/
+classes: wide
 ---
 
 ## Privacy Policy

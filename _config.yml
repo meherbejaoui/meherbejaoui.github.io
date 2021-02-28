@@ -85,9 +85,6 @@ author:
   location         : "Tunisia"
   email            : "meher.bejaoui@outlook.com"
   links            :
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:meher.bejaoui@outlook.com"
     - label: "linkedin"
       icon: "fab fa-fw fa-linkedin"
       url:  "https://www.linkedin.com/in/meherbejaoui"
