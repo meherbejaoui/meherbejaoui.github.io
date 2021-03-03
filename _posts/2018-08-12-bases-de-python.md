@@ -1,7 +1,7 @@
 ---
 title: "Les bases de Python"
 excerpt: "Les bases du langage Python par Meher Béjaoui"
-categories: french
+categories: python
 header:
   teaser: /assets/images/python-powered.jpg
 author_profile: false

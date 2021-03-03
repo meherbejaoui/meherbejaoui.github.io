@@ -4,7 +4,7 @@ main:
     url: /about
   - title: "Blog"
     url: /blog/
-  - title: "Python Fr"
-    url: /french/
+  - title: "Python"
+    url: /python/
   - title: "Terms and Privacy Policies"
     url: /terms/
