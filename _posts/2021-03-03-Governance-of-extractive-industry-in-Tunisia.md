@@ -13,4 +13,4 @@ Governance can be improved with the right legal, institutional and administrativ
 
 ***
 
-<embed src="https://drive.google.com/file/d/1QLG_VJ-4nTBxlzxSeb5f9sXoKrxudmmm/view?usp=sharing" width="500" height="375" type="application/pdf">
+<embed src="/assets/governanceinTunisia.pdf" width="500" height="375" type="application/pdf">
