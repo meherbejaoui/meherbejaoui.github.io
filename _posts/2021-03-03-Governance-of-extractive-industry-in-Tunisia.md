@@ -12,4 +12,5 @@ Simultaneously obtaining higher economic revenues and better social impacts is n
 Governance can be improved with the right legal, institutional and administrative measures, and by applying certain best practices. They must unfold in terms of multiple reforms carried out judiciously.
 
 ***
-<embed src="https://drive.google.com/viewerng/viewer?embedded=true&url=https://drive.google.com/file/d/1QLG_VJ-4nTBxlzxSeb5f9sXoKrxudmmm/view?usp=sharing" width="500" height="375">
+
+<embed src="https://drive.google.com/file/d/1QLG_VJ-4nTBxlzxSeb5f9sXoKrxudmmm/view?usp=sharing" width="500" height="375" type="application/pdf">
