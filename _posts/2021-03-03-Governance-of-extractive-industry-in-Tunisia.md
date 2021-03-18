@@ -13,4 +13,4 @@ Governance can be improved with the right legal, institutional and administrativ
 
 ***
 
-<iframe src="/assets/governanceinTunisia.pdf" alt ="pdf report titled Governance of extractive industry in Tunisia" width="1000" height="750"></iframe>
+<iframe src="/assets/governanceinTunisia.pdf" alt ="pdf report titled Governance of extractive industry in Tunisia" width="800" height="750"></iframe>
