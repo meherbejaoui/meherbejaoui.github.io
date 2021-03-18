@@ -23,7 +23,8 @@ tags:
 ### Introduction
 
 The following [Jupyter Notebook](/assets/olympics/OlympicGamesAnalyses.ipynb) uses the [Olympics dataset](/assets/olympics/olympics.csv), which was derived from the Wikipedia entry on [All Time Olympic Games Medals](https://en.wikipedia.org/wiki/All-time_Olympic_Games_medal_table), as of the 2016 Summer Olympics and 2018 Winter Olympics. All changes in medal standings due to doping cases and medal redistributions up to and including 25 November 2020 are taken into account.  
-*Data queried on March 18th, 2021.*
+*Data queried on March 18th, 2021.*   
+
 ***
 
 
@@ -65,7 +66,8 @@ most_medals = df['Combined total'].nlargest(10).index
 
 ***
 ### Stacked bar chart
-In this cell, we use [**`matplotlib`**](http://matplotlib.org/) to visualize stacked bar charts representing the top ten countries in terms of total number of medals in the winter and summer games.
+In this cell, we use [**`matplotlib`**](http://matplotlib.org/) to visualize stacked bar charts representing the top ten countries in terms of total number of medals in the winter and summer games.   
+
 ***
 
 
@@ -113,7 +115,7 @@ with plt.style.context(('seaborn-poster', {'xtick.labelsize' : 14, 'axes.labelpa
 
 
 
-![png](/assets.olympics/output_6_0.png)
+![png of stacked bar charts representing the top ten countries in terms of total number of medals in the winter and summer games](/assets/olympics/output_6_0.png)
 
 
 
@@ -121,7 +123,8 @@ with plt.style.context(('seaborn-poster', {'xtick.labelsize' : 14, 'axes.labelpa
 ### Bubble chart
 This chart is an example of a visualization that can be created to help understand the data. This is a bubble chart showing the value of *adjusted gold medals* (#total gold/ #total games) Vs. the *rank* with reference to the number of total medals won.  
 
-The **size** of the bubble corresponds to an *adjusted value of total medals* (#total medals/ #total games) won, and the **color** corresponds to the geolocation (European or non-European) or current status (red: no longer exists).
+The **size** of the bubble corresponds to an *adjusted value of total medals* (#total medals/ #total games) won, and the **color** corresponds to the geolocation (European or non-European) or current status (red: no longer exists).   
+
 ***
 
 
@@ -160,7 +163,7 @@ with plt.style.context(('seaborn-poster', {'xtick.labelsize' :12, 'ytick.labelsi
 
 
 
-![png](/assets.olympics/output_8_0.png)
+![png showing adjusted gold medals versus the rank of countries with reference to the number of total medals won](/assets/olympics/output_8_0.png)
 
 
 
