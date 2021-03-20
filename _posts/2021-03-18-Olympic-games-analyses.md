@@ -12,8 +12,6 @@ tags:
 - pandas
 ---
 ***
-## Analysing all-time olympic games medal
-
 - [Introduction & preprocessing](#introduction-and-preprocessing)
 - [Stacked bar chart](#stacked-bar-chart)
 - [Bubble chart](#bubble-chart)
