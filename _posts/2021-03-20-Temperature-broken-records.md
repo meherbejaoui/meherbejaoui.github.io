@@ -12,7 +12,7 @@ tags:
 - pandas
 ---
 
-The data for this notebook comes from a subset of The National Centers for Environmental Information (NCEI) Daily Global Historical Climatology Network (GHCN-Daily). The GHCN-Daily is comprised of daily climate records from thousands of land surface stations across the globe.
+The data for this [notebook](/assets/temperatures/TemperatureBrokenRecords.ipynb) comes from a subset of The National Centers for Environmental Information (NCEI) Daily Global Historical Climatology Network (GHCN-Daily). The GHCN-Daily is comprised of daily climate records from thousands of land surface stations across the globe.
 
 The data (stored in a [csv file](/assets/temperatures/data.csv)) is comprised of daily climate records over the period 2005-2015, from land surface stations near Ann Arbor, Michigan, United States.
 Each row in the datafile corresponds to a single observation.
@@ -218,6 +218,8 @@ plt.yticks(alpha=0.5)
 sns.despine()
 ax.legend()
 
+maxv=tmax1y.values
+minv=tmin1y.values
 #To shade the area between the record high and record low temperatures for each day
 ax.fill_between(observation_dates,maxv, minv, facecolor=sns.light_palette("lightgrey")[4], alpha=0.2)
 
