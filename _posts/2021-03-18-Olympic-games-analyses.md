@@ -20,7 +20,7 @@ tags:
 
 ### Introduction
 
-The following [Jupyter Notebook](/assets/olympics/OlympicGamesAnalyses.ipynb) uses the [Olympics dataset](/assets/olympics/olympics.csv), which was derived from the Wikipedia entry on [All Time Olympic Games Medals](https://en.wikipedia.org/wiki/All-time_Olympic_Games_medal_table), as of the 2016 Summer Olympics and 2018 Winter Olympics. All changes in medal standings due to doping cases and medal redistributions up to and including 25 November 2020 are taken into account.  
+The following [Jupyter Notebook](https://github.com/meherbejaoui/meherbejaoui.github.io/blob/master/assets/olympics/OlympicGamesAnalyses.ipynb) uses the [Olympics dataset](https://github.com/meherbejaoui/meherbejaoui.github.io/blob/master/assets/olympics/olympics.csv), which was derived from the Wikipedia entry on [All Time Olympic Games Medals](https://en.wikipedia.org/wiki/All-time_Olympic_Games_medal_table), as of the 2016 Summer Olympics and 2018 Winter Olympics. All changes in medal standings due to doping cases and medal redistributions up to and including 25 November 2020 are taken into account.  
 *Data queried on March 18th, 2021.*   
 
 ***
