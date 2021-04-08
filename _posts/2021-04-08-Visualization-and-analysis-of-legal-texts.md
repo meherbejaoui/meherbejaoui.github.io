@@ -12,9 +12,10 @@ tags:
 - visualization
 ---
 ***
-- [Generating Word Clouds](#Generating-Word-Clouds)
-- [Counting words](#Counting-words)
-- [Comparing different documents](#Comparing-different-documents)
+- [Generating Word Clouds](#generating-word-clouds)
+- [Counting words](#counting-words)
+- [Comparing different documents](#comparing-different-documents)
+
 ***   
 
 While browsing the Internet, you have probably seen a picture of a cloud filled with words of varying sizes that reflect the frequency of each word within a given text. This is referred to as a Tag Cloud or a Word Cloud. In this tutorial (see the notebook [here](https://github.com/meherbejaoui/meherbejaoui.github.io/blob/master/assets/word_clouds/wordCloud.ipynb)), we will learn how to make Word Clouds in Python. This tool is useful for a visual exploration of text data.
