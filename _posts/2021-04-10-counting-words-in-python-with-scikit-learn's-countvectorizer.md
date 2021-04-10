@@ -82,76 +82,9 @@ counts_df
 
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>10</th>
-      <th>100</th>
-      <th>101</th>
-      <th>102</th>
-      <th>103</th>
-      <th>104</th>
-      <th>105</th>
-      <th>106</th>
-      <th>107</th>
-      <th>108</th>
-      <th>...</th>
-      <th>works</th>
-      <th>world</th>
-      <th>worship</th>
-      <th>writing</th>
-      <th>written</th>
-      <th>year</th>
-      <th>years</th>
-      <th>young</th>
-      <th>younger</th>
-      <th>youth</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2</td>
-      <td>...</td>
-      <td>3</td>
-      <td>2</td>
-      <td>1</td>
-      <td>2</td>
-      <td>2</td>
-      <td>11</td>
-      <td>11</td>
-      <td>1</td>
-      <td>1</td>
-      <td>3</td>
-    </tr>
-  </tbody>
-</table>
-<p>1 rows × 1741 columns</p>
-</div>
+      10	100	101	102	103	104	105	106	107	108	...	works	world	worship	writing	written	year	years	young	younger	youth
+    0	2	1	1	1	1	1	1	1	1	2	...	3	2	1	2	2	11	11	1	1	3
+      1 rows × 1741 columns
 
 
 
@@ -173,7 +106,7 @@ counts_df.T.sort_values(by=0, ascending=False).head(8)
     in	224
     shall	173
     article	173
-    assembly	149
+    assembly 149
 
 
 
@@ -235,48 +168,10 @@ df
 
 
 
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>document</th>
-      <th>content</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Tunisian Constitution</td>
-      <td>PREAMBLE In the Name of God, the Merciful, the...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>United States Constitution</td>
-      <td>THE CONSTITUTION OF THE UNITED STATES OF AMERI...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Athenian Constitution</td>
-      <td>THE ATHENIAN CONSTITUTION\r\n\r\n\r\nby\r\n\r\...</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+      document	content
+    0	Tunisian Constitution	PREAMBLE In the Name of God, the Merciful, the...
+    1	United States Constitution	THE CONSTITUTION OF THE UNITED STATES OF AMERI...
+    2	Athenian Constitution	THE ATHENIAN CONSTITUTION\r\n\r\n\r\nby\r\n\r\...
 
 
 
