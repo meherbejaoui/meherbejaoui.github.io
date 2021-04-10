@@ -165,63 +165,16 @@ counts_df.T.sort_values(by=0, ascending=False).head(8)
 
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+    0
+    the	1705
+    of	1089
+    and	413
+    to	326
+    in	224
+    shall	173
+    article	173
+    assembly	149
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>0</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>the</th>
-      <td>1705</td>
-    </tr>
-    <tr>
-      <th>of</th>
-      <td>1089</td>
-    </tr>
-    <tr>
-      <th>and</th>
-      <td>413</td>
-    </tr>
-    <tr>
-      <th>to</th>
-      <td>326</td>
-    </tr>
-    <tr>
-      <th>in</th>
-      <td>224</td>
-    </tr>
-    <tr>
-      <th>shall</th>
-      <td>173</td>
-    </tr>
-    <tr>
-      <th>article</th>
-      <td>173</td>
-    </tr>
-    <tr>
-      <th>assembly</th>
-      <td>149</td>
-    </tr>
-  </tbody>
-</table>
-</div>
 
 
 
