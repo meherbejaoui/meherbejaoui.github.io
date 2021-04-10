@@ -82,7 +82,7 @@ counts_df
 
 
 
-      10	100	101	102	103	104	105	106	107	108	...	works	world	worship	writing	written	year	years	young	younger	youth
+        10	100	101	102	103	104	105	106	107	108	...	works	world	worship	writing	written	year	years	young	younger	youth
     0	2	1	1	1	1	1	1	1	1	2	...	3	2	1	2	2	11	11	1	1	3
       1 rows × 1741 columns
 
@@ -168,7 +168,7 @@ df
 
 
 
-      document	content
+        document	 content
     0	Tunisian Constitution	PREAMBLE In the Name of God, the Merciful, the...
     1	United States Constitution	THE CONSTITUTION OF THE UNITED STATES OF AMERI...
     2	Athenian Constitution	THE ATHENIAN CONSTITUTION\r\n\r\n\r\nby\r\n\r\...
