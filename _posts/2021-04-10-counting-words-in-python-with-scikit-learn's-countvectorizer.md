@@ -204,7 +204,7 @@ counts.head()
         text-align: right;
     }
 </style>
-<table border="1" class="dataframe">
+<table class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -359,7 +359,7 @@ counts[['people','constitution', 'rules', 'law', 'order', 'assembly', 'house', '
         text-align: right;
     }
 </style>
-<table border="1" class="dataframe">
+<table  class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
