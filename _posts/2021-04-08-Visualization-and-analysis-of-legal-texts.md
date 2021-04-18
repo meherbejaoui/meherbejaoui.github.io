@@ -243,7 +243,7 @@ df.head(10)
         text-align: right;
     }
 </style>
-<table border="1" class="dataframe">
+<table class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -330,6 +330,7 @@ df.head(10)
 
 
 
+***   
 All of these common words between the two documents were used differently in each. We can check how many times they appeared by returning the sum of the values over the desired axis.
 
 
@@ -378,7 +379,7 @@ df[df.Tunisian_constitution >= 10].sort_values(by='Tunisian_constitution', ascen
         text-align: right;
     }
 </style>
-<table border="1" class="dataframe">
+<table class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -473,6 +474,7 @@ df[df.Tunisian_constitution >= 10].sort_values(by='Tunisian_constitution', ascen
 
 
 
+***   
 We can use the `df.sum()` again to compute the frequency of those words.
 
 
