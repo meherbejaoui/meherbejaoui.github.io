@@ -18,7 +18,8 @@ However, there are some limitations with simple word count analysis. A better so
 In fact, some terms will appear more often, carrying little useful knowledge about the document's actual contents. Those very frequent words would shadow the frequencies of more uncommon yet more interesting terms.   
 These problems can be tackled with [**TF-IDF**](https://scikit-learn.org/stable/modules/feature_extraction.html#tfidf-term-weighting). **Tf** means term-frequency while **tf–idf** means term-frequency times inverse document-frequency.   
 It is a statistical measure that evaluates how relevant a word is to a document in a collection of documents.    
-The TF–IDF value increases in relation to the number of times a word appears in a document, and is compensated by the number of documents in the corpus that contain the word, which helps to compensate for the fact that certain words appear more often than others.   
+The TF–IDF value increases in relation to the number of times a word appears in a document, and is compensated by the number of documents in the corpus that contain the word, which helps to compensate for the fact that certain words appear more often than others.    
+
 ***   
 
 
@@ -59,7 +60,9 @@ In order to address this, there are ways to extract numerical features from text
 - **Tokenizing** : Word tokens are the basic units of text. When processing, the first step is to split strings into tokens and giving an integer id for each possible token.
 - **Counting** the occurrences of tokens in each document - how many times does a word appear in the text.
 - **Normalizing** and weighting with diminishing importance tokens that occur in the majority of documents.
+
 ***   
+   
 We can specify a `tokenizer` when using `CountVectorizer`. Here, you find a `stemming_tokenizer` for reference. We will not be using it for this work.    
 
 **Stemming** is a text preprocessing task for transforming related or similar forms of a word to its base form (*talking* to *talk*, and *cats* to *cat* for example). We will use the `Porter stemmer` from `nltk`.
