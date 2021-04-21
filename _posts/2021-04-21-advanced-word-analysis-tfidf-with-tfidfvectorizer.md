@@ -33,10 +33,7 @@ import requests
 ```
 
 
-```python
-import dataframe_image as dfi
 
-```
 
 Our texts for this notebook are some constitutions. We use `requests` to make a request and get a response with the desired text.
 
@@ -62,7 +59,7 @@ In order to address this, there are ways to extract numerical features from text
 - **Normalizing** and weighting with diminishing importance tokens that occur in the majority of documents.
 
 ***   
-   
+
 We can specify a `tokenizer` when using `CountVectorizer`. Here, you find a `stemming_tokenizer` for reference. We will not be using it for this work.    
 
 **Stemming** is a text preprocessing task for transforming related or similar forms of a word to its base form (*talking* to *talk*, and *cats* to *cat* for example). We will use the `Porter stemmer` from `nltk`.
