@@ -7,7 +7,7 @@ header:
 author_profile: false
 classes: wide
 tags:
-- tutoriel
+- tutorial
 - python
 ---
 ***
