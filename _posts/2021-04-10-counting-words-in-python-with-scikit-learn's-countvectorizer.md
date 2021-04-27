@@ -11,7 +11,7 @@ tags:
 - pandas
 - sklearn
 ---
-In a previous [article](https://www.meherbejaoui.com/python/Visualization-and-analysis-of-legal-texts), we used simple techniques to visualize and count words in a document. In this notebook, we will be using another technique. The [`CountVectorizer`](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer) from scikit-learn is more elaborate than the `Counter` tool. It converts a collection of text documents to a matrix of token counts.
+In a previous [article](https://www.meherbejaoui.com/python/visualization-and-analysis-of-legal-texts), we used simple techniques to visualize and count words in a document. In this notebook, we will be using another technique. The [`CountVectorizer`](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer) from scikit-learn is more elaborate than the `Counter` tool. It converts a collection of text documents to a matrix of token counts.
 
 
 ```python
