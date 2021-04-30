@@ -4,6 +4,7 @@ excerpt: "Thesis report about Governance of extractive industry in Tunisia by Me
 categories: blog
 author_profile: false
 classes: wide
+adallow: 0
 tags:
 - governance
 ---
