@@ -128,7 +128,7 @@ df.head(6)
 
 All of the *percentage* values are less than 50. In fact, we can surmise that a well written piece of legal document, should not have a lot of *stopwords*. However, that may not always be the case. Feel free to share your opinions regarding this, in the comments section below, or by email.
 
-We can push the exploration further, and check which constitutions have the most and the least unique words. Such a measure can be an indicatiion of the richness of the used lexicon, and its complexity as well.
+We can push the exploration further, and check which constitutions have the most and the least unique words. Such a measure can be an indicator of the richness of the used lexicon, and its complexity as well.
 
 
 ```python
@@ -147,7 +147,7 @@ print ("The {} has the most unique words with {} words. And the {} has the fewes
 ***
 After the previous exploratory phase, we move to term weighting and `tf-idf`.    
 
-Like we did in this [article](https://www.meherbejaoui.com/python/advanced-word-analysis-tfidf-with-tfidfvectorizer/), we are going to use `TfidfVectorizer` from `sklearn` to convert the collection of documents to a matrix of TF-IDF features. That would allow us to take into account how often a term shows up.    
+Like we did in the previous article linked above, we are going to use `TfidfVectorizer` from `sklearn` to convert the collection of documents to a matrix of TF-IDF features. That would allow us to take into account how often a term shows up.    
 Again, `tf-idf` is a statistical measure that evaluates how relevant a word is to a document in a collection of documents. You can refer to the official `sklearn` [documentation](https://scikit-learn.org/stable/modules/feature_extraction.html#tfidf-term-weighting) for the complex mathematical explanation.
 
 
@@ -160,10 +160,10 @@ tfidfcounts = pd.DataFrame(x.toarray(),index = df.document, columns = tfidf_vect
 
 ****
 ## K-Means clustering
-Let us go over a brief explanation of clustering before delving into K-Means clustering that we will be using.   
+Let us go over a brief explanation of clustering in general before delving into K-Means clustering that we will be using.   
 
 Clustering is the process of grouping a collection of objects, such that those in the same partition (or cluster) are more similar (in some sense) to each other, than to those in other groups (clusters).   
-There are a lot of clustering algorithms that can be used, and are specific to some conditions in the use cases.   
+There are a lot of clustering algorithms that can be utilized, and their use is modulated by specific conditions in the use cases.   
 
 As for the K-Means [algorithm](https://scikit-learn.org/stable/modules/clustering.html#k-means), it clusters data by trying to separate samples in *n* groups of equal variance. It minimizes the squared distance between the cluster mean (centroid) and the points in the cluster.
 This algorithm requires the number of clusters to be specified.
@@ -187,8 +187,8 @@ km.fit(x)
 
 
 After computing the `k-means` clustering, and getting a fitted estimator, we ought to see the top words in each cluster.   
-In the code below, `cluster_centers_` gets the coordinates of each centroid. Then, `.argsort()[:, ::-1]` converts each centroid into a descended sorted list of columns by their *relevance*. That gives the words most relevant, since in our vector representation, words are the features in the form of columns.   
-We used `.get_feature_names()` before, to get a list of feature names mapped from feature integer indices.    
+In the code below, `cluster_centers_` gets the coordinates of each centroid. Then, `.argsort()[:, ::-1]` converts each centroid into a descending sorted list of columns by their *relevance*. That gives the words most relevant, since in our vector representation, words are the features in the form of columns.   
+We use `.get_feature_names()` to get a list of feature names mapped from feature integer indices.    
 Finally, the `for` loop wraps up the work, and prints out the top words in each cluster.
 
 
@@ -234,7 +234,7 @@ The analysis can be improved by using other algorithms and techniques. However, 
 ## Visualizing text corpus similarity
 
 We can visualize the similarities based on the TF-IDF features.    
-To do so, we start by constructing the *vectorizer* as usual. We specify `max_features` to build a vocabulary that only consider the top max_features ordered by term frequency across the dataset.
+To do so, we start by constructing the *vectorizer* as usual. We specify `max_features` to build a vocabulary that considers only the top `max_features` ordered by term frequency across the dataset.
 
 
 ```python
@@ -256,7 +256,8 @@ import matplotlib.pyplot as plt
 fig = plt.figure()
 axi = plt.gca()
 
-ax = df2.plot(kind='scatter', x= 'federal', y= 'president', s= 250, alpha= 0.6, c='state', colormap='viridis',
+ax = df2.plot(kind='scatter', x= 'federal', y= 'president', s= 250, alpha= 0.6,
+              c='state', colormap='viridis',
               figsize= (12,10), ax= axi)
 
 axi.set_title('President X Federal', fontsize=18)
@@ -273,4 +274,4 @@ axi.set_ylabel("President", fontsize=18)
 
 
 
-![a picture showing text corpus similarity](visualizing_text_corpus_similarity.png)
+![a picture showing text corpus similarity](/assets/kmeans-clustering-and-similarity-visualization-of-constitutions/visualizing_text_corpus_similarity.png)
