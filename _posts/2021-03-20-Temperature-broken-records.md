@@ -1,6 +1,6 @@
 ---
 title: "Plotting climate data using pandas"
-excerpt: "Plotting climate data using pandas and matplotlib"
+excerpt: "Plotting line charts and a scatter plot of daily temperature records over the period 2005-2014, using pandas and matplotlib"
 categories: python
 header:
   teaser: /assets/temperatures/output_27_1.png
@@ -11,7 +11,12 @@ tags:
 - python
 - pandas
 ---
+- [Introduction](#introduction)
+- [Data processing and time series manipulation](#data-processing-and-time-series-manipulation)
+- [Plotting and styling using matplotlib and seaborn](#plotting-and-styling-using-matplotlib-and-seaborn)
 
+***   
+## Introduction   
 The data for this [notebook](https://github.com/meherbejaoui/meherbejaoui.github.io/blob/master/assets/temperatures/TemperatureBrokenRecords.ipynb) comes from a subset of The National Centers for Environmental Information (NCEI) Daily Global Historical Climatology Network (GHCN-Daily). The GHCN-Daily is comprised of daily climate records from thousands of land surface stations across the globe.
 
 The data (stored in a [csv file](https://github.com/meherbejaoui/meherbejaoui.github.io/blob/master/assets/temperatures/data.csv)) is comprised of daily climate records over the period 2005-2015, from land surface stations near Ann Arbor, Michigan, United States.
@@ -42,6 +47,7 @@ from matplotlib.dates import MonthLocator, DateFormatter
 df = pd.read_csv('data.csv')
 ```
 
+## Data processing and time series manipulation   
 Since the temparture values are in the tenths of degree Celsius, we need to convert them to °C.
 
 
@@ -182,6 +188,7 @@ dftmin15.size
 
 
 
+## Plotting and styling using matplotlib and seaborn   
 In this cell, we use `matplotlib` and `seaborn ` to create a figure, and plot line charts of the record high and record low temperatures by day of the year over the period 2005-2014, and a scatter of the 2015 data for any points (highs and lows) for which the ten-year record (2005-2014) was broken in 2015.   
 I made sure the visual was nice, with appropriate legends and labels, and reduced chart junk.
 

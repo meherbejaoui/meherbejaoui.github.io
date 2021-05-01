@@ -1,6 +1,6 @@
 ---
 title: "Visualization and analysis of legal texts"
-excerpt: "Generating Word Clouds and counting words using pandas and matplotlib"
+excerpt: "Using pandas and matplotlib, generate and style Word Clouds, count words using the Counter collection and compare different documents"
 categories: python
 header:
   teaser: /assets/word_clouds/output_13_0_teaser.png
@@ -11,7 +11,6 @@ tags:
 - pandas
 - visualization
 ---
-***
 - [Generating Word Clouds](#generating-word-clouds)
 - [Counting words](#counting-words)
 - [Comparing different documents](#comparing-different-documents)

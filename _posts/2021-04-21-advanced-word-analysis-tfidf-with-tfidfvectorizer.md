@@ -11,6 +11,12 @@ tags:
 - pandas
 - sklearn
 ---
+- [Introduction](#introduction-and-basic-concepts)
+- [Term Frequency](#term-frequency)
+- [Inverse document frequency](#inverse-document-frequency)
+
+***   
+## Introduction and basic concepts
 In a previous [article](https://www.meherbejaoui.com/python/counting-words-in-python-with-scikit-learn's-countvectorizer), we utilized **CountVectorizer** from scikit-learn to count words. We used bag of words analysis, where a text is represented as the bag of its words, disregarding grammar, and with no particular order. This model may capture the characteristics of the text or document.   
 
 However, there are some limitations with simple word count analysis. A better solution would be to use latent features, such as the frequency of words used in a document.   

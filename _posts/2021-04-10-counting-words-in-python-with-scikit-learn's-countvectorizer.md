@@ -1,6 +1,6 @@
 ---
 title: "Counting words in Python with scikit-learn's CountVectorizer"
-excerpt: "Counting words with CountVectorizer"
+excerpt: "Using CountVectorizer to count words in multiple documents"
 categories: python
 header:
   teaser: /assets/images/python-powered.jpg
@@ -11,6 +11,12 @@ tags:
 - pandas
 - sklearn
 ---
+- [Introduction](#introduction)
+- [Counting words with CountVectorizer](#counting-words-with-countvectorizer)
+- [Counting words in multiple documents](#counting-words-in-multiple-documents)
+
+***    
+## Introduction
 In a previous [article](https://www.meherbejaoui.com/python/visualization-and-analysis-of-legal-texts), we used simple techniques to visualize and count words in a document. In this notebook, we will be using another technique. The [`CountVectorizer`](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer) from scikit-learn is more elaborate than the `Counter` tool. It converts a collection of text documents to a matrix of token counts.
 
 
@@ -28,7 +34,7 @@ text = open("constitution.txt").read().replace("\n"," ")
 ```
 
 ***   
-### Counting words with CountVectorizer
+## Counting words with CountVectorizer
 The **vectoriser** does the implementation that produces a sparse representation of the counts. The `fit_transform()` method learns the vocabulary dictionary and returns the document-term matrix, as shown below. This method is equivalent to using `fit()` followed by `transform()`, but more efficiently implemented.
 
 
@@ -134,7 +140,7 @@ print (counts_df['law'], '\n' ,counts_df['order'])
 
 
 ***   
-### Counting words in multiple documents
+## Counting words in multiple documents
 All of that is quite good and exciting. Now, we will see how is `CountVectorizer` with multiple text documents.   
 We will be using the United States' Constitution and the Athenian Constitution, by Aristotle in addition to our previous text.   
 
