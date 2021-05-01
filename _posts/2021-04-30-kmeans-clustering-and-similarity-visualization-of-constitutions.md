@@ -71,7 +71,7 @@ print(df['document'].tolist())
 
 
 As we can see, the constitutions pertain to different countries from around the world, with different systems of government. Some nations from the list are monarchies, others are republics. Some have a unitary government, while others are federal. And the differences extend to the legislature as well.   
-It is, in fact, a diverse collection.
+It is, in fact, a diverse collection. But, we should keep in mind that most of these constitutions are translated from their respective native languages. The original meaning in each document may not be conveyed with the same degree of accuracy.
 
 ***
 ## Text processing and exploratory analysis

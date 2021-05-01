@@ -83,76 +83,7 @@ counts_df
 
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>10</th>
-      <th>100</th>
-      <th>101</th>
-      <th>102</th>
-      <th>103</th>
-      <th>104</th>
-      <th>105</th>
-      <th>106</th>
-      <th>107</th>
-      <th>108</th>
-      <th>...</th>
-      <th>works</th>
-      <th>world</th>
-      <th>worship</th>
-      <th>writing</th>
-      <th>written</th>
-      <th>year</th>
-      <th>years</th>
-      <th>young</th>
-      <th>younger</th>
-      <th>youth</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2</td>
-      <td>...</td>
-      <td>3</td>
-      <td>2</td>
-      <td>1</td>
-      <td>2</td>
-      <td>2</td>
-      <td>11</td>
-      <td>11</td>
-      <td>1</td>
-      <td>1</td>
-      <td>3</td>
-    </tr>
-  </tbody>
-</table>
-<p>1 rows × 1741 columns</p>
-</div>
+![DataFrame showing the counts](/assets/counting_words_with_countvectorizer/counts_df.png)
 
 
 
@@ -167,15 +98,7 @@ counts_df.T.sort_values(by=0, ascending=False).head(8)
 
 
 
-    0
-    the	1705
-    of	1089
-    and	413
-    to	326
-    in	224
-    shall	173
-    article	173
-    assembly 149
+![DataFrame showing the sorted list of counts](/assets/counting_words_with_countvectorizer/dataframe_of_sorted_list.png)
 
 
 
@@ -237,47 +160,7 @@ df
 
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>document</th>
-      <th>content</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Tunisian Constitution</td>
-      <td>PREAMBLE In the Name of God, the Merciful, the...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>United States Constitution</td>
-      <td>THE CONSTITUTION OF THE UNITED STATES OF AMERI...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Athenian Constitution</td>
-      <td>THE ATHENIAN CONSTITUTION\r\n\r\n\r\nby\r\n\r\...</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+![DataFrame showing the name of documents and preview of their content](/assets/counting_words_with_countvectorizer/dataframe_showing_name_of_document_and_content.png)
 
 
 
@@ -291,154 +174,13 @@ vectorizer = CountVectorizer()
 matrix = vectorizer.fit_transform(df.content)
 counts = pd.DataFrame(matrix.toarray(), index = df.document, columns = vectorizer.get_feature_names())
 
-counts.head()
+counts
 ```
 
 
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>00</th>
-      <th>000</th>
-      <th>01</th>
-      <th>02</th>
-      <th>03</th>
-      <th>10</th>
-      <th>100</th>
-      <th>1000</th>
-      <th>10000</th>
-      <th>101</th>
-      <th>...</th>
-      <th>younger</th>
-      <th>your</th>
-      <th>youth</th>
-      <th>youthful</th>
-      <th>youths</th>
-      <th>zealous</th>
-      <th>zeugitae</th>
-      <th>zeugites</th>
-      <th>zeus</th>
-      <th>zip</th>
-    </tr>
-    <tr>
-      <th>document</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Tunisian Constitution</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>...</td>
-      <td>1</td>
-      <td>0</td>
-      <td>3</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>United States Constitution</th>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>3</td>
-      <td>1</td>
-      <td>2</td>
-      <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>12</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Athenian Constitution</th>
-      <td>0</td>
-      <td>4</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>15</td>
-      <td>0</td>
-      <td>2</td>
-      <td>7</td>
-      <td>2</td>
-      <td>5</td>
-      <td>1</td>
-      <td>2</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-<p>3 rows × 5082 columns</p>
-</div>
+![DataFrame of the words counted in the three documents](/assets/counting_words_with_countvectorizer/dataframe_showing_counts_of_three_documents.png)
 
 
 
@@ -453,85 +195,10 @@ counts[['people','constitution', 'rules', 'law', 'order', 'assembly', 'house', '
 
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table  class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>people</th>
-      <th>constitution</th>
-      <th>rules</th>
-      <th>law</th>
-      <th>order</th>
-      <th>assembly</th>
-      <th>house</th>
-      <th>democracy</th>
-    </tr>
-    <tr>
-      <th>document</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Tunisian Constitution</th>
-      <td>108</td>
-      <td>31</td>
-      <td>10</td>
-      <td>106</td>
-      <td>9</td>
-      <td>149</td>
-      <td>0</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>United States Constitution</th>
-      <td>5</td>
-      <td>16</td>
-      <td>6</td>
-      <td>24</td>
-      <td>4</td>
-      <td>0</td>
-      <td>23</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>Athenian Constitution</th>
-      <td>77</td>
-      <td>50</td>
-      <td>2</td>
-      <td>55</td>
-      <td>19</td>
-      <td>35</td>
-      <td>11</td>
-      <td>17</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+![DataFrame of interesting words checked in all three documents](/assets/counting_words_with_countvectorizer/dataframe_showing_counts_of_interesting_words.png)
 
 
 
 ***    
 
-In this notebook, we used `CountVectorizer` from scikit-learn to count words in multiple documents. It is more advanced than working with `Counter` and having to do all the text cleaning.
+In this notebook, we used `CountVectorizer` from `sklearn` to count words in multiple documents. It is more advanced than working with `Counter` and having to do all the text cleaning.
