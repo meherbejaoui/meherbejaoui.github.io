@@ -89,7 +89,7 @@ counts_df
 
 
 
-![DataFrame showing the counts](/assets/counting_words_with_countvectorizer/counts_df.png)
+![DataFrame showing the counts](/assets/counting_words_with_countvectorizer/dataframe_of_counts.png)
 
 
 
