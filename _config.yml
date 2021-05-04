@@ -45,7 +45,7 @@ search_full_content      : # true, false (default)
 search_provider          : google # lunr (default), algolia, google
 google:
   search_engine_id       : 012662682197289494790:6dok1xjk-8k # YOUR_SEARCH_ENGINE_ID
-  instant_search         : true # false (default), true
+  instant_search         : # false (default), true
 
 # SEO Related
 google_site_verification :
