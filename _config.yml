@@ -80,7 +80,7 @@ analytics:
 # Site Author
 author:
   name             : "Meher Béjaoui"
-  avatar           : "/assets/images/myAvatar.jpf" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/myAvatar.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Engineer - Data science & visualizations"
   location         : "Tunisia"
   email            : "meher.bejaoui@outlook.com"
