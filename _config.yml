@@ -40,7 +40,7 @@ reCaptcha:
 atom_feed:
   path                   : # blank (default) uses feed.xml
   hide                   : # true, false (default)
-search: true
+search: false
 search_full_content      : # true, false (default)
 search_provider          : google # lunr (default), algolia, google
 google:
@@ -80,7 +80,7 @@ analytics:
 # Site Author
 author:
   name             : "Meher Béjaoui"
-  avatar           : "/assets/images/myAvatar.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/myAvatar.jpf" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Engineer - Data science & visualizations"
   location         : "Tunisia"
   email            : "meher.bejaoui@outlook.com"
@@ -250,7 +250,7 @@ defaults:
       show_date: true
       comments:  true
       share: true
-      related: true
+      related: false
   # _pages
   - scope:
       path: ""
