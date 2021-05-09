@@ -15,13 +15,6 @@ For their 9th birthday, **Coursera** celebrated by offering their learners a col
 
 In this article, I will share some insights about the course, and what you can expect if you decide to take it on.   
 
-
-![course page of problem solving using computational thinking](/assets/may_2021/Capture.png)
-
-
-
-
-
 ## Course overview and structure
 First, the course is taught entirely in English, but there are subtitles for other languages as well (currently French, Portuguese (European), Russian and Spanish).   
 
@@ -67,7 +60,7 @@ I have taken many courses from the University of Michigan. This course is true t
 The case studies are meticulously presented, and I think they bring the most value to the course. And when working on the last peer-graded assignment, you get the chance to apply and test your knowledge to the fullest.    
 Perhaps the thing that can be improved, is the quality of discussion forums.
 
-Overall, I do recommend taking Problem Solving Using Computational Thinking, and investing the time to complete the course.    
+Overall, I do recommend taking [Problem Solving Using Computational Thinking](https://www.coursera.org/learn/compthinking), and investing the time to complete the course.    
 
 Happy learning everyone!
 
