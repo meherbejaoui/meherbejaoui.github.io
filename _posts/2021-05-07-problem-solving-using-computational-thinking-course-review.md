@@ -1,6 +1,6 @@
 ---
 title: "Problem Solving Using Computational Thinking - Course Review"
-excerpt: "Reviewing the course "Problem Solving Using Computational Thinking" from the University of Michigan on Coursera"
+excerpt: "Reviewing the course Problem Solving Using Computational Thinking from the University of Michigan on Coursera"
 categories: blog
 author_profile: false
 classes: wide
@@ -54,7 +54,9 @@ My overall remarks and opinions regarding the course are:
 -	There are no reading materials and other resources.
 
 Note that the case for the 4th week is optional. You will need to consent to be able to read and examine the course material. That is because the case study covers a rather delicate topic regarding hypothetical implications of Computational Thinking on the issue of Human Trafficking.   
+
 ***    
+
 I have taken many courses from the University of Michigan. This course is true to their approach and methodology. It is well structured, with professional high quality videos and production.  
 
 The case studies are meticulously presented, and I think they bring the most value to the course. And when working on the last peer-graded assignment, you get the chance to apply and test your knowledge to the fullest.    
