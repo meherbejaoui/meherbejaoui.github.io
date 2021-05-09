@@ -14,9 +14,15 @@ tags:
 For their 9th birthday, **Coursera** celebrated by offering their learners a collection of 9 coursers to pick from, and enrol to earn a free certificate (special offer was available through 30 April 2021). I chose **Problem Solving Using Computational Thinking** from the **University of Michigan**.   
 
 In this article, I will share some insights about the course, and what you can expect if you decide to take it on.
-   
 
-![picture showing course page of problem solving using computational thinking](/assets/may_2021/problem_solving_using_computational_thinking.png)
+
+
+
+
+![course page of problem solving using computational thinking](/assets/may_2021/problem_solving_page.png)
+
+
+
 
 
 ## Course overview and structure
