@@ -15,7 +15,12 @@ For their 9th birthday, **Coursera** celebrated by offering their learners a col
 
 In this article, I will share some insights about the course, and what you can expect if you decide to take it on.   
 
-![course page of problem solving using computational thinking](/assets/may_2021/problem_solving_page.png)   
+
+![course page of problem solving using computational thinking](/assets/may_2021/Capture.png)
+
+
+
+
 
 ## Course overview and structure
 First, the course is taught entirely in English, but there are subtitles for other languages as well (currently French, Portuguese (European), Russian and Spanish).   
