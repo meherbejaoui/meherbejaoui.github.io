@@ -20,7 +20,7 @@ tags:
 
 ### Introduction
 
-The following [Jupyter Notebook](https://github.com/meherbejaoui/meherbejaoui.github.io/blob/master/assets/olympics/OlympicGamesAnalyses.ipynb) uses the [Olympics dataset](https://github.com/meherbejaoui/meherbejaoui.github.io/blob/master/assets/olympics/olympics.csv), which was derived from the Wikipedia entry on [All Time Olympic Games Medals](https://en.wikipedia.org/wiki/All-time_Olympic_Games_medal_table), as of the 2016 Summer Olympics and 2018 Winter Olympics. All changes in medal standings due to doping cases and medal redistributions up to and including 25 November 2020 are taken into account.  
+The following [Jupyter Notebook](https://github.com/meherbejaoui/meherbejaoui.github.io/blob/master/assets/olympics/OlympicGamesAnalyses.ipynb) uses the [Olympic games medal dataset](https://github.com/meherbejaoui/meherbejaoui.github.io/blob/master/assets/olympics/olympic_games_medal_table.csv), which was derived from the Wikipedia entry on [All Time Olympic Games Medals](https://en.wikipedia.org/wiki/All-time_Olympic_Games_medal_table), as of the 2016 Summer Olympics and 2018 Winter Olympics. All changes in medal standings due to doping cases and medal redistributions up to and including 25 November 2020 are taken into account.  
 *Data queried on March 18th, 2021.*   
 
 ***
@@ -32,7 +32,7 @@ Using the power of **`pandas`**, read the csv file containing the dataset (the r
 
 ```python
 import pandas as pd
-df = pd.read_csv("olympics.csv",index_col=0,skiprows=1, encoding='latin_1')
+df = pd.read_csv("olympic_games_medal_table.csv",index_col=0,skiprows=1, encoding='latin_1')
 
 for col in df.columns:    # clean the lables of the raw data
     if col[:2]=="01":
