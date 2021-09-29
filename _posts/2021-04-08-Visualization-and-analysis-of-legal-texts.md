@@ -42,7 +42,7 @@ import seaborn as sns
 ***    
 
 ### Generating Word Clouds   
-Then, we read the Hydrocarbons Code stored in a `.txt` file. I chose this legal document, because I have worked on it and analysed it for a thesis [report](http://www.meherbejaoui.com/blog/Governance-of-extractive-industry-in-Tunisia) I wrote. It is a complex legal text that pertains to a sensitive and important topic, that is natural resources.   
+Then, we read the Hydrocarbons Code stored in a `.txt` file. I chose this legal document, because I have worked on it and analysed it for a thesis [report](https://www.meherbejaoui.com/blog/Governance-of-extractive-industry-in-Tunisia) I wrote. It is a complex legal text that pertains to a sensitive and important topic, that is natural resources.   
 
 We have to make some necessary text processing. First, we convert the entire text to lower case. This is important since Python strings are case sensitive. Afterwards, we use the magic of regular expressions to deal with apostrophes and other characters to be removed.   
 Whenever in doubt regarding regular expressions syntax, you can use [this](https://regex101.com/) website or the official Python [documentation](https://docs.python.org/3/library/re.html) to have the desired outcome.
