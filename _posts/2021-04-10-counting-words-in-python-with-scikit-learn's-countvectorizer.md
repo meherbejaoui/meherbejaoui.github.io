@@ -208,3 +208,5 @@ counts[['people','constitution', 'rules', 'law', 'order', 'assembly', 'house', '
 ***    
 
 In this notebook, we used `CountVectorizer` from `sklearn` to count words in multiple documents. It is more advanced than working with `Counter` and having to do all the text cleaning.
+  
+{% include video id="sCZ34kQvX0s" provider="youtube" %}
