@@ -477,7 +477,6 @@ Within this climate category, the intricate interplay among various atmospheric 
 Considering the distinct characteristics of the locality, it is reasonable to expect that the relationships may not conform to a simple linear pattern. The complex interplay of factors such as temperature inversions, air masses, and local topography contributes to the observed complexity in these relationships.
 
 ## Multiple linear regression
-
 ### Sacramento
 
 
@@ -573,10 +572,10 @@ Overall, the findings support the idea that the independent variables (averagewi
 The regression equation is:   
 
 <center>
-$\text{Sacramento temperature}$ = 16.2143 - 0.5312 × $\text{averagewindspeed}$ + 1.0532 × $\text{minimumtemperature}$ - 0.0711 × $\text{precipitation}$ - 0.1139 × $\text{humidity}$
+Sacramento temperature = 16.2143 - 0.5312 × averagewindspeed + 1.0532 × minimumtemperature - 0.0711 × precipitation - 0.1139 × humidity
 </center>
-
-
+    
+    
 ```python
 # Obtain the predicted values
 y_pred = results.predict(X)
@@ -712,10 +711,10 @@ The OLS Regression Results show that the regression model has a high R-squared v
 The regression equation can be expressed as:
 
 <center>
-$\text{Albany temperature} = 12.0641 - 0.3560 \times \text{averagewindspeed} + 1.0241 \times \text{minimumtemperature} - 0.0116 \times \text{precipitation} - 0.0812 \times \text{humidity}$
+Albany temperature = 12.0641 - 0.3560 × averagewindspeed + 1.0241 × minimumtemperature - 0.0116 × precipitation - 0.0812 × humidity
 </center>
-
-
+    
+    
 ```python
 # Obtain the predicted values
 y_pred2 = results2.predict(X2)
