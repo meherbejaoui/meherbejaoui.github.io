@@ -68,7 +68,7 @@ social:
   type                   : # Person or Organization (defaults to Person)
   name                   : # If the user or organization name differs from the site's name
   links: # An array of links to social media profiles
-    - "https://twitter.com/meher_bejaoui"
+    - "https://x.com/meher_bejaoui"
     - "https://www.linkedin.com/in/meherbejaoui/en"
 
 # Analytics
@@ -88,9 +88,9 @@ author:
     - label: "linkedin"
       icon: "fab fa-fw fa-linkedin"
       url:  "https://www.linkedin.com/in/meherbejaoui"
-    - label: "Twitter"
+    - label: "X"
       icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/meher_bejaoui"
+      url: "https://x.com/meher_bejaoui"
     - label: "stackoverflow"
       icon: "fab fa-fw fa-stack-overflow"
       url: "https://stackoverflow.com/users/6452770/meher-b%c3%a9jaoui"
@@ -106,7 +106,7 @@ footer:
       url:  "https://www.linkedin.com/in/meherbejaoui"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/meher_bejaoui"
+      url: "https://x.com/meher_bejaoui"
     - label: "stackoverflow"
       icon: "fab fa-fw fa-stack-overflow"
       url: "https://stackoverflow.com/users/6452770/meher-b%c3%a9jaoui"
