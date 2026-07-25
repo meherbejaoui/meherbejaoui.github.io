@@ -3,17 +3,17 @@ hugoblox:
   identity:
     name: Meher Bejaoui
     type: person
-    tagline: Government | Economic Development | Systems
-    description: A dedicated multidisciplinary public administrator with a background in strategic administration, public policy, monitoring & evaluation, and compliance.
+    tagline: Jack of many trades. Public finance, governance, and data.
+    description: Meher Bejaoui, Humphrey Fellow and Tunisian Presidency official writing on public affairs, SOEs, governance, policy and data analysis
   theme:
     mode: system
-    pack: minimal
+    pack: default
     colors:
       primary: ""
       secondary: ""
       neutral: ""
   typography:
-    font: sans
+    font: serif
     size: md
   layout:
     radius: md
