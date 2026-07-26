@@ -16,17 +16,34 @@ affiliations:
     url: "https://isp.msu.edu/international-centers-units/student-scholar-programs/humphrey-fellowship-program/profiles/humphrey-fellows/bejaoui/"
 links:
   - icon: "at-symbol"
-    url: "mailto:your-email@example.com"
+    url: "mailto:meher.bejaoui@outlook.com"
     label: "E-mail Me"
   - icon: "brands/x"
-    url: "https://x.com/MakeOwnable"
-  - icon: "brands/instagram"
-    url: "https://www.instagram.com/"
+    url: "https://x.com/meher_bejaoui"
   - icon: "brands/linkedin"
-    url: "https://www.linkedin.com/"
+    url: "https://www.linkedin.com/in/meherbejaoui/en"
+  - icon: "brands/youtube"
+    url: "https://youtube.com/@meher_bejaoui?si=kLj611WqNM-sJOse"
+    label: "YouTube"
   - icon: "academicons/cv"
     url: "uploads/resume.pdf"
     label: "Download my resume"
   - icon: "rss"
     url: "./post/index.xml"
     label: "Subscribe to my blog via RSS feed"
+languages:
+  - name: "English"
+    level: 5
+    label: "Fluent"
+  - name: "French"
+    level: 5
+    label: "Fluent"
+  - name: "Arabic"
+    level: 5
+    label: "Native"
+  - name: "Spanish"
+    level: 3
+    label: "Intermediate"
+  - name: "Korean"
+    level: 1
+    label: "Basic"
