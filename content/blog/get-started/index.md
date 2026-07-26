@@ -1,21 +1,17 @@
 ---
-title: 🎉 Easily create your own simple yet highly customizable blog
-summary: Take full control of your personal brand and privacy by migrating away from the big tech platforms!
-date: 2023-10-27
-
-# Featured image
-# Place an image named `featured.jpg/png` in this page's folder and customize its options here.
+title: "A placeholder for a post "
+summary: Take full control of your personal brand and privacy by migrating away
+  from the big tech platforms!
+date: 2026-07-26T12:00:00.000Z
 image:
-  caption: 'Image credit: [**Unsplash**](https://unsplash.com)'
-
+  caption: "Image credit: [**Unsplash**](https://unsplash.com)"
 authors:
   - me
-  - Ted
-
 tags:
   - Academic
   - Hugo Blox
   - Markdown
+
 ---
 
 Welcome 👋
@@ -73,14 +69,7 @@ As a token of appreciation for sponsoring, you can **unlock [these](https://hugo
 - **Stand Out** - Bring your site to life with animation, parallax backgrounds, and scroll effects
 - **One-Click Deployment** - No servers. No databases. Only files.
 
-## Themes
-
-Hugo Blox and its templates come with **automatic day (light) and night (dark) mode** built-in. Visitors can choose their preferred mode by clicking the sun/moon icon in the header.
-
-[Choose a stunning **theme** and **font**](https://docs.hugoblox.com/getting-started/customize/) for your site. Themes are fully customizable.
 
 ## License
-
-Copyright 2016-present [George Cushen](https://georgecushen.com).
 
 Released under the [MIT](https://github.com/HugoBlox/kit/blob/main/LICENSE.md) license.
