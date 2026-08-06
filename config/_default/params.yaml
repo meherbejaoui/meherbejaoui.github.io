@@ -18,7 +18,7 @@ hugoblox:
   layout:
     radius: md
     spacing: comfortable
-    avatar_shape: circle
+    avatar_shape: rounded
   header:
     enable: true
     style: navbar
@@ -26,14 +26,17 @@ hugoblox:
     align: center
     search: true
     theme_toggle: true
+    cta:
+      enable: false
   footer:
     style: minimal
     language_switcher: true
+    text: "Made "
   copyright:
     notice: © {year} {name}
   content:
     math:
-      enable: false
+      enable: true
     toc:
       enable: true
     reading_time:

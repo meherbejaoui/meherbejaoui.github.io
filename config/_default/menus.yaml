@@ -3,11 +3,14 @@
 
 main:
   - name: Home
+    identifier: 60b7c4e8
     url: /
     weight: 10
-  - name: Topics
-    url: tags/
+  - name: Projects
+    identifier: 814598ee
+    url: /projects
     weight: 20
-  - name: Uses
-    url: uses/
+  - name: Topics
+    identifier: "539801e0"
+    url: tags/
     weight: 30
