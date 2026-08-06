@@ -1,12 +1,40 @@
-[Check out the latest demo](https://hugo-blog-theme.netlify.app/) of what you'll get in less than 10 minutes, or [view the showcase](https://hugoblox.com/creators/).
+# swift-comet
 
-The integrated [**Hugo Blox**](https://hugoblox.com) website builder and CMS makes it easy to create a beautiful website for free. Edit your site in the CMS (or your favorite editor), generate it with [Hugo](https://github.com/gohugoio/hugo), and deploy with GitHub or Netlify. Customize anything on your site with widgets, light/dark themes, and language packs.
+Source for [meherbejaoui.com](https://www.meherbejaoui.com), built with [Hugo](https://gohugo.io) and the [Hugo Blox](https://hugoblox.com) blog template.
 
-- 👉 [**Get Started**](https://hugoblox.com/templates/)
-- 📚 [View the **documentation**](https://docs.hugoblox.com/)
-- 💬 [Chat with the **HugoBlox Kit community**](https://discord.gg/z8wNYzb) or [**Hugo community**](https://discourse.gohugo.io)
-- ⬇️ **Automatically import citations from BibTeX** with the [Hugo Academic CLI](https://github.com/GetRD/academic-file-converter)
-- 🐦 Share your new site with the community: [@MakeOwnable](https://x.com/MakeOwnable)  [#MadeWithHugoBlox](https://x.com/search?q=%23MadeWithHugoBlox&src=typed_query)
-- 🗳 [Take the survey and help us improve #OpenSource](https://forms.gle/NioD9VhUg7PNmdCAA)
-- 🚀 [Contribute improvements](https://github.com/HugoBlox/kit/blob/main/CONTRIBUTING.md) or [suggest improvements](https://github.com/HugoBlox/kit/issues)
-- ⬆️ **Updating?** View the [Update Guide](https://docs.hugoblox.com/) and [Release Notes](https://github.com/HugoBlox/kit/releases)
+## Stack
+
+- [Hugo](https://gohugo.io) (extended) — static site generator, version pinned in `hugoblox.yaml`
+- [Hugo Blox Kit](https://github.com/HugoBlox/kit) modules (`go.mod`) — theme, layouts, blocks
+- [Tailwind CSS v4](https://tailwindcss.com/) — styling
+- [Pagefind](https://pagefind.app/) — static search index
+- pnpm — package management
+
+## Local development
+
+```bash
+pnpm install
+pnpm run dev
+```
+
+This starts a Hugo dev server (`hugo server --disableFastRender`) with live reload.
+
+## Building
+
+```bash
+pnpm run build
+```
+
+Runs `hugo --minify` and generates the Pagefind search index into `public/`.
+
+## Content structure
+
+- `content/blog/<slug>/index.md` — blog posts, as Hugo page bundles (images/data files live alongside `index.md` in the same folder)
+- `content/authors/` — author profile data (rendering disabled; see `data/authors/`)
+- `content/projects.md`, `content/uses.md`-style single pages — standalone pages linked from the nav (`config/_default/menus.yaml`)
+- `data/authors/me.yaml` — site owner's bio, links, education, etc.
+- `config/_default/` — site config (`hugo.yaml`, `params.yaml`, `menus.yaml`, `module.yaml`)
+
+## Deployment
+
+Pushes to `main` trigger `.github/workflows/deploy.yml`, which builds the site and publishes it to GitHub Pages. The workflow also runs on a 6-hour schedule so that content with a future `date` (or an expired `expiryDate`) goes live automatically, since Hugo excludes such content from production builds by default.
