@@ -1,5 +1,5 @@
 ---
-title: "A placeholder for a post "
+title: "A placeholder for a post"
 summary: Take full control of your personal brand and privacy by migrating away
   from the big tech platforms!
 date: 2026-07-26T12:00:00.000Z
