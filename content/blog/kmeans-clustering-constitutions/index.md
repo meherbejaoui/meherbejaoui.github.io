@@ -22,7 +22,7 @@ When written, these documents can be quite unique and distinct in many aspects, 
 
 A textual analysis of such data can be useful. We are going to apply some techniques to compare and cluster various constitutions. This work tries to see if constitutional text corpuses are indicative of the set and outlined systems of government.
 
-To do so, we are going to use TF-IDF term weighting and K-Means clustering from scikit-learn. If you need a text analysis refresher, please check [here](https://www.meherbejaoui.com/python/advanced-word-analysis-tfidf-with-tfidfvectorizer/).
+To do so, we are going to use TF-IDF term weighting and K-Means clustering from scikit-learn. If you need a text analysis refresher, please check [here](/blog/advanced-word-analysis-tfidf/).
 
 ***
 
