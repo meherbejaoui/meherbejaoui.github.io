@@ -4,6 +4,13 @@ on:
   # Trigger the workflow every time you push to the `main` branch
   push:
     branches: ['main']
+  # Rebuild periodically so posts with a future `date` (or an `expiryDate` that
+  # has since passed) go live on their own, without needing a new push.
+  # Hugo excludes future/expired content from production builds by default,
+  # so a post dated even a few minutes after the triggering push's build time
+  # gets silently dropped until the next build.
+  schedule:
+    - cron: '0 */6 * * *'
   # Allows you to run this workflow manually from the Actions tab on GitHub
   workflow_dispatch:
 
