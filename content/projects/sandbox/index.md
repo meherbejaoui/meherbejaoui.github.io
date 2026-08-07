@@ -25,17 +25,18 @@ Not everything fits neatly into a single write-up. This page is a sandbox: a pla
   display: block;
   padding: 1.75rem;
   border-radius: 1rem;
-  border: 1px solid var(--bs-border-color, rgba(0, 0, 0, 0.1));
+  border: 1px solid rgba(127, 127, 127, 0.3);
   text-decoration: none;
   color: inherit;
-  background: var(--bs-body-bg, #fff);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  background: rgba(127, 127, 127, 0.06);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 #sandbox-cards a.sandbox-card:hover,
 #sandbox-cards a.sandbox-card:focus-visible {
   transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
-  border-color: transparent;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+  border-color: rgba(127, 127, 127, 0.55);
+  background: rgba(127, 127, 127, 0.1);
 }
 #sandbox-cards .sandbox-card-icon {
   font-size: 2.25rem;
