@@ -2,7 +2,7 @@
   <div class="mx-auto m-4 flex max-w-2xl items-center gap-4 rounded-lg bg-neutral-800 px-5 py-4 text-sm text-neutral-100 shadow-lg dark:bg-neutral-900 dark:ring-1 dark:ring-neutral-700">
     <p class="flex-1">
       This site uses cookies to improve your browsing experience. By continuing, you agree to these terms.
-      <a href="/terms/" class="underline hover:text-primary-300">Learn more</a>
+      {{ with site.GetPage "terms" }}<a href="{{ .RelPermalink }}" class="underline hover:text-primary-300">Learn more</a>{{ end }}
     </p>
     <button
       type="button"
