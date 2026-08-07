@@ -1,0 +1,82 @@
+{{/*
+  Site-wide "tip me" button, click-to-load.
+
+  Nothing from Ko-fi loads until this placeholder is clicked -- it is ours,
+  costs nothing, and sets no cookie. On click it injects Ko-fi's real
+  overlay-widget.js and calls kofiWidgetOverlay.draw(), which renders Ko-fi's
+  own floating button in roughly the same spot. From then on it behaves
+  exactly like Ko-fi's normal widget (one more click opens the actual panel).
+
+  This intentionally does not try to auto-open Ko-fi's panel by reaching into
+  their button's internals after draw() -- that DOM structure isn't part of
+  their documented API and isn't something this could verify live from this
+  environment, so relying on it would be one Ko-fi release away from quietly
+  breaking.
+
+  Position is coordinated with the analytics consent banner
+  (hooks/body-end/cookie-consent.html): while that banner is visible, this
+  button sits above it instead of overlapping it.
+*/}}
+
+{{ $ga := site.Params.hugoblox.analytics.google.measurement_id | default "" }}
+
+{{ if hugo.IsProduction }}
+<button
+  type="button"
+  id="kofi-float-trigger"
+  aria-label="Support me on Ko-fi"
+  class="fixed left-4 z-40 flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-medium text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl print:hidden"
+  style="bottom: 1.5rem; background-color: #00b9fe;"
+>
+  <span aria-hidden="true">☕</span>
+  <span>Tip Me</span>
+</button>
+<script>
+  (function () {
+    var btn = document.getElementById('kofi-float-trigger');
+    if (!btn) return;
+
+    {{ if $ga }}
+    /* Keep clear of the analytics consent banner while it's on screen. */
+    function repositionForBanner() {
+      var banner = document.getElementById('cookie-consent-banner');
+      var visible = !!banner && !banner.classList.contains('hidden');
+      btn.style.bottom = visible ? '7rem' : '1.5rem';
+    }
+    repositionForBanner();
+    new MutationObserver(repositionForBanner).observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['class']
+    });
+    {{ end }}
+
+    var loading = false;
+    btn.addEventListener('click', function () {
+      if (loading) return;
+      loading = true;
+      btn.disabled = true;
+
+      var script = document.createElement('script');
+      script.src = 'https://storage.ko-fi.com/cdn/scripts/overlay-widget.js';
+      script.onload = function () {
+        if (window.kofiWidgetOverlay) {
+          window.kofiWidgetOverlay.draw('meherbejaoui', {
+            type: 'floating-chat',
+            'floating-chat.donateButton.text': 'Tip Me',
+            'floating-chat.donateButton.background-color': '#00b9fe',
+            'floating-chat.donateButton.text-color': '#fff'
+          });
+        }
+        btn.remove();
+      };
+      script.onerror = function () {
+        loading = false;
+        btn.disabled = false;
+      };
+      document.body.appendChild(script);
+    });
+  })();
+</script>
+{{ end }}
