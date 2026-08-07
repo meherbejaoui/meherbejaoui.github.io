@@ -55,6 +55,8 @@ sections:
             iframe.title = 'Support me on Ko-fi';
             iframe.loading = 'lazy';
             iframe.height = '712';
+            iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+            iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox');
             iframe.style.cssText = 'border:none;width:100%;padding:0;background:transparent;display:block;';
             mount.appendChild(iframe);
             mount.style.display = 'block';
