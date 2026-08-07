@@ -1,0 +1,39 @@
+User-agent: *
+Allow: /
+
+{{/*
+  AI training crawlers, blocked. These are the tokens each vendor has
+  documented specifically for opting out of using this site's content to
+  train models -- distinct from the same vendors' search/indexing and
+  on-demand assistant-browsing bots below, which are left alone so this
+  site can still be found and cited through those products.
+
+  Left deliberately unblocked for the same reason: OAI-SearchBot,
+  ChatGPT-User, Claude-User, Claude-SearchBot, Googlebot, Applebot,
+  Meta-ExternalFetcher, PerplexityBot, Perplexity-User.
+*/}}
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+Sitemap: {{ "sitemap.xml" | absURL }}
