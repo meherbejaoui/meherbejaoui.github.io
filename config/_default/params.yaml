@@ -43,3 +43,8 @@ hugoblox:
       enable: true
   search:
     enable: true
+  analytics:
+    google:
+      measurement_id: "G-53406JLEX4"
+  verification:
+    bing: "6746FB8FF682FBA0CDA0A5AE1833ECBD"
