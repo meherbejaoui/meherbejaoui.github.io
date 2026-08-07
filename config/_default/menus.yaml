@@ -14,3 +14,7 @@ main:
     identifier: "539801e0"
     url: tags/
     weight: 30
+  - name: Contact
+    identifier: c3d90fa7
+    url: /contact
+    weight: 40

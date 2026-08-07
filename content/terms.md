@@ -13,11 +13,15 @@ The privacy of all visitors is important. This page explains what information is
 
 Like most websites, this site's hosting provider (GitHub Pages) may log standard technical information about visits, such as IP addresses, browser type, referring/exit pages, and date/time stamps. This information isn't linked to anything personally identifiable. See [GitHub's Privacy Statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement) for details on how GitHub Pages handles this data.
 
-## Cookies
+## Cookies and Analytics
 
-This site does not use third-party tracking or advertising cookies. The only browser storage used is a small local flag that remembers you've dismissed the cookie notice banner — it isn't sent anywhere and contains no personal information.
+This site uses **Google Analytics** to understand which pages people find useful. It's configured with IP anonymization enabled, and it sets its own cookies (typically named `_ga` and `_ga_*`) to distinguish one visitor from another across pages and visits. It also records when an outbound link is clicked, so I can see which references readers follow. No advertising cookies are used, and none of this data is sold or shared for marketing.
 
-If this ever changes (for example, if comments or analytics are added in the future), this page will be updated to reflect it.
+If you'd rather not be counted, you can use [Google's official opt-out browser add-on](https://tools.google.com/dlpage/gaoptout), enable your browser's "Do Not Track" or tracking-protection setting, or block the domain `googletagmanager.com`. Nothing on this site depends on analytics working, so blocking it won't break anything.
+
+The only other browser storage used is a small local flag that remembers you've dismissed the cookie notice banner — it isn't sent anywhere and contains no personal information.
+
+This page is updated whenever what's collected changes.
 
 ## License
 
