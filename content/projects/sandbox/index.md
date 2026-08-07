@@ -88,7 +88,7 @@ Not everything fits neatly into a single write-up. This page is a sandbox: a pla
   <div class="sandbox-card-icon">🧭</div>
   <span class="sandbox-card-tag">Proof of concept</span>
   <div class="sandbox-card-title">Suivre</div>
-  <div class="sandbox-card-desc">A proof-of-concept built to give potential employers a concrete sense of how I work and think.</div>
+  <div class="sandbox-card-desc">A small, self-contained proof-of-concept — a sample of how I like to think through and work a problem.</div>
   <div class="sandbox-card-cta">Take a look →</div>
 </a>
 
