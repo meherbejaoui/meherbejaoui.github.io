@@ -1,0 +1,34 @@
+<div id="cookie-consent-banner" class="fixed inset-x-0 bottom-0 z-50 hidden print:hidden" role="region" aria-label="Cookie consent">
+  <div class="mx-auto m-4 flex max-w-2xl items-center gap-4 rounded-lg bg-neutral-800 px-5 py-4 text-sm text-neutral-100 shadow-lg dark:bg-neutral-900 dark:ring-1 dark:ring-neutral-700">
+    <p class="flex-1">
+      This site uses cookies to improve your browsing experience. By continuing, you agree to these terms.
+      <a href="https://www.meherbejaoui.com/terms/" class="underline hover:text-primary-300" target="_blank" rel="noopener">Learn more</a>
+    </p>
+    <button
+      type="button"
+      id="cookie-consent-dismiss"
+      aria-label="Dismiss cookie notice"
+      class="shrink-0 rounded-md p-1.5 text-neutral-300 hover:bg-neutral-700 hover:text-white"
+    >
+      {{ partial "functions/get_icon" (dict "name" "hero/x-mark" "attributes" "class=\"w-5 h-5\"") }}
+    </button>
+  </div>
+</div>
+<script>
+  (function () {
+    var KEY = 'cookie-consent-dismissed';
+    try {
+      if (localStorage.getItem(KEY) === '1') return;
+    } catch (e) {}
+    var banner = document.getElementById('cookie-consent-banner');
+    if (!banner) return;
+    banner.classList.remove('hidden');
+    var dismiss = document.getElementById('cookie-consent-dismiss');
+    dismiss.addEventListener('click', function () {
+      banner.remove();
+      try {
+        localStorage.setItem(KEY, '1');
+      } catch (e) {}
+    });
+  })();
+</script>
