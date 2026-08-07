@@ -26,5 +26,5 @@ sections:
           url: https://calendly.com/meher-bejaoui/30min
     design:
       spacing:
-        padding: ['3rem', 0, '4rem', 0]
+        padding: [0, 0, 0, 0]
 ---
