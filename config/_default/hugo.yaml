@@ -29,6 +29,22 @@ cascade:
     header:
       navbar:
         enable: true
+  # Project post options (mirrors blog post options)
+  - target:
+      path: /projects/**
+      kind: page
+    pager: true
+    editable: true
+    show_date: true
+    show_date_updated: true
+    reading_time: true
+    commentable: true
+    show_related: true
+    share: true
+    show_breadcrumb: false
+    header:
+      navbar:
+        enable: true
 
 ############################
 ## LANGUAGE

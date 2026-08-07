@@ -31,7 +31,7 @@ hugoblox:
   footer:
     style: minimal
     language_switcher: true
-    text: "Made "
+    text: "Made with Python, data, and a little too much coffee ☕"
   copyright:
     notice: © {year} {name}
   content:
