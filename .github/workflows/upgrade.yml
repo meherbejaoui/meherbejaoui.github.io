@@ -42,9 +42,9 @@ jobs:
           node-version: '22'
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
-          package_json_path: ./package.json
+          package_json_file: ./package.json
           run_install: false
 
       - name: Setup Go
