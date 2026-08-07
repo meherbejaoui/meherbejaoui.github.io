@@ -32,7 +32,7 @@ links:
     url: "https://substack.com/@meherbejaoui"
     label: "Substack"
   - icon: "rss"
-    url: "./post/index.xml"
+    url: "/blog/index.xml"
     label: "Subscribe to my blog via RSS feed"
 languages:
   - name: "English"
