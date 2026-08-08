@@ -1,0 +1,17 @@
+version: 2
+updates:
+  # Keeps the SHA-pinned GitHub Actions in .github/workflows/*.yml current.
+  # Dependabot understands the `uses: owner/repo@<sha> # vX.Y.Z` convention
+  # natively: when a new release comes out, it opens a PR updating both the
+  # SHA and the version comment, so the pins never require manually hunting
+  # down a commit hash again.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+    commit-message:
+      prefix: "chore(actions)"
