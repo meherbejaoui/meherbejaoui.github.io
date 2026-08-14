@@ -108,6 +108,22 @@ Not everything fits neatly into a single write-up. This page is a sandbox: a pla
   <div class="sandbox-card-cta">Open the tool →</div>
 </a>
 
+<a class="sandbox-card" href="https://steg-status.meherbejaoui.com" target="_blank" rel="noopener">
+  <div class="sandbox-card-icon">⚡</div>
+  <span class="sandbox-card-tag">Community tool</span>
+  <div class="sandbox-card-title">STEG Status</div>
+  <div class="sandbox-card-desc">Crowdsourced electricity outage map for Tunisia — like Downdetector, but for the power grid, delegation by delegation. A zone only turns red once enough independent people confirm it.</div>
+  <div class="sandbox-card-cta">View the map →</div>
+</a>
+
+<a class="sandbox-card" href="https://meherbejaoui.com/poetry" target="_blank" rel="noopener">
+  <div class="sandbox-card-icon">📜</div>
+  <span class="sandbox-card-tag">Literary collection</span>
+  <div class="sandbox-card-title">Poetry</div>
+  <div class="sandbox-card-desc">Classical and modern poems in Arabic, English, and Mongolian, shown side by side by theme — plus AI-generated poems, clearly labeled as such.</div>
+  <div class="sandbox-card-cta">Read the poems →</div>
+</a>
+
 </div>
 
-All four are actively evolving — check back here for updates, or click through to see them as they stand today.
+All six are actively evolving — check back here for updates, or click through to see them as they stand today.
