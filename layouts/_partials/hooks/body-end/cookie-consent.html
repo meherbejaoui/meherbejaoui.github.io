@@ -1,75 +1,34 @@
-{{/*
-  Analytics consent notice.
-
-  Only rendered when analytics is actually configured and we are building for
-  production — if nothing would set a cookie, there is nothing to ask about, so
-  visitors are never shown a banner. The gating itself lives in
-  layouts/_partials/blox-analytics/services/google_analytics.html, which exposes
-  window.hbConsent.
-*/}}
-
-{{ $ga := site.Params.hugoblox.analytics.google.measurement_id | default "" }}
-
-{{ if hugo.IsProduction | and $ga }}
-<div
-  id="cookie-consent-banner"
-  class="fixed inset-x-0 bottom-0 z-50 hidden opacity-0 transition-opacity duration-300 print:hidden"
-  role="region"
-  aria-label="Analytics consent"
->
-  <div class="mx-auto m-4 flex max-w-2xl flex-col gap-3 rounded-lg bg-neutral-800 px-5 py-4 text-sm text-neutral-100 shadow-lg sm:flex-row sm:items-center dark:bg-neutral-900 dark:ring-1 dark:ring-neutral-700">
+<div id="cookie-consent-banner" class="fixed inset-x-0 bottom-0 z-50 hidden print:hidden" role="region" aria-label="Cookie consent">
+  <div class="mx-auto m-4 flex max-w-2xl items-center gap-4 rounded-lg bg-neutral-800 px-5 py-4 text-sm text-neutral-100 shadow-lg dark:bg-neutral-900 dark:ring-1 dark:ring-neutral-700">
     <p class="flex-1">
-      Mind if I count this visit? It uses Google Analytics, which sets a cookie. Nothing on this site depends on it.
-      {{ with site.GetPage "terms" }}<a href="{{ .RelPermalink }}" class="underline hover:text-primary-300">Details</a>{{ end }}
+      This site uses cookies to improve your browsing experience. By continuing, you agree to these terms.
+      {{ with site.GetPage "terms" }}<a href="{{ .RelPermalink }}" class="underline hover:text-primary-300">Learn more</a>{{ end }}
     </p>
-    <div class="flex shrink-0 gap-2">
-      <button
-        type="button"
-        id="cookie-consent-decline"
-        class="rounded-md px-3 py-1.5 font-medium text-neutral-300 hover:bg-neutral-700 hover:text-white"
-      >
-        No thanks
-      </button>
-      <button
-        type="button"
-        id="cookie-consent-accept"
-        class="rounded-md bg-white px-3 py-1.5 font-medium text-neutral-900 hover:bg-neutral-200"
-      >
-        Sure
-      </button>
-    </div>
+    <button
+      type="button"
+      id="cookie-consent-dismiss"
+      aria-label="Dismiss cookie notice"
+      class="shrink-0 rounded-md p-1.5 text-neutral-300 hover:bg-neutral-700 hover:text-white"
+    >
+      {{ partial "functions/get_icon" (dict "name" "hero/x-mark" "attributes" "class=\"w-5 h-5\"") }}
+    </button>
   </div>
 </div>
 <script>
   (function () {
+    var KEY = 'cookie-consent-dismissed';
+    try {
+      if (localStorage.getItem(KEY) === '1') return;
+    } catch (e) {}
     var banner = document.getElementById('cookie-consent-banner');
     if (!banner) return;
-
-    /* No consent API means analytics never loaded, so drop the banner. */
-    if (!window.hbConsent || !window.hbConsent.needsChoice()) {
-      banner.remove();
-      return;
-    }
-
-    function dismiss() {
-      banner.classList.remove('opacity-100');
-      window.setTimeout(function () { banner.remove(); }, 300);
-    }
-
-    document.getElementById('cookie-consent-accept').addEventListener('click', function () {
-      window.hbConsent.grant();
-      dismiss();
-    });
-
-    document.getElementById('cookie-consent-decline').addEventListener('click', function () {
-      window.hbConsent.deny();
-      dismiss();
-    });
-
     banner.classList.remove('hidden');
-    window.requestAnimationFrame(function () {
-      banner.classList.add('opacity-100');
+    var dismiss = document.getElementById('cookie-consent-dismiss');
+    dismiss.addEventListener('click', function () {
+      banner.remove();
+      try {
+        localStorage.setItem(KEY, '1');
+      } catch (e) {}
     });
   })();
 </script>
-{{ end }}
