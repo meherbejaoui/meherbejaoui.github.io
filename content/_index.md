@@ -1,5 +1,6 @@
 ---
-title: 'Home'
+title: 'Jack of many trades. Public finance, governance, and data.'
+linkTitle: 'Home'
 date: 2023-10-24
 type: landing
 sections:

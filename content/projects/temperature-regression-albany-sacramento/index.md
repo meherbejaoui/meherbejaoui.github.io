@@ -15,6 +15,7 @@ tags:
   - sklearn
 image:
   caption: "Image credit: [**Unsplash**](https://unsplash.com)"
+  alt_text: "Infographic on multiple linear regression analysis comparing predicted vs. actual temperatures for Albany and Sacramento"
 ---
 
 {{< toc mobile_only=true is_open=true >}}

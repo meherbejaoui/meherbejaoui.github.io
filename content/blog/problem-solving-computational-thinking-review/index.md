@@ -7,6 +7,8 @@ authors:
   - me
 tags:
   - review
+image:
+  alt_text: "University of Michigan Coursera certificate for completing Problem Solving Using Computational Thinking, issued to Meher Béjaoui"
 ---
 
 {{< toc mobile_only=true is_open=true >}}

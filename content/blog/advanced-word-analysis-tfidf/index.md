@@ -11,6 +11,8 @@ tags:
   - python
   - pandas
   - sklearn
+image:
+  alt_text: "Infographic titled 'Advanced Word Analysis: TF-IDF' showing constitutional texts scored by term frequency and inverse document frequency"
 ---
 
 {{< toc mobile_only=true is_open=true >}}

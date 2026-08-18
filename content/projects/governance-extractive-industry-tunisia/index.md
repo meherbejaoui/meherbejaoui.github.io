@@ -7,6 +7,8 @@ authors:
   - me
 tags:
   - governance
+image:
+  alt_text: "Illustrated infographic titled 'From Shadow to Shine: A Path Forward', contrasting opaque extractive-industry governance with a transparent, accountable model"
 ---
 
 Governance of the extractive industry is important to optimize resource utilization, and to ensure that the outcomes from natural resources exploitation contribute to the sustainable development of the country.

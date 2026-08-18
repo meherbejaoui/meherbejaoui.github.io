@@ -10,6 +10,8 @@ tags:
   - python
   - pandas
   - sklearn
+image:
+  alt_text: "Infographic illustrating CountVectorizer turning text documents into a word-frequency matrix"
 ---
 
 {{< toc mobile_only=true is_open=true >}}
