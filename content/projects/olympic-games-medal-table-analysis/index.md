@@ -10,6 +10,8 @@ tags:
   - tutorial
   - python
   - pandas
+image:
+  alt_text: "Stacked bar chart of total Summer and Winter Olympic medals for the top ten countries"
 ---
 
 {{< toc mobile_only=true is_open=true >}}

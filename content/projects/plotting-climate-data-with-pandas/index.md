@@ -11,6 +11,8 @@ tags:
   - tutorial
   - python
   - pandas
+image:
+  alt_text: "Line chart of daily high and low temperatures for Ann Arbor, Michigan from 2005-2014, with record highs and lows marked"
 ---
 
 {{< toc mobile_only=true is_open=true >}}

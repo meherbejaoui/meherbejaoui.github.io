@@ -9,6 +9,8 @@ categories:
 tags:
   - sandbox
   - work-in-progress
+image:
+  alt_text: "Illustrated enamel-pin badge with science and experiment icons: flasks, a gear, and a telescope"
 ---
 
 Not everything fits neatly into a single write-up. This page is a sandbox: a place to point to smaller, standalone projects that live outside this site, and that will keep growing as I add to them.

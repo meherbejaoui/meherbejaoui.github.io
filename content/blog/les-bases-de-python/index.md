@@ -9,6 +9,8 @@ categories:
 tags:
   - tutorial
   - python
+image:
+  alt_text: "Title graphic for 'Les bases de Python' featuring the Python logo and the text 'Prêt à coder?'"
 ---
 
 {{< toc mobile_only=true is_open=true >}}

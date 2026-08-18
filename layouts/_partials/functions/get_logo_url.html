@@ -1,0 +1,22 @@
+{{/*
+  Override of the theme's get_logo_url partial (v0.12.0).
+
+  The upstream partial falls back to get_site_icon, which returns a
+  dict (resource/type/is_svg) rather than an image resource, so calling
+  .Permalink on it directly returns nil. That leaves JSON-LD
+  publisher.logo.url as null. This override unwraps the dict's
+  .resource before reading .Permalink.
+*/}}
+
+{{ $logo_url := "" }}
+{{ if resources.Get "media/logo.png" | or (resources.Get "media/logo.svg") }}
+  {{/* !CACHED! Can safely cache this site logo variant */}}
+  {{ $logo_url = (partialCached "functions/get_logo" (dict "constraint" "fit" "size" 192)).Permalink }}
+{{ else }}
+  {{ $icon := partial "functions/get_site_icon" 192 }}
+  {{ with $icon.resource }}
+    {{ $logo_url = .Permalink }}
+  {{ end }}
+{{ end }}
+
+{{ return $logo_url }}

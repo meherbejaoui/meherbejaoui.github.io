@@ -3,8 +3,9 @@
 # Hugo Documentation: https://gohugo.io/getting-started/configuration/#all-configuration-settings
 # This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
 
-# Website name (set in params.yaml under hugoblox.branding.name)
-title: ''
+# Website name (mirrors hugoblox.identity.name in params.yaml; some structured-data
+# templates read this field directly rather than the branding helper)
+title: 'Meher Bejaoui'
 baseURL: 'https://www.meherbejaoui.com/' # Website URL
 
 ############################

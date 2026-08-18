@@ -11,6 +11,8 @@ tags:
   - python
   - pandas
   - visualization
+image:
+  alt_text: "Word cloud titled 'Tunisian Hydrocarbons Code Cloud', highlighting frequently used legal terms"
 ---
 
 {{< toc mobile_only=true is_open=true >}}

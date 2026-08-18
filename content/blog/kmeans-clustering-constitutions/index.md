@@ -11,6 +11,8 @@ tags:
   - python
   - pandas
   - sklearn
+image:
+  alt_text: "Infographic titled 'Can Law Be Mapped?' showing constitutional texts clustered by K-Means into common-law, rights-focused, and executive-heavy groups"
 ---
 
 {{< toc mobile_only=true is_open=true >}}
