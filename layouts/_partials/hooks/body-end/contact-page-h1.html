@@ -1,0 +1,39 @@
+{{/*
+  /contact/ renders no page-level <h1>: it's a `type: landing` page (baseof.html
+  never emits a chrome-level h1 for that type — see contact-page-spacing.html
+  for the same root cause on the spacing side), and the theme's contact-info
+  block renders its own title as an <h2> (blox/contact-info/block.html:223),
+  assuming a page h1 exists elsewhere. On this page nothing else supplies one,
+  so the page has zero <h1> elements — a real gap for screen readers and SEO
+  tooling (e.g. axe/Lighthouse's "page should contain a level-one heading").
+
+  This can't be fixed by overriding a template at a stable path (contact-info
+  is a theme block, not something this repo mounts a layout override for), so
+  it's patched here at runtime: scoped to /contact/ only, only fires if no h1
+  is already present (self-disarms if a future theme update adds one), and
+  reuses the block's own rendered title text so it never drifts out of sync
+  with content/contact.md. Inline styles rather than a Tailwind utility class
+  (e.g. sr-only) since classes not referenced in a scanned template can be
+  purged from the compiled CSS -- confirmed sr-only itself doesn't survive
+  this site's build, so a class-based visually-hidden approach isn't safe
+  here.
+*/}}
+{{ if eq .RelPermalink "/contact/" }}
+<script>
+  (function () {
+    if (document.querySelector('h1')) return;
+    var section = document.getElementById('section-contact-info');
+    var titleEl = section && section.querySelector('h2, h1');
+    var text = (titleEl && titleEl.textContent.trim()) || document.title.split('|')[0].trim() || 'Contact';
+
+    var h1 = document.createElement('h1');
+    h1.textContent = text;
+    h1.style.cssText =
+      'position:absolute;width:1px;height:1px;padding:0;margin:-1px;' +
+      'overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;';
+
+    var body = document.querySelector('.page-body') || document.body;
+    body.insertBefore(h1, body.firstChild);
+  })();
+</script>
+{{ end }}

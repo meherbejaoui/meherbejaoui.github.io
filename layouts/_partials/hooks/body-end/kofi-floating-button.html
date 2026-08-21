@@ -61,19 +61,37 @@
       var script = document.createElement('script');
       script.src = 'https://storage.ko-fi.com/cdn/scripts/overlay-widget.js';
       script.onload = function () {
-        if (window.kofiWidgetOverlay) {
-          window.kofiWidgetOverlay.draw('meherbejaoui', {
-            type: 'floating-chat',
-            'floating-chat.donateButton.text': 'Tip Me',
-            'floating-chat.donateButton.background-color': '#00b9fe',
-            'floating-chat.donateButton.text-color': '#fff'
-          });
+        var overlay = window.kofiWidgetOverlay;
+        var drew = false;
+        if (overlay && typeof overlay.draw === 'function') {
+          try {
+            overlay.draw('meherbejaoui', {
+              type: 'floating-chat',
+              'floating-chat.donateButton.text': 'Tip Me',
+              'floating-chat.donateButton.background-color': '#00b9fe',
+              'floating-chat.donateButton.text-color': '#fff'
+            });
+            drew = true;
+          } catch (err) {
+            drew = false;
+          }
         }
-        btn.remove();
+        if (drew) {
+          btn.remove();
+        } else {
+          /* Ko-fi's script loaded but never exposed a usable overlay API
+             (e.g. an ad/tracker blocker stripped or stubbed it out), or
+             draw() itself threw. Leave the trigger clickable instead of
+             getting stuck disabled or silently vanishing. */
+          loading = false;
+          btn.disabled = false;
+        }
+        script.remove();
       };
       script.onerror = function () {
         loading = false;
         btn.disabled = false;
+        script.remove();
       };
       document.body.appendChild(script);
     });
