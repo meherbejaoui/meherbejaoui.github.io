@@ -126,6 +126,14 @@ Not everything fits neatly into a single write-up. This page is a sandbox: a pla
   <div class="sandbox-card-cta">Read the poems →</div>
 </a>
 
+<a class="sandbox-card" href="https://meherbejaoui.com/puzzlefactory" target="_blank" rel="noopener">
+  <div class="sandbox-card-icon">🧩</div>
+  <span class="sandbox-card-tag">Daily puzzle games</span>
+  <div class="sandbox-card-title">Puzzle Factories</div>
+  <div class="sandbox-card-desc">Two small daily-puzzle generators: a mini crossword and a nonogram, each certified fair before it ships and free to replay from a growing archive. No accounts, no ads.</div>
+  <div class="sandbox-card-cta">Play the puzzles →</div>
+</a>
+
 </div>
 
-All six are actively evolving — check back here for updates, or click through to see them as they stand today.
+All seven are actively evolving — check back here for updates, or click through to see them as they stand today.
