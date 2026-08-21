@@ -1,0 +1,53 @@
+{{/*
+  Align the /contact/ page heading with the other sections.
+
+  /projects/ and /tags/ ("Topics") both render their heading from
+  layouts/list.html (and this repo's layouts/taxonomy.html): a centred,
+  shrink-to-fit `prose` h1 sitting 2.5rem below the header -- that 2.5rem
+  comes from baseof.html's page-body wrapper, whose `my-10` class is only
+  added `{{ if and (ne .Type "landing") (not $cover) }}`.
+
+  /contact/ is a `type: landing` page, so it skips that wrapper margin and
+  instead gets whatever the contact-info block brings itself:
+
+    * the block's inner wrapper ships responsive top padding
+      (py-12 sm:py-16 lg:py-20, i.e. 3-5rem), which sat lower than the
+      other sections at every width; and
+    * the block renders its title at text-3xl/sm:text-4xl/lg:text-5xl with
+      font-bold (blox/contact-info/block.html), i.e. smaller than the other
+      sections' headings below 640px and above 1024px, and a weight lighter
+      everywhere.
+
+  Neither is reachable by overriding a template at a stable path
+  (contact-info is a theme block, not something this repo mounts a layout
+  override for), so both are pinned here in scoped CSS instead. Selectors
+  are ID-anchored, so they only match on /contact/ and are a no-op
+  everywhere else on the site.
+
+  Note the `:not(.home-section-bg)`: the block's section starts with a
+  `<div class="home-section-bg">` background layer, so the content wrapper
+  is the section's *second* child -- an earlier `> div:first-child` version
+  of this rule silently targeted that background div and did nothing.
+*/}}
+<style>
+  /* Match the 2.5rem gap that page-body's `my-10` gives /projects/ and /tags/. */
+  #section-contact-info > div:not(.home-section-bg) {
+    padding-top: 2.5rem;
+  }
+
+  /* Match the `prose` h1 on /projects/ and /tags/: 2.25rem/2.5rem, weight 800. */
+  #section-contact-info h2 {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  /* ...and its `lg:text-6xl` step at the same breakpoint. */
+  @media (min-width: 1024px) {
+    #section-contact-info h2 {
+      font-size: 3.75rem;
+      line-height: 1;
+    }
+  }
+</style>

@@ -1,5 +1,16 @@
 {{/*
-  Site-wide "tip me" button, click-to-load.
+  Support button for article pages, click-to-load.
+
+  Scope: individual blog posts and project pages only -- the places where a
+  reader has just finished something and might want to say thanks. It is
+  deliberately kept off the section and positioning pages (home, /projects/,
+  /tags/, /contact/, /terms/), where a standing ask for money competes with
+  the advisory framing and the "Schedule a 30-minute call" CTA. /contact/
+  still carries its own "Support the work" panel further down the page, so
+  the option remains one click away from the main navigation.
+
+  Wording is "Support" rather than "Tip Me": same offer, without the
+  imperative ask.
 
   Nothing from Ko-fi loads until this placeholder is clicked -- it is ours,
   costs nothing, and sets no cookie. On click it injects Ko-fi's real
@@ -20,16 +31,19 @@
 
 {{ $ga := site.Params.hugoblox.analytics.google.measurement_id | default "" }}
 
-{{ if hugo.IsProduction }}
+{{/* Article pages only: individual posts under /blog/ and /projects/. */}}
+{{ $is_article := and (eq .Kind "page") (in (slice "blog" "projects") .Section) }}
+
+{{ if and hugo.IsProduction $is_article }}
 <button
   type="button"
   id="kofi-float-trigger"
-  aria-label="Support me on Ko-fi"
+  aria-label="Support my work on Ko-fi"
   class="fixed left-4 z-40 flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-medium text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl print:hidden"
   style="bottom: 1.5rem; background-color: #00b9fe;"
 >
   <span aria-hidden="true">☕</span>
-  <span>Tip Me</span>
+  <span>Support</span>
 </button>
 <script>
   (function () {
@@ -67,7 +81,7 @@
           try {
             overlay.draw('meherbejaoui', {
               type: 'floating-chat',
-              'floating-chat.donateButton.text': 'Tip Me',
+              'floating-chat.donateButton.text': 'Support',
               'floating-chat.donateButton.background-color': '#00b9fe',
               'floating-chat.donateButton.text-color': '#fff'
             });
