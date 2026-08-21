@@ -3,6 +3,9 @@ title: Terms and Privacy Policy
 date: 2023-10-24
 show_date: false
 reading_time: false
+image:
+  filename: icon.png
+  alt_text: 'Site icon'
 ---
 
 ## Privacy Policy

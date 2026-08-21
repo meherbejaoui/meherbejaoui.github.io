@@ -2,6 +2,9 @@
 title: 'Contact'
 date: 2026-08-07
 type: landing
+image:
+  filename: icon.png
+  alt_text: 'Site icon'
 sections:
   - block: contact-info
     content:
