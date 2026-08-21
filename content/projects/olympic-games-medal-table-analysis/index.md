@@ -18,7 +18,7 @@ image:
 
 ### Introduction
 
-The following [Jupyter Notebook](https://github.com/meherbejaoui/meherbejaoui.github.io/blob/master/assets/olympics/OlympicGamesAnalyses.ipynb) uses the [Olympic games medal dataset](https://github.com/meherbejaoui/meherbejaoui.github.io/blob/master/assets/olympics/olympic_games_medal_table.csv), which was derived from the Wikipedia entry on [All Time Olympic Games Medals](https://en.wikipedia.org/wiki/All-time_Olympic_Games_medal_table), as of the 2016 Summer Olympics and 2018 Winter Olympics. All changes in medal standings due to doping cases and medal redistributions up to and including 25 November 2020 are taken into account.
+The following [Jupyter Notebook](OlympicGamesAnalyses.ipynb) uses the [Olympic games medal dataset](olympics.csv), which was derived from the Wikipedia entry on [All Time Olympic Games Medals](https://en.wikipedia.org/wiki/All-time_Olympic_Games_medal_table), as of the 2016 Summer Olympics and 2018 Winter Olympics. All changes in medal standings due to doping cases and medal redistributions up to and including 25 November 2020 are taken into account.
 *Data queried on March 18th, 2021.*
 
 ***
@@ -157,3 +157,10 @@ Based on the values of *adjusted gold medals* represented by the y-axis, the Sov
 The sizes of bubbles suggest that the top 3 countries that won *most medals* relative to the number of games they were part of, are respectively, the Soviet Union, the US and Russia.
 
 To put it in perspective by comparing France and China, the latter won *less* total medals overall (position on x-axis). But taking into account the number of olympic games played, China *did* win more gold medals (position on y-axis) and total medals (bubble-size).
+
+***
+### Run it yourself
+
+[Download the notebook](OlympicGamesAnalyses.ipynb) and the dataset it reads, [olympics.csv](olympics.csv). Keep both in the same folder and it runs top to bottom.
+
+*Written in 2021 against python 3.7 and pandas 1.2, with outputs stripped so you start from a clean run. Re-checked on pandas 3.0 and matplotlib 3.11, where two things need updating: `plt.style.use('seaborn-poster')` becomes `'seaborn-v0_8-poster'`, and the bubble labels need `bubble_df['Rank'].iloc[i]` rather than `bubble_df['Rank'][i]`, since a Series no longer falls back to positional lookup. With those two changes it runs end to end.*

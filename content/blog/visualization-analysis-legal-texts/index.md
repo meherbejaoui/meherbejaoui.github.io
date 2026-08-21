@@ -17,7 +17,7 @@ image:
 
 {{< toc mobile_only=true is_open=true >}}
 
-While browsing the Internet, you have probably seen a picture of a cloud filled with words of varying sizes that reflect the frequency of each word within a given text. This is referred to as a Tag Cloud or a Word Cloud. In this tutorial (see the notebook [here](https://github.com/meherbejaoui/meherbejaoui.github.io/blob/master/assets/word_clouds/wordCloud.ipynb)), we will learn how to make Word Clouds in Python. This tool is useful for a visual exploration of text data.
+While browsing the Internet, you have probably seen a picture of a cloud filled with words of varying sizes that reflect the frequency of each word within a given text. This is referred to as a Tag Cloud or a Word Cloud. In this tutorial (see the notebook [here](wordCloud.ipynb)), we will learn how to make Word Clouds in Python. This tool is useful for a visual exploration of text data.
 
 We will use legal texts for the purpose of this tutorial, namely the Tunisian Constitution and the Tunisian Hydrocarbons Code.
 
@@ -252,3 +252,12 @@ dtype: float64
 In this notebook (using *python 3.7 pandas 1.2.1* and *matplotlib 3.3.2*), we have learned how to draw a Word Cloud that would be helpful for visualization of any text. Besides, we used `Counter` to count words in documents. The tool worked well with pandas DataFrames, allowing us to make simple comparisons.
 
 This might have been naive text analysis, but it is an important first step towards a more comprehensive and elaborate text analysis.
+
+***
+### Run it yourself
+
+[Download the notebook](wordCloud.ipynb); the three texts it reads sit beside it — [constitution.txt](constitution.txt), [french constitution.txt](french%20constitution.txt) and [hydrocarbons_code.txt](hydrocarbons_code.txt). Keep all four in the same folder.
+
+Two mask images the shaped clouds use, `map.png` and `Flag_of_Tunisia.png`, were never published with the notebook. Supply any two PNG silhouettes under those names before running — the cell that loads the flag also loads the Tunisian constitution, so the word-count tables further down depend on it.
+
+*Written in 2021 against python 3.7, pandas 1.2.1 and matplotlib 3.3.2, with outputs stripped so you start from a clean run. Re-checked on pandas 3.0, matplotlib 3.11 and wordcloud: apart from the missing masks, it runs unchanged.*
