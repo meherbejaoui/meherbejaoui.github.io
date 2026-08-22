@@ -1,0 +1,9 @@
+# GitHub's language bar (Linguist) runs on the default branch and counts only
+# files it classes as code. Markdown posts, YAML config, CSV data and images
+# are all excluded already, which left the notebooks published alongside three
+# posts as 80%+ of the bar -- labelling a Hugo site "Jupyter Notebook".
+#
+# They are reference material shipped for readers, not this project's source,
+# so mark them as documentation: GitHub keeps rendering and diffing them
+# normally and simply leaves them out of the language statistics.
+*.ipynb linguist-documentation
