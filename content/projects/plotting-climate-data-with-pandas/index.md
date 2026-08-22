@@ -18,7 +18,7 @@ image:
 {{< toc mobile_only=true is_open=true >}}
 
 ## Introduction
-The data for this [notebook](https://github.com/meherbejaoui/meherbejaoui.github.io/blob/master/assets/temperatures/TemperatureBrokenRecords.ipynb) comes from a subset of The National Centers for Environmental Information (NCEI) Daily Global Historical Climatology Network (GHCN-Daily). The GHCN-Daily is comprised of daily climate records from thousands of land surface stations across the globe.
+The data for this [notebook](TemperatureBrokenRecords.ipynb) comes from a subset of The National Centers for Environmental Information (NCEI) Daily Global Historical Climatology Network (GHCN-Daily). The GHCN-Daily is comprised of daily climate records from thousands of land surface stations across the globe.
 
 The data (stored in a [csv file](https://github.com/meherbejaoui/meherbejaoui.github.io/blob/master/assets/temperatures/data.csv)) is comprised of daily climate records over the period 2005-2015, from land surface stations near Ann Arbor, Michigan, United States.
 Each row in the datafile corresponds to a single observation.
@@ -224,3 +224,10 @@ This is not the only way to represent the data as you may opt to tweak the diffe
 Furthermore, there are several ways to handle the data and the various DataFrames. I tried to be more explicit and went for simplicity, all whilst incorporating the [Zen of Python](https://www.python.org/dev/peps/pep-0020/#id2).
 
 If you want to learn more about data science through the python programming language, I highly recommend [Applied Data Science with Python Specialization](https://www.coursera.org/specializations/data-science-python) on **Coursera**.
+
+***
+### Run it yourself
+
+[Download the notebook](TemperatureBrokenRecords.ipynb) and the [data file](https://github.com/meherbejaoui/meherbejaoui.github.io/blob/master/assets/temperatures/data.csv) it reads (4.9 MB, so it is kept out of this page). Save it as `data.csv` next to the notebook.
+
+*Written in 2021 against python 3.7 and pandas 1.2, with outputs stripped so you start from a clean run. Re-checked on pandas 3.0, matplotlib 3.11 and seaborn: drop the `infer_datetime_format=True` argument from `pd.to_datetime` — it has been removed, and the format is inferred anyway — and the notebook runs end to end.*
