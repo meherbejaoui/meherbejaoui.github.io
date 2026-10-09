@@ -1,7 +1,7 @@
 ---
 title: "Sandbox"
 summary: A running collection of smaller, standalone experiments — from an educational governance game to a portfolio proof-of-concept.
-date: 2026-08-07
+date: 2026-08-21
 authors:
   - me
 categories:
