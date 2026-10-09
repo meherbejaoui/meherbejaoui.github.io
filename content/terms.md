@@ -16,13 +16,15 @@ The privacy of all visitors is important. This page explains what information is
 
 Like most websites, this site's hosting provider (GitHub Pages) may log standard technical information about visits, such as IP addresses, browser type, referring/exit pages, and date/time stamps. This information isn't linked to anything personally identifiable. See [GitHub's Privacy Statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement) for details on how GitHub Pages handles this data.
 
-## Cookies and Analytics
+## Cookies, Analytics and Advertising
 
-This site uses **Google Analytics** to understand which pages people find useful. It sets cookies (typically named `_ga` and `_ga_*`) to tell one visitor from another across pages and visits. It runs with IP anonymization enabled, and it records when an outbound link is clicked so I can see which references readers actually follow. No advertising cookies are used, and none of this data is sold or shared for marketing.
+This site uses **Google Analytics** to understand which pages people find useful. It sets cookies (typically named `_ga` and `_ga_*`) to tell one visitor from another across pages and visits. It runs with IP anonymization enabled, and it records when an outbound link is clicked so I can see which references readers actually follow.
+
+This site also shows advertising served by **Google AdSense**. Google and its advertising partners set cookies, such as `IDE`, `DSID` and `__gads`, to show ads. These cookies can use your visits to this site and to other sites to choose which ads you see. Google explains how this works at [How Google uses information from sites or apps that use our services](https://policies.google.com/technologies/partner-sites). You can turn off personalized ads in [Google's Ads Settings](https://adssettings.google.com) or at [aboutads.info](https://www.aboutads.info). Turning them off doesn't remove the ads; they just won't be tailored to you.
 
 The only other browser storage used is a small local flag that remembers you've dismissed the cookie notice banner — it isn't sent anywhere and contains no personal information.
 
-If you'd rather not be tracked, use a browser extension such as [Google's opt-out add-on](https://tools.google.com/dlpage/gaoptout), or block `googletagmanager.com` — nothing on this site depends on analytics working.
+If you'd rather not be tracked or shown personalized ads, use a browser extension such as [Google's opt-out add-on](https://tools.google.com/dlpage/gaoptout), or block `googletagmanager.com` and `googlesyndication.com`. Nothing on this site depends on analytics or ads working.
 
 This page is updated whenever what's collected changes.
 
