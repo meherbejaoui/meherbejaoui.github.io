@@ -1,0 +1,20 @@
+{{/*
+  Make a tag that has no page of its own read as a label, not a link.
+
+  A tag used by a single post gets no page (see content/_content.gotmpl).
+  The theme's tag row and card badge still wrap every tag in a link, so for
+  such a tag they output a link with an empty address, which would reload
+  the page the reader is already on.
+
+  This is done in CSS from a hook, the theme's own extension point, instead
+  of by copying the theme's tags.html and card.html into this repo. Copies
+  would stop receiving the theme's future changes; a hook does not. The
+  selector matches any link with an empty address, wherever the theme puts
+  it, and no other link on the site has one.
+*/}}
+<style>
+  a[href=""] {
+    pointer-events: none;
+    cursor: default;
+  }
+</style>
