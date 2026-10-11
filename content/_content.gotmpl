@@ -15,10 +15,15 @@
   second post and the page appears on the next build; remove the second use
   and it goes away again.
 
-  The term itself still exists, so a post can keep a single-use tag. It is
-  shown as a plain label instead of a link (layouts/_partials/tags.html), is
-  skipped on cards (layouts/_partials/views/card.html) and is left off the
-  Topics page (layouts/taxonomy.html).
+  The term itself still exists, so a post can keep a single-use tag. The
+  theme then outputs its label with an empty link, which
+  layouts/_partials/hooks/head-end/tags-without-page.html turns into a plain
+  label, and layouts/taxonomy.html leaves it off the Topics page.
+
+  This file needs nothing from the theme and overrides none of its files, so
+  theme upgrades do not touch it. It relies only on Hugo itself (content
+  adapters, Hugo 0.126 or later). Deleting it restores Hugo's default of one
+  page per term.
 
   Limits worth knowing:
   - Site.Taxonomies is not available this early in a build, so the counts come
