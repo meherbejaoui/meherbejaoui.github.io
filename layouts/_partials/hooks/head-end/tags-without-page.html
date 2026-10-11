@@ -11,6 +11,12 @@
   would stop receiving the theme's future changes; a hook does not. The
   selector matches any link with an empty address, wherever the theme puts
   it, and no other link on the site has one.
+
+  CSS alone leaves such a link in the keyboard tab order, where Enter would
+  reload the current page and screen readers would announce it as a link. So
+  once the page loads, the script below drops the empty href. An anchor
+  without href is a placeholder: not focusable, not a link to assistive
+  technology. The CSS stays as the fallback for when scripts do not run.
 */}}
 <style>
   a[href=""] {
@@ -18,3 +24,10 @@
     cursor: default;
   }
 </style>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('a[href=""]').forEach(function (a) {
+      a.removeAttribute('href');
+    });
+  });
+</script>
