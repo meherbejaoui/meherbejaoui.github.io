@@ -10,7 +10,6 @@ authors:
 tags:
   - governance
   - tunisia
-  - extractive industries
 image:
   alt_text: "Illustrated infographic titled 'From Shadow to Shine: A Path Forward', contrasting opaque extractive-industry governance with a transparent, accountable model"
 ---

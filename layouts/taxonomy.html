@@ -10,8 +10,12 @@
   centred, shrink-to-fit heading. That made "Topics" the odd page out.
 
   The header markup below is copied verbatim from the theme's
-  layouts/list.html so the two stay identical; the term-pill listing beneath
-  it is unchanged from the theme's taxonomy.html.
+  layouts/list.html so the two stay identical.
+
+  The term-pill listing beneath it differs from the theme's taxonomy.html in
+  one way: a term is listed only when it has a page of its own. Terms used by
+  a single post have none (see content/_content.gotmpl), so they are skipped
+  here instead of being rendered as a pill with nowhere to go.
 */}}
 {{ define "main" }}
 
@@ -33,6 +37,7 @@
       {{- $name := .Name }}
       {{- $count := .Count }}
       {{- with site.GetPage (printf "/%s/%s" $type $name) }}
+      {{- if .RelPermalink }}
 
         <a href="{{ .RelPermalink }}" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
           {{ .Title }}
@@ -41,6 +46,7 @@
           </span>
         </a>
 
+      {{- end }}
       {{- end }}
     {{- end }}
   </div>

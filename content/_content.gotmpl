@@ -1,0 +1,98 @@
+{{- /*
+  Rule: a tag or category gets its own page only once at least $minPosts
+  published pages use it.
+
+  Why: Hugo creates a listing page for every term, including ones used a
+  single time. /tags/review/ listing one post is a near-empty page that
+  repeats a card already shown elsewhere, and a site with as many of those as
+  real articles reads as thin to search engines and ad reviewers.
+
+  How: this is a Hugo content adapter. It runs before the site is built,
+  counts how many pages use each term, and for every term under the threshold
+  adds that term's page with `build.render: never`. Hugo then writes no
+  /tags/<term>/ page, no feed for it, and no sitemap entry (the sitemap
+  template skips pages without a URL). Nothing needs listing by hand: tag a
+  second post and the page appears on the next build; remove the second use
+  and it goes away again.
+
+  The term itself still exists, so a post can keep a single-use tag. It is
+  shown as a plain label instead of a link (layouts/_partials/tags.html), is
+  skipped on cards (layouts/_partials/views/card.html) and is left off the
+  Topics page (layouts/taxonomy.html).
+
+  Limits worth knowing:
+  - Site.Taxonomies is not available this early in a build, so the counts come
+    from reading front matter directly. YAML (---) and TOML (+++) front matter
+    in .md files are read; JSON front matter and other formats are not.
+  - Drafts and pages dated in the future are not counted, matching a normal
+    production build, so a term used by one live post and one draft has no
+    page until the draft is published.
+  - To change the threshold or add another taxonomy, edit the two values below.
+    Each $taxonomies entry maps a front matter field to its URL section.
+*/ -}}
+{{- $minPosts := 2 -}}
+{{- $taxonomies := dict "tags" "tags" "categories" "categories" -}}
+
+{{- $counts := dict -}}
+{{- $titles := dict -}}
+
+{{- /* Walk content/ one directory level per pass (templates cannot recurse). */ -}}
+{{- $dirs := slice "content" -}}
+{{- range seq 12 -}}
+  {{- $next := slice -}}
+  {{- range $dir := $dirs -}}
+    {{- range os.ReadDir $dir -}}
+      {{- $path := printf "%s/%s" $dir .Name -}}
+      {{- if .IsDir -}}
+        {{- $next = $next | append $path -}}
+      {{- else if strings.HasSuffix .Name ".md" -}}
+        {{- $source := os.ReadFile $path -}}
+        {{- $fm := dict -}}
+        {{- range $format, $pattern := dict
+              "yaml" `(?s)\A\x{FEFF}?---\r?\n(.*?)\r?\n---`
+              "toml" `(?s)\A\x{FEFF}?\+\+\+\r?\n(.*?)\r?\n\+\+\+` -}}
+          {{- with findRESubmatch $pattern $source 1 -}}
+            {{- with try (transform.Unmarshal (dict "format" $format) (index (index . 0) 1)) -}}
+              {{- with .Value -}}{{- $fm = . -}}{{- end -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+
+        {{- $live := not (index $fm "draft") -}}
+        {{- range $key := slice "date" "publishDate" "publishdate" -}}
+          {{- with index $fm $key -}}
+            {{- with try (time.AsTime .) -}}
+              {{- with .Value -}}{{- if .After now -}}{{- $live = false -}}{{- end -}}{{- end -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+
+        {{- if $live -}}
+          {{- range $field, $section := $taxonomies -}}
+            {{- /* $seen guards against one page listing the same term twice. */ -}}
+            {{- $seen := slice -}}
+            {{- range (index $fm $field) -}}
+              {{- $id := printf "%s/%s" $section (urlize (string .)) -}}
+              {{- if not (in $seen $id) -}}
+                {{- $seen = $seen | append $id -}}
+                {{- $counts = merge $counts (dict $id (add 1 (index $counts $id | default 0))) -}}
+                {{- $titles = merge $titles (dict $id (string .)) -}}
+              {{- end -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $dirs = $next -}}
+{{- end -}}
+
+{{- range $id, $count := $counts -}}
+  {{- if lt $count $minPosts -}}
+    {{- $.AddPage (dict
+          "path" $id
+          "kind" "term"
+          "title" (index $titles $id)
+          "build" (dict "render" "never")) -}}
+  {{- end -}}
+{{- end -}}
