@@ -1,5 +1,5 @@
 {{- /*
-  Rule: a tag or category gets its own page only once at least $minPosts
+  Rule: a tag gets its own page only once at least $minPosts
   published pages use it.
 
   Why: Hugo creates a listing page for every term, including ones used a
@@ -33,10 +33,13 @@
     production build, so a term used by one live post and one draft has no
     page until the draft is published.
   - To change the threshold or add another taxonomy, edit the two values below.
-    Each $taxonomies entry maps a front matter field to its URL section.
+    Each $taxonomies entry maps a front matter field to its URL section, and
+    must name a taxonomy declared in config/_default/hugo.yaml. Categories
+    are not one: they listed the same posts as /tags/python/, so the
+    `categories:` lines left in posts no longer produce pages.
 */ -}}
 {{- $minPosts := 2 -}}
-{{- $taxonomies := dict "tags" "tags" "categories" "categories" -}}
+{{- $taxonomies := dict "tags" "tags" -}}
 
 {{- $counts := dict -}}
 {{- $titles := dict -}}
