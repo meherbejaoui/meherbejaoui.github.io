@@ -37,3 +37,9 @@ User-agent: CCBot
 Disallow: /
 
 Sitemap: {{ "sitemap.xml" | absURL }}
+{{/*
+  Project sites served under this domain that publish their own sitemap.
+  Crawlers read robots.txt only at the domain root, so this is where they
+  learn about it. Puzzle Factories adds a page a day, which is why it has one.
+*/}}
+Sitemap: {{ "puzzlefactory/sitemap.xml" | absURL }}
