@@ -7,7 +7,6 @@ authors:
 tags:
   - text-analysis
   - readability
-  - privacy
 image:
   alt_text: "Glasstext analyzing a bureaucratic sample paragraph, showing words per sentence, syllables per word, a warning that the readability formulas disagree by 22.2 grades, and the first three formula scores"
 ---

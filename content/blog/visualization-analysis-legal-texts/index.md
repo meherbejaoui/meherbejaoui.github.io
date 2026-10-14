@@ -8,6 +8,7 @@ authors:
 categories:
   - python
 tags:
+  - text-analysis
   - python
   - pandas
   - visualization

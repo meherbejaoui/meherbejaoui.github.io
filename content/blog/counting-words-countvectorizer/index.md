@@ -7,6 +7,7 @@ authors:
 categories:
   - python
 tags:
+  - text-analysis
   - python
   - pandas
   - sklearn
