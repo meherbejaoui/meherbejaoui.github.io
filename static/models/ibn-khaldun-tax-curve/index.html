@@ -1,0 +1,1152 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Ibn Khaldun's Tax Curve</title>
+<meta name="description" content="An interactive model of Ibn Khaldun's dynastic cycle: light taxes, a growing court, fading trust, borrowing, and a ruler who turns trader.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400..800&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap">
+<style>
+  /* Meher Bejaoui Evergreen: light mood, green spectrum plus a yellow signal, serif headlines, hairline rules, numbered exhibits. */
+  :root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+  html{scroll-padding-top:env(safe-area-inset-top,0px)}
+  body{margin:0;padding:0}
+  img{max-width:100%}
+  [hidden]:not([hidden=until-found i]){display:none!important}
+  :root {
+    --surface: #ffffff; --surface-paper: #f5f4ee; --line: #d3d8d1; --ink: #0f1f19; --ink-muted: #4b5a53;
+    --on-strong: #ffffff; --on-forest-muted: #a9c9b8;
+    --forest: #0b3b2c; --green: #18714e; --leaf: #3cb878; --lime: #b4d334; --sun: #ffd400;
+    --mint: #e2f1e8; --lime-tint: #f2f8dc; --sun-tint: #fff5c2;
+    --font-serif: "Source Serif 4", Georgia, serif;
+    --font-sans: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --radius-sm: 2px; --radius-md: 6px; --radius-lg: 12px;
+    /* roles used by the charts and the page */
+    --bg: var(--surface-paper); --muted: var(--ink-muted); --accent: var(--green); --accent-2: var(--forest);
+    --ruler: var(--forest); --chal: var(--leaf); --trade: var(--forest); --trust: var(--leaf); --warn: var(--ink);
+    --alert: var(--forest);
+    --st1: var(--forest); --st2: var(--green); --st3: var(--leaf); --st4: var(--lime); --st5: var(--sun);
+    --font-display: var(--font-sans); --font-prose: var(--font-serif); --font-data: var(--font-sans);
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--surface-paper); color: var(--ink); font-family: var(--font-sans); font-size: 16px; line-height: 1.5; }
+  .band { display: flex; height: 10px; width: 100%; }
+  .band span { flex: 1; }
+  .band .b1 { background: var(--forest); } .band .b2 { background: var(--green); } .band .b3 { background: var(--leaf); } .band .b4 { background: var(--lime); } .band .b5 { background: var(--sun); }
+  .wrap { max-width: 1120px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); padding-block: 40px 72px; display: flex; flex-direction: column; gap: 56px; }
+  h1, h2, h3 { font-family: var(--font-serif); font-weight: 600; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(2.4rem, 6vw, 3.5rem); line-height: 1.04; letter-spacing: -0.02em; }
+  h2 { font-size: 1.75rem; line-height: 1.25; letter-spacing: -0.01em; }
+  h3 { font-size: 1.15rem; line-height: 1.3; letter-spacing: -0.005em; }
+  p { margin: 0; }
+  .series, .label { font-family: var(--font-sans); font-size: 13px; line-height: 16px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); }
+  .series { margin-bottom: 14px; }
+  .lede { font-family: var(--font-serif); font-size: 1.4rem; line-height: 1.45; font-weight: 400; max-width: 60ch; color: var(--ink); margin-top: 16px; }
+  .small { font-size: 0.9rem; line-height: 1.45; color: var(--ink-muted); }
+  .src { font-size: 0.82rem; line-height: 1.35; color: var(--ink-muted); margin-top: 6px; }
+  button, input, select { font: inherit; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  a { color: var(--green); text-underline-offset: 2px; }
+  blockquote.kq { margin: 0; padding: 18px 0 0; border-top: 1px solid var(--line); font-family: var(--font-serif); font-size: 1.5rem; line-height: 1.35; font-weight: 400; max-width: 46ch; }
+  blockquote.kq::before { content: "\201C"; display: block; font-size: 3rem; line-height: 0.8; height: 0.45em; font-weight: 600; color: var(--green); }
+  blockquote.kq cite { display: block; margin-top: 12px; font-family: var(--font-sans); font-style: normal; font-size: 0.85rem; color: var(--ink-muted); }
+
+  .lab { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 36px; align-items: start; }
+  @media (max-width: 860px) { .lab { grid-template-columns: minmax(0, 1fr); } }
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 20px; display: flex; flex-direction: column; gap: 18px; }
+  .group { display: flex; flex-direction: column; gap: 16px; border-top: 1px solid var(--line); padding-top: 14px; }
+  .group > .gtitle, details.group > summary { font-size: 13px; line-height: 16px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--green); font-weight: 700; margin: 0; }
+  details.group > summary { cursor: pointer; }
+  details.group[open] > summary { margin-bottom: 2px; }
+  .eyebrow { font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--green); font-weight: 700; margin-bottom: 8px; }
+  .btn { border: 1px solid var(--ink-muted); background: var(--surface); color: var(--ink); border-radius: var(--radius-md); padding: 8px 12px; cursor: pointer; text-align: left; line-height: 1.25; }
+  .btn:hover { border-color: var(--ink); }
+  .btn.primary { background: var(--green); border-color: var(--green); color: var(--on-strong); font-weight: 600; text-align: center; }
+  .btn.primary:hover { background: var(--forest); border-color: var(--forest); }
+  .btn:disabled { opacity: 0.45; cursor: default; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .row .btn { flex: 1 1 auto; text-align: center; }
+  .ctl { display: flex; flex-direction: column; gap: 4px; }
+  .ctl .top { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+  .ctl label { font-weight: 600; font-size: 0.95rem; }
+  .ctl output { font-size: 0.88rem; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--green); }
+  .ctl input[type="range"] { width: 100%; accent-color: var(--green); margin: 4px 0 0; }
+  .ctl .help { font-size: 0.82rem; color: var(--ink-muted); line-height: 1.4; }
+  .ctl select { width: 100%; margin-top: 4px; padding: 7px 8px; border: 1px solid var(--ink-muted); border-radius: var(--radius-md); background: var(--surface); color: var(--ink); font: inherit; font-size: 0.92rem; }
+
+  .view { display: flex; flex-direction: column; gap: 32px; min-width: 0; }
+  .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px 22px; margin: 0; }
+  @media (max-width: 600px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .stats div { border-top: 1px solid var(--line); padding-top: 10px; min-width: 0; }
+  .stats dt { font-size: 0.8rem; color: var(--ink-muted); line-height: 1.3; display: flex; align-items: flex-start; gap: 2px; }
+  .stats dd { margin: 4px 0 0; font-family: var(--font-sans); font-size: 1.7rem; line-height: 1.1; font-variant-numeric: tabular-nums; font-weight: 700; letter-spacing: -0.02em; }
+  .stats dd small { display: block; margin-top: 4px; font-size: 0.74rem; line-height: 1.25; letter-spacing: 0; color: var(--ink-muted); font-weight: 400; }
+  .stats .keystat { border-top: 6px solid var(--sun); padding-top: 5px; }
+  .gridhead { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; flex-wrap: wrap; margin-bottom: 10px; }
+  .status { font-size: 0.85rem; color: var(--ink-muted); font-variant-numeric: tabular-nums; }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 10px; font-size: 0.82rem; color: var(--ink-muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .exhibit { border-top: 1px solid var(--line); padding-top: 12px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .exhibit h3 { margin-bottom: 2px; }
+  .charts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 28px; }
+  .charts .wide { grid-column: 1 / -1; }
+  @media (max-width: 600px) { .charts { grid-template-columns: minmax(0, 1fr); } }
+  canvas { display: block; width: 100%; }
+  .c-md { height: 210px; }
+  .section { display: flex; flex-direction: column; gap: 16px; }
+  .section > h2 { border-top: 1px solid var(--line); padding-top: 14px; }
+  .findings { display: flex; flex-direction: column; margin: 6px 0 0; padding: 0; list-style: none; }
+  .findings li { display: grid; grid-template-columns: minmax(0, 200px) minmax(0, 1fr); gap: 6px 28px; padding-block: 20px; border-top: 1px solid var(--line); }
+  .findings li:last-child { border-bottom: 1px solid var(--line); }
+  @media (max-width: 640px) { .findings li { grid-template-columns: minmax(0, 1fr); } }
+  .stat { font-family: var(--font-sans); font-size: 1.6rem; font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; color: var(--green); }
+  .findings h3 { margin-bottom: 6px; font-size: 1.15rem; }
+  .findings p { font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.6; max-width: 62ch; }
+  .ftable-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 4px 16px; }
+  table.ftable { width: 100%; border-collapse: collapse; font-size: 0.92rem; min-width: 600px; }
+  table.ftable th, table.ftable td { text-align: left; vertical-align: top; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--line); line-height: 1.45; }
+  table.ftable tr:last-child td { border-bottom: 0; }
+  table.ftable th { font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--green); font-weight: 700; }
+  table.ftable td:nth-child(2) { font-size: 0.86rem; font-weight: 600; }
+  table.ftable td:nth-child(3) { font-family: var(--font-serif); }
+  .term { border-bottom: 1.5px dotted var(--ink-muted); cursor: help; }
+  .term:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 2px; }
+  .info { flex: none; width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--ink-muted); background: var(--surface); color: var(--ink-muted); font: 700 0.72rem/18px var(--font-sans); text-align: center; cursor: help; padding: 0; margin-left: 6px; vertical-align: 1px; }
+  .info:hover, .info[aria-expanded="true"] { border-color: var(--green); color: var(--green); }
+  .ctl .top .lab-wrap { display: inline-flex; align-items: center; }
+  #tipbox { position: fixed; z-index: 50; max-width: min(300px, calc(100vw - 32px)); background: var(--forest); color: var(--on-strong); padding: 12px 14px; border-radius: var(--radius-md); font-family: var(--font-sans); font-size: 0.88rem; line-height: 1.45; pointer-events: none; }
+  #tipbox b { display: block; margin-bottom: 4px; font-weight: 700; color: var(--sun); }
+  .hint { font-size: 0.84rem; color: var(--ink-muted); }
+  .steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--line); background: var(--surface); }
+  .steps .step { position: relative; padding: 0 14px 16px; display: flex; flex-direction: column; gap: 12px; min-width: 0; border-right: 1px solid var(--line); }
+  .steps .step:last-child { border-right: 0; }
+  .steps .step::before { content: ""; display: block; height: 10px; margin: 0 -14px; }
+  .steps .step:nth-child(1)::before { background: var(--forest); } .steps .step:nth-child(2)::before { background: var(--green); } .steps .step:nth-child(3)::before { background: var(--leaf); } .steps .step:nth-child(4)::before { background: var(--lime); } .steps .step:nth-child(5)::before { background: var(--sun); }
+  .steps .num { font-size: 13px; font-weight: 700; letter-spacing: 0.1em; color: var(--green); }
+  .steps .step p { font-size: 0.95rem; line-height: 1.45; }
+  @media (max-width: 900px) { .steps { grid-template-columns: minmax(0, 1fr); } .steps .step { border-right: 0; border-bottom: 1px solid var(--line); } .steps .step:last-child { border-bottom: 0; } }
+  .loop-note { font-family: var(--font-serif); font-size: 1.08rem; line-height: 1.6; max-width: 64ch; }
+  .notes ul { margin: 0; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 8px; max-width: 68ch; font-family: var(--font-serif); font-size: 1.04rem; line-height: 1.6; }
+  .caveat { max-width: 68ch; }
+  .scen { display: flex; flex-direction: column; gap: 10px; }
+  .scen .eyebrow { margin-bottom: 0; }
+  .scen-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .scen-lead { font-size: 0.84rem; color: var(--ink-muted); line-height: 1.4; }
+  .scen-chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; }
+  .chip { flex: 1 1 130px; display: grid; align-content: start; grid-template-columns: 16px minmax(0, 1fr); column-gap: 8px; row-gap: 2px; align-items: start; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: var(--radius-md); padding: 8px 10px 8px 9px; cursor: pointer; text-align: left; font: inherit; font-size: 0.9rem; font-weight: 600; line-height: 1.25; }
+  .chip:hover { border-color: var(--ink-muted); }
+  .chip .tick { grid-row: 1 / span 2; width: 16px; height: 16px; margin-top: 1px; border: 1.5px solid var(--ink-muted); border-radius: var(--radius-sm); position: relative; }
+  .chip .chip-d { grid-column: 2; font-size: 0.72rem; font-weight: 400; color: var(--ink-muted); line-height: 1.3; }
+  .chip[aria-pressed="true"] { border-color: var(--green); background: var(--mint); }
+  .chip[aria-pressed="true"] .tick { background: var(--green); border-color: var(--green); }
+  .chip[aria-pressed="true"] .tick::after { content: ""; position: absolute; left: 4px; top: 0.5px; width: 4px; height: 9px; border: solid var(--on-strong); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+  .chip.mine { border-style: dashed; }
+  .chip-x { align-self: center; margin-left: -6px; border: 0; background: none; color: var(--ink-muted); font-size: 1rem; cursor: pointer; padding: 2px 4px; }
+  .chip-x:hover { color: var(--ink); }
+  .scen-now { font-size: 0.86rem; line-height: 1.45; background: var(--sun-tint); border-radius: var(--radius-md); padding: 8px 10px; }
+  .scen-now b { font-weight: 700; }
+  .scen-note { color: var(--ink-muted); }
+  .scen-save { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .scen-form { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .scen-form[hidden] { display: none; }
+  .scen-form input { width: 12rem; max-width: 100%; padding: 6px 8px; border: 1px solid var(--ink-muted); border-radius: var(--radius-md); background: var(--surface); color: var(--ink); font: inherit; font-size: 0.88rem; }
+  .linkbtn { background: none; border: 0; padding: 0; color: var(--green); font: inherit; font-size: 0.84rem; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+  .linkbtn:disabled { color: var(--ink-muted); text-decoration: none; cursor: default; opacity: 0.7; }
+  .linkbtn[hidden] { display: none; }
+  .ctl.is-changed > .top label { color: var(--green); }
+  .ctl .undo { margin-left: auto; margin-right: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-muted); border-radius: var(--radius-sm); font: 600 0.72rem/1.2 var(--font-sans); padding: 2px 7px; cursor: pointer; white-space: nowrap; }
+  .ctl .undo:hover { border-color: var(--green); color: var(--green); }
+  .ctl .undo[hidden] { display: none; }
+  .basebar { position: relative; height: 7px; margin-top: -3px; }
+  .basebar[hidden] { display: none; }
+  .basebar i { position: absolute; top: 0; width: 2px; height: 7px; margin-left: -1px; background: var(--green); border-radius: 1px; }
+  .svgbox { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 8px; }
+  .svgbox svg { display: block; width: 100%; height: auto; }
+  svg text { font-family: var(--font-sans); font-size: 12px; fill: var(--ink); }
+  svg text.m { font-size: 11.5px; fill: var(--ink-muted); }
+  svg text.w { font-size: 11.5px; font-weight: 700; fill: var(--ink); }
+  svg text.wd { font-size: 11.5px; font-weight: 700; fill: var(--on-strong); }
+  .key { display: inline-block; width: 12px; height: 12px; border-radius: var(--radius-sm); vertical-align: -1px; }
+  .stage-now { font-size: 1rem; margin: 8px 0 0; }
+  .stage-now b { font-weight: 700; }
+  h3.sub { margin: 18px 0 8px; }
+  @media (max-width: 600px) { #dz text { font-size: 17px; } }
+  .then { max-width: 72ch; }
+  .then p { font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.62; margin: 0 0 12px; }
+  .then ol { font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.55; margin: 0 0 14px; padding-left: 1.3rem; display: flex; flex-direction: column; gap: 6px; }
+  .then .small { font-family: var(--font-sans); }
+  .then .panel-mint { background: var(--mint); border-radius: var(--radius-md); padding: 18px 20px; }
+  .then .panel-mint p, .then .panel-mint ol { margin-bottom: 0; }
+  .byline { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 12px; font-size: 0.85rem; color: var(--ink-muted); }
+  .byline b { color: var(--ink); font-weight: 700; }
+
+  /* ---------- layout v2: shorter page, folded detail, sticky settings ---------- */
+  .wrap { gap: 72px; }
+  @media (max-width: 700px) { .wrap { gap: 48px; padding-block: 28px 56px; } }
+  .skip { position: absolute; left: 12px; top: -60px; z-index: 60; background: var(--forest); color: var(--on-strong); padding: 10px 14px; border-radius: var(--radius-md); font-weight: 700; text-decoration: none; }
+  .skip:focus { top: 12px; outline: 2px solid var(--sun); outline-offset: 2px; }
+  .hero { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 24px 56px; align-items: end; }
+  @media (max-width: 860px) { .hero { grid-template-columns: minmax(0, 1fr); } }
+  .hero .lede { font-size: 1.3rem; max-width: 52ch; }
+  .jump { display: flex; flex-wrap: wrap; gap: 4px 20px; margin-top: 20px; }
+  .jump a { display: inline-flex; align-items: center; min-height: 32px; font-weight: 600; font-size: 0.95rem; text-decoration: none; border-bottom: 2px solid var(--lime); color: var(--ink); }
+  .jump a:hover { border-bottom-color: var(--green); color: var(--green); }
+  .hstats { margin: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .hstats > div { border-top: 1px solid var(--line); padding-top: 10px; display: flex; flex-direction: column-reverse; gap: 2px; }
+  .hstats dd { margin: 0; font-size: 2rem; line-height: 1.05; font-weight: 700; letter-spacing: -0.02em; color: var(--green); font-variant-numeric: tabular-nums; }
+  .hstats dt { font-size: 0.86rem; line-height: 1.35; color: var(--ink-muted); }
+  .hstats .hnote { font-size: 0.78rem; color: var(--ink-muted); }
+  @media (max-width: 860px) { .hstats { gap: 0; } .hstats > div { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 12px; align-items: baseline; padding: 8px 0; } .hstats dd { order: -1; font-size: 1.4rem; } .hstats dt { font-size: 0.82rem; } .hstats .hnote { margin-top: 6px; } }
+  .section { border-top: 1px solid var(--line); padding-top: 18px; gap: 24px; }
+  .section > h2 { border-top: 0; padding-top: 0; }
+  .sechead { display: flex; flex-direction: column; gap: 8px; max-width: 72ch; }
+  .cyclehead { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px 32px; align-items: center; }
+  @media (max-width: 860px) { .cyclehead { grid-template-columns: minmax(0, 1fr); } }
+  .cycle { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--surface); overflow: hidden; }
+  .cycle li { display: flex; align-items: center; gap: 8px; padding: 8px 10px; font-size: 0.86rem; line-height: 1.3; border-right: 1px solid var(--line); }
+  .cycle li:last-child { border-right: 0; }
+  .cycle .cn { flex: none; width: 22px; height: 22px; border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+  .cycle li:nth-child(1) .cn { background: var(--forest); color: var(--on-strong); } .cycle li:nth-child(2) .cn { background: var(--green); color: var(--on-strong); }
+  .cycle li:nth-child(3) .cn { background: var(--leaf); color: var(--ink); } .cycle li:nth-child(4) .cn { background: var(--lime); color: var(--ink); } .cycle li:nth-child(5) .cn { background: var(--sun); color: var(--ink); }
+  @media (max-width: 760px) { .cycle { grid-template-columns: minmax(0, 1fr); } .cycle li { border-right: 0; border-bottom: 1px solid var(--line); } .cycle li:last-child { border-bottom: 0; } }
+  @media (min-width: 861px) { .lab { grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 32px; } }
+  @media (min-width: 861px) { .panel { position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow-y: auto; overscroll-behavior: contain; } }
+  .panel { gap: 14px; padding: 16px; }
+  .panel details > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 8px; min-height: 32px; }
+  .panel details > summary::-webkit-details-marker { display: none; }
+  .panel details > summary::before { content: ""; flex: none; width: 7px; height: 7px; border-right: 2px solid var(--green); border-bottom: 2px solid var(--green); transform: rotate(-45deg); margin: 0 4px 0 2px; transition: transform 0.15s; }
+  .panel details[open] > summary::before { transform: rotate(45deg); }
+  .allset { border-top: 1px solid var(--line); padding-top: 6px; display: flex; flex-direction: column; }
+  .allset > summary { font-weight: 700; font-size: 0.95rem; }
+  .allset[open] > summary { margin-bottom: 4px; }
+  details.group { border-top: 1px solid var(--line); padding: 4px 0 6px; gap: 0; display: block; }
+  details.group > summary { justify-content: flex-start; font-size: 13px; line-height: 16px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--green); font-weight: 700; }
+  details.group > summary .sumval { margin-left: auto; text-transform: none; letter-spacing: 0; font-weight: 500; font-size: 0.78rem; color: var(--ink-muted); text-align: right; }
+  details.group[open] > summary .sumval { display: none; }
+  details.group > .ctl { margin: 10px 0 14px; }
+  .scen-chips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+  .chip { padding: 7px 8px; font-size: 0.84rem; column-gap: 6px; }
+  .chip .chip-d { font-size: 0.68rem; }
+  .scen-lead { display: none; }
+  .scen-now { font-size: 0.8rem; padding: 6px 9px; }
+  .view { gap: 36px; }
+  .stats { gap: 14px 20px; }
+  .stats dd { font-size: 1.5rem; }
+  .nowline { margin-top: -18px; display: flex; flex-direction: column; gap: 4px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 10px 14px; }
+  .nowline .stage-now { margin: 0; font-size: 0.95rem; }
+  .exhibit { gap: 6px; }
+  .charts { gap: 36px 28px; }
+  .findings { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; margin: 0; }
+  .findings li { display: flex; flex-direction: column; gap: 6px; padding-block: 18px 22px; border-top: 1px solid var(--line); border-bottom: 0; grid-template-columns: none; }
+  .findings li:last-child { border-bottom: 0; grid-column: 1 / -1; border-top: 6px solid var(--sun); }
+  .findings li:last-child p { max-width: 75ch; }
+  .findings h3 { margin: 0; }
+  .findings p { font-size: 1rem; line-height: 1.55; }
+  @media (max-width: 760px) { .findings { grid-template-columns: minmax(0, 1fr); } }
+  #findings .kq { max-width: 62ch; }
+  .then { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 32px 44px; max-width: none; align-items: start; }
+  @media (max-width: 860px) { .then { grid-template-columns: minmax(0, 1fr); } }
+  .then-text { max-width: 68ch; }
+  .then .panel-mint { display: flex; flex-direction: column; gap: 10px; }
+  .then .panel-mint p, .then .panel-mint ol { font-family: var(--font-serif); font-size: 1rem; line-height: 1.5; margin: 0; }
+  details.fold { border-top: 1px solid var(--line); }
+  details.fold:last-of-type { border-bottom: 1px solid var(--line); }
+  details.fold > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 12px; min-height: 52px; font-family: var(--font-serif); font-size: 1.2rem; font-weight: 600; }
+  details.fold > summary::-webkit-details-marker { display: none; }
+  details.fold > summary::after { content: "Show"; margin-left: auto; font-family: var(--font-sans); font-size: 0.85rem; font-weight: 600; color: var(--green); }
+  details.fold[open] > summary::after { content: "Hide"; }
+  details.fold > summary:hover { color: var(--green); }
+  .fold-body { padding: 4px 0 24px; display: flex; flex-direction: column; gap: 14px; }
+  .info { width: 24px; height: 24px; font-size: 0.78rem; line-height: 22px; }
+  .ctl .undo { min-height: 24px; padding: 3px 8px; }
+  .chip-x { min-width: 24px; min-height: 24px; }
+  .linkbtn { min-height: 24px; display: inline-flex; align-items: center; }
+  @media (max-width: 700px) {
+    .hero .lede { font-size: 1.12rem; }
+    h1 { font-size: 2.2rem; }
+    .chip .chip-d { display: none; }
+    .chip { padding: 8px; min-height: 40px; align-items: center; }
+    .stats { gap: 10px 16px; }
+    .stats dd { font-size: 1.3rem; }
+    .stats dd small { font-size: 0.7rem; }
+    .nowline { margin-top: -22px; }
+    .view { gap: 28px; }
+  }
+  .then p.small { font-family: var(--font-sans); font-size: 0.88rem; }
+  .findtop { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 20px 48px; align-items: start; }
+  .findtop .kq { border-top: 0; padding-top: 0; font-size: 1.3rem; }
+  @media (max-width: 860px) { .findtop { grid-template-columns: minmax(0, 1fr); } .findtop .kq { border-top: 1px solid var(--line); padding-top: 14px; } }
+  @media (max-width: 860px) { .hstats > div { grid-template-columns: 9.5rem minmax(0, 1fr); } }
+  .backlink { margin: 0 0 14px; font-size: 0.9rem; font-weight: 600; }
+  .backlink a { display: inline-flex; align-items: center; min-height: 24px; color: var(--green); }
+  .byline a { color: inherit; }
+</style>
+</head>
+<body>
+<a class="skip" href="#model">Skip to the model</a>
+<div class="band" aria-hidden="true"><span class="b1"></span><span class="b2"></span><span class="b3"></span><span class="b4"></span><span class="b5"></span></div>
+<div class="wrap">
+  <header class="hero">
+    <div class="hero-main">
+      <p class="backlink"><a href="/blog/ibn-khaldun-ruler-as-trader/" target="_top">Read the essay: The Ruler Who Turns Trader</a></p>
+      <div class="series">Small models · 22 · <span class="term" tabindex="0" data-term="modeltype">Dynamical system, one step a year</span></div>
+      <h1>Ibn Khaldun's Tax Curve</h1>
+      <p class="lede">Ibn Khaldun warned in 1377 that a ruler short of money who turns trader ruins his subjects and his own treasury. Run his dynastic cycle over 400 years, and switch the trading, trust and borrowing on and off.</p>
+      <nav class="jump" aria-label="On this page"><a href="#model">Model</a><a href="#findings">Findings</a><a href="#then">Then and now</a><a href="#method">Method and sources</a></nav>
+    </div>
+    <dl class="hstats" aria-label="Headline results with the starting settings">
+      <div><dt>Tax displaced for each unit the ruler's trade earns</dt><dd>4.1×</dd></div>
+      <div><dt>A dynasty's life with the ruler trading, and without</dt><dd>85 → 113 yrs</dd></div>
+      <div><dt>Year rates pass 50% when most of each gap is borrowed, against year 83</dt><dd>Year 52</dd></div>
+      <p class="hnote">With the model's starting settings. Illustrative, not data.</p>
+    </dl>
+  </header>
+
+  <section id="model" class="section" aria-labelledby="modelH">
+    <div class="cyclehead">
+      <h2 id="modelH">The model</h2>
+      <ol class="cycle" aria-label="The cycle in five steps">
+        <li><span class="cn">1</span><span class="ct">Strong <span class="term" tabindex="0" data-term="asabiyya">cohesion</span>, light taxes</span></li>
+        <li><span class="cn">2</span><span class="ct"><span class="term" tabindex="0" data-term="luxury">Luxury</span> grows, cohesion fades</span></li>
+        <li><span class="cn">3</span><span class="ct">Rates rise, <span class="term" tabindex="0" data-term="trust">trust</span> falls</span></li>
+        <li><span class="cn">4</span><span class="ct">The ruler <span class="term" tabindex="0" data-term="borrow">borrows</span> or <span class="term" tabindex="0" data-term="trade">trades</span></span></li>
+        <li><span class="cn">5</span><span class="ct">Past the <span class="term" tabindex="0" data-term="peak">peak</span>, outsiders win</span></li>
+      </ol>
+    </div>
+
+    <div class="lab">
+      <aside class="panel" aria-label="Settings">
+        <div id="scen"></div>
+        <details class="allset" id="allset" open>
+          <summary>All settings</summary>
+          <details class="group" open>
+            <summary><span>The ruler as trader</span><span class="sumval" data-keys="trade,margin"></span></summary>
+            <div class="ctl">
+              <div class="top"><span class="lab-wrap"><label for="trade">How readily the ruler turns to trade</label><button class="info" type="button" data-term="trade" aria-label="What is the ruler's trading?">?</button></span><output id="tradeo" for="trade"></output></div>
+              <input id="trade" type="range" min="0" max="1" step="0.05" value="0.5">
+              <div class="help">Once taxes fall more than 5% short of spending. At 0 he never trades.</div>
+            </div>
+            <div class="ctl">
+              <div class="top"><span class="lab-wrap"><label for="margin">Profit on his own trade</label><button class="info" type="button" data-term="margin" aria-label="What is the profit margin?">?</button></span><output id="margino" for="margin"></output></div>
+              <input id="margin" type="range" min="-0.15" max="0.15" step="0.01" value="0.05">
+            </div>
+          </details>
+          <details class="group">
+            <summary><span>Trust</span><span class="sumval" data-keys="works,trustw"></span></summary>
+            <div class="ctl">
+              <div class="top"><span class="lab-wrap"><label for="works">Public works each year</label><button class="info" type="button" data-term="works" aria-label="What are public works?">?</button></span><output id="workso" for="works"></output></div>
+              <input id="works" type="range" min="0" max="0.06" step="0.005" value="0.02">
+              <div class="help">Roads, security and justice, as a share of output.</div>
+            </div>
+            <div class="ctl">
+              <div class="top"><span class="lab-wrap"><label for="trustw">How far paying depends on trust</label><button class="info" type="button" data-term="trust" aria-label="What is trust?">?</button></span><output id="trustwo" for="trustw"></output></div>
+              <input id="trustw" type="range" min="0" max="1" step="0.05" value="0.5">
+            </div>
+          </details>
+          <details class="group">
+            <summary><span>Borrowing</span><span class="sumval" data-keys="borrow,rate"></span></summary>
+            <div class="ctl">
+              <div class="top"><span class="lab-wrap"><label for="borrow">Share of a shortfall borrowed</label><button class="info" type="button" data-term="borrow" aria-label="What is borrowing?">?</button></span><output id="borrowo" for="borrow"></output></div>
+              <input id="borrow" type="range" min="0" max="1" step="0.05" value="0">
+              <div class="help">Lenders stop once the debt reaches 60% of a year's output.</div>
+            </div>
+            <div class="ctl">
+              <div class="top"><span class="lab-wrap"><label for="rate">Interest on the debt</label></span><output id="rateo" for="rate"></output></div>
+              <input id="rate" type="range" min="0.02" max="0.15" step="0.005" value="0.08">
+            </div>
+          </details>
+          <details class="group">
+            <summary><span>Taxes and the court</span><span class="sumval" data-keys="rule,lux,tau0,eps"></span></summary>
+            <div class="ctl">
+              <div class="top"><span class="lab-wrap"><label for="rule">How taxes are set</label><button class="info" type="button" data-term="rule" aria-label="How are taxes set?">?</button></span></div>
+              <select id="rule">
+                <option value="cover">Raised to cover whatever is spent</option>
+                <option value="fixed">Kept at the starting rate; the court makes do</option>
+              </select>
+            </div>
+            <div class="ctl">
+              <div class="top"><span class="lab-wrap"><label for="lux">Growth of court spending each year</label><button class="info" type="button" data-term="luxury" aria-label="What is court spending?">?</button></span><output id="luxo" for="lux"></output></div>
+              <input id="lux" type="range" min="0" max="0.05" step="0.0025" value="0.025">
+            </div>
+            <div class="ctl">
+              <div class="top"><span class="lab-wrap"><label for="tau0">Starting tax rate</label></span><output id="tau0o" for="tau0"></output></div>
+              <input id="tau0" type="range" min="0.05" max="0.5" step="0.01" value="0.1">
+            </div>
+            <div class="ctl">
+              <div class="top"><span class="lab-wrap"><label for="eps">How much people cut back when taxed</label><button class="info" type="button" data-term="eps" aria-label="What does cutting back mean?">?</button></span><output id="epso" for="eps"></output></div>
+              <input id="eps" type="range" min="0.25" max="3" step="0.05" value="1">
+            </div>
+          </details>
+          <details class="group">
+            <summary><span>Cohesion and the frontier</span><span class="sumval" data-keys="decay,chal"></span></summary>
+            <div class="ctl">
+              <div class="top"><span class="lab-wrap"><label for="decay">Cohesion lost each generation</label><button class="info" type="button" data-term="asabiyya" aria-label="What is cohesion?">?</button></span><output id="decayo" for="decay"></output></div>
+              <input id="decay" type="range" min="0.05" max="0.6" step="0.05" value="0.3">
+            </div>
+            <div class="ctl">
+              <div class="top"><span class="lab-wrap"><label for="merc">How far money can replace cohesion</label><button class="info" type="button" data-term="merc" aria-label="What are paid soldiers?">?</button></span><output id="merco" for="merc"></output></div>
+              <input id="merc" type="range" min="0" max="1" step="0.05" value="0.6">
+            </div>
+            <div class="ctl">
+              <div class="top"><span class="lab-wrap"><label for="chal">How fast outside groups unite</label><button class="info" type="button" data-term="chal" aria-label="Who are the outside groups?">?</button></span><output id="chalo" for="chal"></output></div>
+              <input id="chal" type="range" min="0.01" max="0.08" step="0.0025" value="0.025">
+            </div>
+            <div class="ctl">
+              <div class="top"><span class="lab-wrap"><label for="renew">Cohesion restored each generation</label><button class="info" type="button" data-term="renew" aria-label="What is renewal of cohesion?">?</button></span><output id="renewo" for="renew"></output></div>
+              <input id="renew" type="range" min="0" max="1" step="0.05" value="0">
+            </div>
+            <div class="ctl">
+              <div class="top"><span class="lab-wrap"><label for="rcost">Cost of each renewal</label></span><output id="rcosto" for="rcost"></output></div>
+              <input id="rcost" type="range" min="0" max="0.5" step="0.05" value="0.1">
+            </div>
+          </details>
+        </details>
+        <div class="row">
+          <button class="btn primary" type="button" id="play">Play 400 years</button>
+          <button class="btn" type="button" id="pause" disabled>Pause</button>
+        </div>
+        <p class="hint">Hover over, tap or tab to any underlined word or ? for an explanation.</p>
+      </aside>
+
+      <div class="view">
+        <dl class="stats">
+          <div><dt>Dynasties in 400 years</dt><dd id="stN">–</dd></div>
+          <div><dt>Average dynasty</dt><dd id="stL">–</dd></div>
+          <div><dt>Tax rate now <button class="info" type="button" data-term="peak" aria-label="What is the revenue peak?">?</button></dt><dd id="stT">–</dd></div>
+          <div><dt>Revenue now</dt><dd id="stR">–</dd></div>
+          <div class="keystat"><dt>Ruler's share of trade</dt><dd id="stS">–</dd></div>
+          <div><dt>Trust now</dt><dd id="stTr">–</dd></div>
+          <div><dt>Debt</dt><dd id="stD">–</dd></div>
+          <div><dt>Spending that comes back</dt><dd id="stQ">–</dd></div>
+        </dl>
+        <div class="nowline"><span class="status" id="status" aria-live="polite"></span><p class="stage-now" id="stageNow"></p><p class="stage-now" id="peakNow"></p></div>
+
+        <div class="exhibit">
+          <span class="label">Exhibit 1</span>
+          <h3>The ruler's trade displaces more tax than it earns</h3>
+          <p class="small">Each year: his profit from his own trade, and the tax the same trade would have paid in merchants' hands. <span id="tradeSum"></span></p>
+          <canvas id="cvX" class="c-md" role="img" aria-label="Lines of the ruler's trading profit and the tax it displaces over 400 years"></canvas>
+          <p class="src">Source: model output with the settings shown; illustrative, not data.</p>
+        </div>
+
+        <div class="charts">
+          <div class="exhibit">
+            <span class="label">Exhibit 2</span>
+            <h3>Falling trust and the ruler's trade pull the peak down</h3>
+            <p class="small">Revenue at each rate once the economy adjusts. Solid: this year's trust and trading. Dotted: full trust, no trading. Shaded: past this year's peak.</p>
+            <canvas id="cvC" class="c-md" role="img" aria-label="Revenue against tax rate, with the current year's position"></canvas>
+          </div>
+          <div class="exhibit">
+            <span class="label">Exhibit 3</span>
+            <h3>Trust falls as public works shrink and the ruler trades</h3>
+            <p class="small">Trust, the share of what is owed that is actually paid, and the ruler's share of trade.</p>
+            <canvas id="cvT" class="c-md" role="img" aria-label="Lines of trust, the share paid and the ruler's share of trade over time"></canvas>
+          </div>
+        </div>
+
+        <div class="exhibit">
+          <span class="label">Exhibit 4</span>
+          <h3>Each dynasty runs through Ibn Khaldun's five stages</h3>
+          <div class="svgbox"><svg id="tl" viewBox="0 0 660 120" role="img" aria-labelledby="tlT"><title id="tlT">A 400-year band split into dynasties, each colored by Ibn Khaldun's stages, with a marker at the current year.</title></svg></div>
+          <div class="svgbox" style="margin-top:8px"><svg id="dz" viewBox="0 0 660 96" role="img" aria-labelledby="dzT"><title id="dzT">The current dynasty from its conquest to the current year, split into Ibn Khaldun's five stages, with the years the ruler began trading and the rate passed the revenue peak.</title></svg></div>
+          <div class="legend"><span><i class="key" style="background:var(--st1)"></i>1 Conquest</span><span><i class="key" style="background:var(--st2)"></i>2 Rule by one</span><span><i class="key" style="background:var(--st3)"></i>3 Leisure</span><span><i class="key" style="background:var(--st4)"></i>4 Imitation</span><span><i class="key" style="background:var(--st5)"></i>5 Waste</span></div>
+        </div>
+
+        <div class="charts">
+          <div class="exhibit">
+            <span class="label">Exhibit 5</span>
+            <h3>Outsiders overtake a dynasty whose cohesion has faded</h3>
+            <p class="small">The rulers' cohesion, what they can field with money added, and the strongest outside group.</p>
+            <canvas id="cvA" class="c-md" role="img" aria-label="Lines of the ruling group's cohesion, its power and the outside group's cohesion over time"></canvas>
+          </div>
+          <div class="exhibit">
+            <span class="label">Exhibit 6</span>
+            <h3>Spending outruns revenue as rates climb past the peak</h3>
+            <p class="small">Revenue and spending as shares of the starting economy, with the tax rate and any interest.</p>
+            <canvas id="cvM" class="c-md" role="img" aria-label="Lines of revenue, spending, interest and the tax rate over 400 years"></canvas>
+          </div>
+        </div>
+        <p class="src">Exhibits 2 to 6: model output with the settings shown; illustrative, not data.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="findings" class="section" aria-labelledby="findH">
+    <div class="findtop">
+    <div class="sechead">
+      <h2 id="findH">What the runs show</h2>
+      <p class="small" id="findLead"></p>
+    </div>
+    <blockquote class="kq">Were the ruler to compare the revenue from taxes with the small profits (he reaps from trading himself), he would find the latter negligible in comparison with the former.<cite>Ibn Khaldun, <i>The Muqaddimah</i>, chapter 3, section 38, translated by Franz Rosenthal</cite></blockquote>
+    </div>
+    <ul class="findings" id="findList"></ul>
+  </section>
+
+  <section id="then" class="section" aria-labelledby="thenH">
+    <h2 id="thenH">Then and now: Tunis, 1377 and 2027</h2>
+    <div class="then">
+      <div class="then-text">
+        <p>Six and a half centuries after Ibn Khaldun wrote in Tunis, Tunisia's parliament is examining the <span class="term" tabindex="0" data-term="plf">2027 finance bill</span>. It adds no new taxes and leaves the main rates unchanged. Its main measures are reliefs, such as a four-year exemption from income or corporate tax for new firms that declare investments between 2027 and 2030, and lower duties on a first home. It also asks delivery firms to report online sellers' sales to the tax authority, which widens the base rather than raising rates (<a href="https://businessnews.com.tn/?p=1427049">Business News, November 4, 2026</a>). Tax revenue is still forecast to rise 4.7%, to 49.6 billion dinars (<a href="https://www.leconomistemaghrebin.com/2026/10/26/tunisie-plus-91-des-recettes-budgetaires-proviendront-impots-2027/">L'Economiste Maghrébin, October 26, 2026</a>). The deficit reaches 14.6 billion dinars, and its financing rests heavily on borrowing at home, including a 9.8 billion dinar interest-free advance from the central bank (<a href="https://enterpriseam.com/menaplus/2026/11/02/tunisia-is-funding-a-32-bigger-deficit-next-year-by-leaning-harder-on-domestic-borrowing-crowding-out-smes/">Enterprise, November 2, 2026</a>).</p>
+        <p>The state is also an owner of firms. The report on public enterprises annexed to the 2024 finance law covered 88 of them, with a combined net loss of 2.98 billion dinars in 2020 and 1.13 billion in 2021. Programmed transfers from the state reached 17.08 billion dinars in 2022 and 14.51 billion in 2023, and 43 enterprises owed the state about 19.7 billion dinars in 2022 while the state owed them more than 7 billion (<a href="https://businessnews.com.tn/?p=1398032">Business News, April 22, 2026</a>).</p>
+        <p>Most of these firms are not a ruler trading for profit. Many run utilities, transport or basic supplies, where a public owner can have good reasons to be present. The model speaks to a narrower question: what happens when a state in financial straits relies on its own commercial activity, or on borrowing, in place of a broad, trusted tax base.</p>
+        <p class="small">A historical parallel, not a forecast. The model is not calibrated to Tunisia, and nothing here says whether any Tunisian tax or enterprise is above or below any peak.</p>
+      </div>
+      <aside class="panel-mint" aria-labelledby="oecdH">
+        <span class="label" id="oecdH">What international practice asks of an owner</span>
+        <p>The 2024 Guidelines of the Organisation for Economic Co-operation and Development (OECD) on the corporate governance of state-owned enterprises read almost as a gloss on Ibn Khaldun's chapter. They ask the state to:</p>
+        <ol>
+          <li>state and regularly review why it owns each enterprise;</li>
+          <li>keep its role as owner separate from its roles as regulator and policymaker;</li>
+          <li>let state-owned and private firms compete on equal terms, without hidden advantages in tax, credit or regulation;</li>
+          <li>cost and pay openly for any public-service obligation, instead of leaving it buried in losses the budget covers later.</li>
+        </ol>
+        <p class="src">Source: <a href="https://www.oecd.org/en/publications/oecd-guidelines-on-corporate-governance-of-state-owned-enterprises-2024_18a24f43-en/full-report/component-14.html">OECD Guidelines on Corporate Governance of State-Owned Enterprises, 2024</a>.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="method" class="section" aria-labelledby="methodH">
+    <div class="sechead">
+      <h2 id="methodH">Method and sources</h2>
+      <p class="small">This is the model's third version. The first two followed the tax curve alone; this one adds the ruler's trading (from the <i>Muqaddimah</i>, chapter 3, section 38), trust (from its chapter on injustice) and borrowing. The model is stylized: its numbers show how Ibn Khaldun's mechanisms behave together, not the history of any real dynasty or the finances of any modern state.</p>
+    </div>
+    <details class="fold">
+      <summary>The rules of the game</summary>
+      <div class="fold-body notes">
+        <ul>
+          <li>The economy can grow up to about twice its starting size. It grows when people keep enough of what they make and shrinks when they keep too little. Public works raise that ceiling a little; without them it is lower.</li>
+          <li>Spending is the court, which grows by the yearly rate set and is reset low by each new dynasty; soldiers, whose cost rises as paid fighters replace the group's own; the public works planned; and interest on any debt.</li>
+          <li>Under the “cover” rule, the rate rises each year by a quarter of whatever gap is not borrowed, up to 90%. Under the “fixed” rule, the rate stays put; soldiers and interest are paid first, then public works, and the court gets what is left.</li>
+          <li>Trust drifts each year toward a level set by two things people can see: the share of spending that comes back to them as public works, and how much of the market the ruler has taken over. When trust falls below 0.7, fewer people pay what they owe; the setting decides how much fewer. What goes unpaid is still produced, outside the tax collector's reach.</li>
+          <li>After the first 15 years, when taxes fall more than 5% short of spending after any borrowing, the ruler takes over part of the market. His trade pays no tax, produces 30% less than the same trade in merchants' hands, and earns the chosen margin. His forced sales and price-fixing weigh on the merchants who remain, as an extra burden worth half his share. Once in, he does not leave; a new dynasty starts without trade.</li>
+          <li>Borrowing, when switched on, covers the chosen share of each year's shortfall until the debt reaches 60% of a year's output. Interest is added to spending every year after. Money lent to the ruler is money not lent to merchants, so each dinar borrowed lowers the economy's capacity slightly. A new dynasty does not take on the old one's debt.</li>
+          <li>Cohesion fades in the capital, faster as the court grows, and grows among outside groups, as in Turchin's model. When an outside group's cohesion exceeds the dynasty's power, it takes over and the economy loses 10% in the fighting.</li>
+          <li>Stages: conquest for the first 15 years; rule by one while cohesion stays above 60% of its start; leisure while taxes stay near their starting level; imitation as they rise; waste once the rate passes the revenue peak or revenue and borrowing together cover less than 90% of spending.</li>
+        </ul>
+        <p class="small caveat"><b>Assumed values.</b> The size of the court, soldiers and public works, how fast trust moves, how much less productive the ruler's trade is, the burden it puts on merchants, the trigger for trading, and the debt ceiling are all assumptions, set so a dynasty without trading lasts about a century, as Ibn Khaldun said. No one has measured cohesion, trust moves for many reasons the model leaves out, and how strongly people respond to taxes is debated even for modern economies.</p>
+      </div>
+    </details>
+    <details class="fold">
+      <summary>Why these numbers?</summary>
+      <div class="fold-body">
+        <div class="ftable-wrap" tabindex="0" role="region" aria-label="Why these numbers: table of assumptions and sources">
+          <table class="ftable">
+            <thead><tr><th>In the model</th><th>Number used</th><th>Based on</th></tr></thead>
+            <tbody>
+              <tr><td>The cycle and its stages</td><td>about 120 years; 5 stages</td><td>Ibn Khaldun, <i>The Muqaddimah: An Introduction to History</i>, translated by Franz Rosenthal (1958; abridged edition, <a href="https://press.princeton.edu/books/paperback/9780691166285/the-muqaddimah">Princeton University Press</a>), chapter 3: dynasties rarely last beyond three generations of 40 years (section 12) and pass through five stages (section 15)</td></tr>
+              <tr><td>Light taxes, heavy taxes</td><td>the tax curve</td><td><i>Muqaddimah</i>, chapter 3, section 36: “at the beginning of the dynasty, taxation yields a large revenue from small assessments” (quoted by <a href="https://equitablegrowth.org/grasping-reality-ibn-khaldun-laffer-curve/">Brad DeLong, 2015</a>)</td></tr>
+              <tr><td>The ruler's trading</td><td>starts when taxes fall 5% short; 30% less productive; burden on merchants half his share; profit 5%</td><td><i>Muqaddimah</i>, chapter 3, section 38, “Commercial activity on the part of the ruler is harmful to his subjects and ruinous to the tax revenue”: a ruler in financial straits trades “from desire to increase his revenues”, competes with subjects who have less money, and forces prices (<a href="https://aspeninstitute.org/wp-content/uploads/files/content/docs/KHALDUN_MUQADDIMAH_SELECTIONS_(AS08).PDF">Rosenthal translation, Aspen Institute selections</a>). The numbers are assumed</td></tr>
+              <tr><td>Trading at a loss</td><td>margin from −15% to +15%</td><td>János Kornai's “soft budget constraint”: a firm whose losses its owner will always cover has little reason to avoid them (“The Soft Budget Constraint”, <i>Kyklos</i>, 1986; Kornai, Maskin and Roland, <a href="https://doi.org/10.1257/002205103771799999"><i>Journal of Economic Literature</i>, 2003</a>)</td></tr>
+              <tr><td>Trust and paying</td><td>full payment above a trust of 0.7; half the shortfall in trust becomes unpaid tax</td><td><i>Muqaddimah</i>, chapter 3, section 41, “Injustice brings about the ruin of civilization”; Margaret Levi's “quasi-voluntary compliance” (<i>Of Rule and Revenue</i>, University of California Press, 1988); Erzo Luttmer and Monica Singhal, “Tax Morale” (<a href="https://doi.org/10.1257/jep.28.4.149"><i>Journal of Economic Perspectives</i>, 2014</a>). The size of the effect is assumed</td></tr>
+              <tr><td>Public works</td><td>2% of output; raise the economy's ceiling</td><td><i>Muqaddimah</i>, chapter 3, section 40: the dynasty is “the greatest market”, and what it spends returns to its subjects. Assumed size</td></tr>
+              <tr><td>Borrowing</td><td>off at the start; 8% interest; lenders stop at 60% of output</td><td>Assumed. Premodern rulers borrowed and seized from merchants and officials; modern states borrow far more easily. Domestic lending to the state can crowd out lending to firms, an argument made about Tunisia's 2027 budget (<a href="https://enterpriseam.com/menaplus/2026/11/02/tunisia-is-funding-a-32-bigger-deficit-next-year-by-leaning-harder-on-domestic-borrowing-crowding-out-smes/">Enterprise, 2026</a>)</td></tr>
+              <tr><td>The revenue peak</td><td>31% with full trust and no trading</td><td>Arthur Laffer, “<a href="https://www.heritage.org/node/17781">The Laffer Curve: Past, Present, and Future</a>” (Heritage Foundation, 2004), who credits Ibn Khaldun. The 31% follows from the model's own growth rates, not from data</td></tr>
+              <tr><td>How much people cut back</td><td>1</td><td>A free setting. Modern estimates of how taxable income responds to tax rates mostly fall between 0.12 and 0.4 (Saez, Slemrod and Giertz, <a href="https://doi.org/10.1257/jel.50.1.3"><i>Journal of Economic Literature</i>, 2012</a>); a premodern economy of mobile traders may have responded more</td></tr>
+              <tr><td>Cohesion growing and fading</td><td>outside groups +2.5% a year; 30% lost a generation in the capital</td><td>Peter Turchin's model of ʿaṣabiyya (<a href="https://muse.jhu.edu/book/58326"><i>Historical Dynamics</i>, Princeton University Press, 2003</a>). Rates assumed</td></tr>
+              <tr><td>Court and soldiers</td><td>court 2% of starting output, growing 2.5% a year; money replaces up to 60% of lost cohesion</td><td>Assumed, following Ibn Khaldun's account of luxury growing each generation and of rulers turning to clients and mercenaries</td></tr>
+              <tr><td>Time horizon of rulers</td><td>light taxes early</td><td>Mancur Olson's “stationary bandit” (<a href="https://doi.org/10.2307/2938736"><i>American Political Science Review</i>, 1993</a>)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </details>
+  </section>
+  <footer class="byline"><span><a href="/" target="_top"><b>Meher Bejaoui</b></a> · Small models, 22 · <a href="/blog/ibn-khaldun-ruler-as-trader/" target="_top">Read the essay</a></span><span>Third version, November 2026</span></footer>
+</div>
+<script>
+/* Shared chart helpers: crisp canvas line charts colored from the page's theme tokens. */
+function cssVar(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+function setupCanvas(cv) {
+  var r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+  var w = Math.max(1, Math.round(r.width)), h = Math.max(1, Math.round(r.height));
+  if (cv.width !== w * dpr || cv.height !== h * dpr) { cv.width = w * dpr; cv.height = h * dpr; }
+  var ctx = cv.getContext("2d"); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  return { ctx: ctx, w: w, h: h };
+}
+function niceMax(v, min) {
+  v = Math.max(v, min);
+  var p = Math.pow(10, Math.floor(Math.log10(v)));
+  var m = [1, 2, 2.5, 5, 10];
+  for (var k = 0; k < m.length; k++) if (m[k] * p >= v - 1e-9) return m[k] * p;
+  return 10 * p;
+}
+function drawXTicks(ctx, ticks, fmt, X, h, color) {
+  var lastRight = -Infinity;
+  ticks.forEach(function (xv) {
+    var t = fmt(xv), wd = ctx.measureText(t).width, x = X(xv);
+    if (x - wd / 2 < lastRight + 6) return;
+    ctx.fillStyle = color; ctx.fillText(t, x, h - 9); lastRight = x + wd / 2;
+  });
+}
+function drawLines(cv, o) {
+  var s = setupCanvas(cv), ctx = s.ctx, w = s.w, h = s.h;
+  ctx.clearRect(0, 0, w, h);
+  var L = o.left || 44, R = o.right == null ? 64 : o.right, Tp = 8, Bt = 24;
+  if (w < 520) R = Math.min(R, Math.round(w * 0.4));
+  var pw = Math.max(10, w - L - R), ph = h - Tp - Bt;
+  var X = function (v) { return L + (v - o.xMin) / (o.xMax - o.xMin) * pw; };
+  var Y = function (v) { return Tp + ph - (Math.min(o.yMax, Math.max(o.yMin, v)) - o.yMin) / (o.yMax - o.yMin) * ph; };
+  var line = cssVar("--line"), muted = cssVar("--muted");
+  ctx.font = '500 12px Figtree, system-ui, sans-serif';
+  ctx.textBaseline = "middle"; ctx.lineWidth = 1;
+  var k, v;
+  for (k = 0; k <= o.yTicks; k++) {
+    v = o.yMin + (o.yMax - o.yMin) * k / o.yTicks;
+    ctx.strokeStyle = line; ctx.beginPath(); ctx.moveTo(L, Math.round(Y(v)) + 0.5); ctx.lineTo(L + pw, Math.round(Y(v)) + 0.5); ctx.stroke();
+    ctx.fillStyle = muted; ctx.textAlign = "right"; ctx.fillText(o.yFmt(v), L - 6, Y(v));
+  }
+  ctx.textAlign = "center";
+  drawXTicks(ctx, o.xTicks, o.xFmt, X, h, muted);
+  if (o.shade) { ctx.save(); ctx.globalAlpha = o.shade.alpha || 0.09; ctx.fillStyle = o.shade.color; ctx.fillRect(X(o.shade.from), Tp, X(o.shade.to) - X(o.shade.from), ph); ctx.restore();
+    if (o.shade.label) { ctx.fillStyle = muted; ctx.textAlign = "left"; ctx.textBaseline = "bottom"; ctx.fillText(o.shade.label, X(o.shade.from) + 4, Tp + ph - 4); ctx.textBaseline = "middle"; } }
+  if (o.marker != null) {
+    ctx.strokeStyle = muted; ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.moveTo(X(o.marker), Tp); ctx.lineTo(X(o.marker), Tp + ph); ctx.stroke(); ctx.setLineDash([]);
+  }
+  var labels = [];
+  o.series.forEach(function (se) {
+    if (!se.pts || !se.pts.length) return;
+    ctx.strokeStyle = se.color; ctx.lineWidth = se.width || 2; ctx.lineJoin = "round";
+    if (se.dash) ctx.setLineDash(se.dash);
+    ctx.beginPath();
+    se.pts.forEach(function (p, i) { if (i) ctx.lineTo(X(p.x), Y(p.y)); else ctx.moveTo(X(p.x), Y(p.y)); });
+    ctx.stroke(); ctx.setLineDash([]);
+    if (se.noDot) return;
+    var last = se.pts[se.pts.length - 1];
+    ctx.fillStyle = se.color; ctx.beginPath(); ctx.arc(X(last.x), Y(last.y), 3.5, 0, 6.2832); ctx.fill();
+    if (se.label) labels.push({ y: Y(last.y), text: se.label, color: se.color, x: last.x < o.xMax - (o.xMax - o.xMin) * 0.01 ? X(last.x) + 7 : null });
+  });
+  if (o.dots) o.dots.forEach(function (d) {
+    ctx.beginPath(); ctx.arc(X(d.x), Y(d.y), d.r || 5, 0, 6.2832);
+    ctx.fillStyle = d.color; ctx.fill();
+    if (d.stroke) { ctx.lineWidth = 1.5; ctx.strokeStyle = d.stroke; ctx.stroke(); }
+    if (d.label) { ctx.fillStyle = d.labelColor || d.color; ctx.textAlign = d.align || "left"; ctx.fillText(d.label, X(d.x) + (d.align === "right" ? -9 : 9), Y(d.y) - 9); }
+  });
+  // place labels: inline ones next to their line's end, edge ones in the right margin; spread any that sit close together
+  var groups = {};
+  labels.forEach(function (lb) { var key = lb.x == null ? "edge" : String(Math.round(lb.x / 30)); (groups[key] = groups[key] || []).push(lb); });
+  Object.keys(groups).forEach(function (key) {
+    var g = groups[key]; g.sort(function (a, b) { return a.y - b.y; });
+    for (var q = 1; q < g.length; q++) if (g[q].y - g[q - 1].y < 13) g[q].y = g[q - 1].y + 13;
+    var maxY = Tp + ph + 2;
+    for (q = g.length - 1; q >= 0; q--) g[q].y = Math.min(g[q].y, q === g.length - 1 ? maxY : g[q + 1].y - 13);
+  });
+  ctx.textAlign = "left";
+  labels.forEach(function (lb) {
+    ctx.fillStyle = lb.color;
+    var yy = Math.max(Tp + 4, lb.y);
+    if (lb.x != null) { ctx.fillText(lb.text, lb.x, yy); return; }
+    var room = w - (L + pw + 8) - 2;
+    if (ctx.measureText(lb.text).width <= room) { ctx.fillText(lb.text, L + pw + 8, yy); return; }
+    var words = lb.text.split(" "), first = "";
+    while (words.length && ctx.measureText((first ? first + " " : "") + words[0]).width <= room) first = (first ? first + " " : "") + words.shift();
+    if (!first) first = words.shift() || "";
+    ctx.fillText(first, L + pw + 8, yy - 6); ctx.fillText(words.join(" "), L + pw + 8, yy + 7);
+  });
+}
+function tickN(max) {
+  var steps = [0.01, 0.02, 0.025, 0.05, 0.1, 0.2, 0.25, 0.5, 1, 2, 2.5, 5];
+  for (var i = 0; i < steps.length; i++) { var n = max / steps[i]; if (Math.abs(n - Math.round(n)) < 1e-6 && n >= 2 && n <= 6) return Math.round(n); }
+  return 4;
+}
+function pct(v, d) { return (v * 100).toFixed(d || 0) + "%"; }
+/* Plain-language explanations for any element with data-term, on hover, tap or keyboard focus. */
+function initTips(TERMS) {
+  var tip = document.createElement("div"); tip.id = "tipbox"; tip.setAttribute("role", "tooltip"); tip.hidden = true; document.body.appendChild(tip);
+  var owner = null;
+  function place() {
+    if (!owner) return;
+    var r = owner.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
+    if (r.bottom < 0 || r.top > window.innerHeight) { hide(); return; }
+    var left = Math.max(12, Math.min(window.innerWidth - w - 12, r.left + r.width / 2 - w / 2));
+    var top = r.bottom + 8;
+    if (top + h > window.innerHeight - 8) top = Math.max(8, r.top - h - 8);
+    tip.style.left = left + "px"; tip.style.top = top + "px";
+  }
+  function show(el) {
+    var t = TERMS[el.dataset.term]; if (!t) return;
+    if (owner && owner !== el) { owner.removeAttribute("aria-expanded"); owner.removeAttribute("aria-describedby"); }
+    tip.innerHTML = "<b></b><span></span>";
+    tip.firstChild.textContent = t[0]; tip.lastChild.textContent = t[1];
+    tip.hidden = false; owner = el;
+    el.setAttribute("aria-describedby", "tipbox");
+    if (el.classList.contains("info")) el.setAttribute("aria-expanded", "true");
+    place();
+  }
+  function hide() {
+    tip.hidden = true;
+    if (owner) { owner.removeAttribute("aria-describedby"); owner.removeAttribute("aria-expanded"); }
+    owner = null;
+  }
+  function termOf(e) { return e.target && e.target.closest ? e.target.closest("[data-term]") : null; }
+  document.addEventListener("mouseover", function (e) { var el = termOf(e); if (el) show(el); });
+  document.addEventListener("mouseout", function (e) { var el = termOf(e); if (el && !el.contains(e.relatedTarget)) hide(); });
+  document.addEventListener("focusin", function (e) { var el = termOf(e); if (el) show(el); });
+  document.addEventListener("focusout", function (e) { if (termOf(e)) hide(); });
+  document.addEventListener("click", function (e) { var el = termOf(e); if (el) { e.preventDefault(); show(el); } else hide(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") hide(); });
+  window.addEventListener("scroll", place, { passive: true });
+  window.addEventListener("resize", place);
+  return { missing: function () { return Array.prototype.map.call(document.querySelectorAll("[data-term]"), function (el) { return el.dataset.term; }).filter(function (k) { return !TERMS[k]; }); } };
+}
+function onThemeChange(fn) {
+  var raf = 0;
+  function go() { cancelAnimationFrame(raf); raf = requestAnimationFrame(fn); }
+  window.addEventListener("resize", go);
+  if (window.matchMedia) { var mq = window.matchMedia("(prefers-color-scheme: dark)"); (mq.addEventListener ? mq.addEventListener("change", go) : mq.addListener(go)); }
+  new MutationObserver(go).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+}
+/* Combinable scenarios: each sets a few controls; several can be ticked at once; a mix can be saved. */
+function initScenarios(o) {
+  var mount = typeof o.mount === "string" ? document.getElementById(o.mount) : o.mount;
+  var C = o.controls, keys = Object.keys(C), base = o.base, on = [], note = "", saved = [];
+  var store = o.store || null;
+  function el(k) { return C[k].id ? document.getElementById(C[k].id) : null; }
+  function get(k) { var e = el(k); return isNaN(+e.value) ? e.value : +e.value; }
+  function put(k, v) { el(k).value = v; }
+  function same(a, b) { return typeof a === "number" && typeof b === "number" ? Math.abs(a - b) < 1e-9 : String(a) === String(b); }
+  function fmt(k, v) { return C[k].fmt ? C[k].fmt(v) : String(v); }
+  function name(k) { return C[k].short || k; }
+  function all() { return o.scenarios.concat(saved); }
+  function find(id) { return all().filter(function (s) { return s.id === id; })[0]; }
+  try { if (store) saved = JSON.parse(localStorage.getItem(store) || "[]").filter(function (s) { return s && s.set; }); } catch (e) { saved = []; }
+  function persist() { try { if (store) localStorage.setItem(store, JSON.stringify(saved)); } catch (e) {} }
+  mount.classList.add("scen");
+  mount.innerHTML = '<div class="scen-top"><span class="eyebrow">Scenarios</span><button class="linkbtn" type="button" data-act="reset">Back to the start</button></div>' +
+    '<p class="scen-lead">Tick one or more to combine them. Each sets a few of the settings below, and you can still change any setting yourself.</p>' +
+    '<div class="scen-chips" role="group" aria-label="Scenarios"></div>' +
+    '<p class="scen-now" aria-live="polite"></p>' +
+    '<div class="scen-save"><button class="linkbtn" type="button" data-act="save">Save these settings as a scenario</button>' +
+    '<span class="scen-form" hidden><input type="text" maxlength="40" aria-label="Name for this scenario"><button class="btn" type="button" data-act="ok">Save</button><button class="linkbtn" type="button" data-act="cancel">Cancel</button></span></div>';
+  var chips = mount.querySelector(".scen-chips"), now = mount.querySelector(".scen-now"), form = mount.querySelector(".scen-form"), saveBtn = mount.querySelector('[data-act="save"]');
+  function deltaText(s) { return s.note || Object.keys(s.set).filter(function (k) { return C[k]; }).map(function (k) { return name(k) + ": " + fmt(k, s.set[k]); }).join(" · "); }
+  function render() {
+    chips.innerHTML = "";
+    all().forEach(function (s) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "chip" + (s.mine ? " mine" : ""); b.dataset.id = s.id;
+      b.innerHTML = '<span class="tick" aria-hidden="true"></span><span class="chip-l"></span><span class="chip-d"></span>';
+      b.querySelector(".chip-l").textContent = s.label; b.querySelector(".chip-d").textContent = deltaText(s);
+      chips.appendChild(b);
+      if (s.mine) {
+        var x = document.createElement("button"); x.type = "button"; x.className = "chip-x"; x.dataset.del = s.id;
+        x.setAttribute("aria-label", "Delete saved scenario " + s.label); x.textContent = "×"; chips.appendChild(x);
+      }
+    });
+    status();
+  }
+  function status() {
+    on = on.filter(function (id) { var s = find(id); return s && Object.keys(s.set).every(function (k) { return !C[k] || same(get(k), s.set[k]); }); });
+    chips.querySelectorAll(".chip").forEach(function (b) { b.setAttribute("aria-pressed", String(on.indexOf(b.dataset.id) >= 0)); });
+    var covered = {};
+    on.forEach(function (id) { Object.keys(find(id).set).forEach(function (k) { covered[k] = 1; }); });
+    var own = keys.filter(function (k) { return !covered[k] && !same(get(k), base[k]); });
+    keys.forEach(function (k) {
+      var e = el(k), box = e && e.closest(".ctl");
+      if (!box) return;
+      var changed = !same(get(k), base[k]);
+      box.classList.toggle("is-changed", changed);
+      var u = box.querySelector(".undo");
+      if (!u) {
+        u = document.createElement("button"); u.type = "button"; u.className = "undo"; u.dataset.key = k;
+        var out = box.querySelector(".top output"); (out ? out.parentNode.insertBefore(u, out) : (box.querySelector(".top") || box).appendChild(u));
+      }
+      u.hidden = !changed; u.textContent = "↺ " + fmt(k, base[k]);
+      u.setAttribute("aria-label", "Reset " + name(k) + " to " + fmt(k, base[k]));
+      if (e.type === "range") {
+        var bar = box.querySelector(".basebar");
+        if (!bar) { bar = document.createElement("div"); bar.className = "basebar"; bar.innerHTML = "<i></i>"; e.parentNode.insertBefore(bar, e.nextSibling); }
+        var p = (base[k] - e.min) / (e.max - e.min);
+        bar.firstChild.style.left = "calc(8px + (100% - 16px) * " + Math.max(0, Math.min(1, p)) + ")";
+        bar.hidden = !changed; bar.title = "Starting value: " + fmt(k, base[k]);
+      }
+    });
+    now.innerHTML = "";
+    var lead = document.createElement("span");
+    if (!on.length && !own.length) { lead.textContent = "Now: the starting point" + (o.baseName ? ", " + o.baseName : "") + "."; now.appendChild(lead); }
+    else {
+      lead.textContent = "Now: "; now.appendChild(lead);
+      on.forEach(function (id, i) { var b = document.createElement("b"); b.textContent = find(id).label; if (i) now.appendChild(document.createTextNode(" + ")); now.appendChild(b); });
+      if (own.length) now.appendChild(document.createTextNode((on.length ? ", plus your changes: " : "your own settings: ") + own.map(function (k) { return name(k) + ": " + fmt(k, get(k)); }).join(", ")));
+      now.appendChild(document.createTextNode("."));
+    }
+    if (note) { var n = document.createElement("span"); n.className = "scen-note"; n.textContent = " " + note; now.appendChild(n); note = ""; }
+    saveBtn.disabled = !own.length && on.length < 2;
+  }
+  function toggle(id) {
+    var s = find(id), i = on.indexOf(id);
+    if (i >= 0) { on.splice(i, 1); Object.keys(s.set).forEach(function (k) { if (C[k]) put(k, base[k]); }); }
+    else {
+      on.slice().forEach(function (oid) {
+        var t = find(oid), clash = Object.keys(s.set).some(function (k) { return k in t.set && !same(t.set[k], s.set[k]); });
+        if (clash) { on.splice(on.indexOf(oid), 1); note = "It replaces “" + t.label + "”, which sets the same thing differently."; }
+      });
+      Object.keys(s.set).forEach(function (k) { if (C[k]) put(k, s.set[k]); });
+      on.push(id);
+    }
+    o.apply(); status();
+  }
+  mount.addEventListener("click", function (e) {
+    var t = e.target.closest("button"); if (!t) return;
+    if (t.classList.contains("chip")) toggle(t.dataset.id);
+    else if (t.dataset.del) { saved = saved.filter(function (s) { return s.id !== t.dataset.del; }); on = on.filter(function (id) { return id !== t.dataset.del; }); persist(); render(); }
+    else if (t.dataset.act === "reset") { on = []; keys.forEach(function (k) { put(k, base[k]); }); o.apply(); status(); }
+    else if (t.dataset.act === "save") { form.hidden = false; saveBtn.hidden = true; var inp = form.querySelector("input"); inp.value = "My scenario " + (saved.length + 1); inp.focus(); inp.select(); }
+    else if (t.dataset.act === "cancel") { form.hidden = true; saveBtn.hidden = false; }
+    else if (t.dataset.act === "ok") saveNow();
+  });
+  form.querySelector("input").addEventListener("keydown", function (e) { if (e.key === "Enter") saveNow(); if (e.key === "Escape") { form.hidden = true; saveBtn.hidden = false; } });
+  function saveNow() {
+    var set = {}; keys.forEach(function (k) { if (!same(get(k), base[k])) set[k] = get(k); });
+    if (!Object.keys(set).length) return;
+    var label = (form.querySelector("input").value || "").trim() || "My scenario " + (saved.length + 1);
+    var s = { id: "mine-" + Date.now(), label: label, set: set, mine: true };
+    saved.push(s); persist(); on = [s.id]; form.hidden = true; saveBtn.hidden = false; render();
+  }
+  document.addEventListener("click", function (e) {
+    var u = e.target.closest && e.target.closest(".undo"); if (!u) return;
+    put(u.dataset.key, base[u.dataset.key]); o.apply(); status();
+  });
+  keys.forEach(function (k) { var e = el(k); if (e) { e.addEventListener("input", function () { setTimeout(status, 0); }); e.addEventListener("change", function () { setTimeout(status, 0); }); } });
+  render();
+  return { sync: function () { setTimeout(status, 0); } };
+}
+
+/* Ibn Khaldun's Tax Curve, v3: dynasties, cohesion (ʿaṣabiyya), luxury, taxation, trust,
+   the ruler's own trading, and borrowing. One step per year. */
+var KH_DEFAULTS = {
+  years: 400, decay: 0.3, lux: 0.025, rule: "cover", tau0: 0.1, eps: 1, chal: 0.025, merc: 0.6,
+  renew: 0, rcost: 0.1, every: 25,
+  // the ruler as trader
+  trade: 0.5,      // how readily the ruler turns to trade when revenue falls short (0 = never)
+  margin: 0.05,    // profit on the ruler's own sales; negative = runs at a loss the treasury covers
+  // trust
+  works: 0.02,     // public works (roads, security, justice) planned each year, share of output
+  trustw: 0.5,     // how far paying taxes depends on trust
+  // borrowing
+  borrow: 0,       // share of each year's shortfall borrowed instead of taxed
+  rate: 0.08,      // interest on the ruler's debt
+  // fixed internals
+  gain: 0.25, war: 0.1, luxBite: 1, m0: 0.03, m1: 0.12, eta: 0.7, phi: 0.5, smax: 0.6, debtCap: 0.6, crowd: 0.3
+};
+function khClamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+/* Long-run capacity at a given private-sector wedge (tax actually paid plus the burden of the ruler's trading). */
+function khLongP(w, eps, cap) {
+  var e = Math.pow(1 - Math.min(0.97, w), eps), g = 0.05, dp = 0.03;
+  return Math.max(0, (cap || 2) * (1 - dp * (1 - e) / (g * e)));
+}
+/* Revenue at a statutory rate tau, once the economy has adjusted, for a given compliance c and ruler's share s. */
+function khLongRev(tau, eps, c, s, margin, eta, phi, cap) {
+  var w = tau * c + phi * s, e = Math.pow(1 - Math.min(0.97, w), eps), P = khLongP(w, eps, cap);
+  return tau * c * (1 - s) * P * e + margin * s * P * eta;
+}
+function khShortRev(tau, eps, c, s, margin, eta, phi, P) {
+  var w = tau * c + phi * s, e = Math.pow(1 - Math.min(0.97, w), eps);
+  return tau * c * (1 - s) * P * e + margin * s * P * eta;
+}
+/* The statutory rate that brings in the most revenue once the economy has adjusted. */
+function khPeakAt(eps, c, s, margin, eta, phi, cap) {
+  var best = -1, bt = 0;
+  for (var i = 1; i < 95; i++) { var r = khLongRev(i / 100, eps, c, s, margin, eta, phi, cap); if (r > best) { best = r; bt = i / 100; } }
+  return bt;
+}
+function khRun(o) {
+  o = Object.assign({}, KH_DEFAULTS, o || {});
+  var dA = 1 - Math.pow(1 - o.decay, 1 / 25);
+  var g = 0.05, dp = 0.03;
+  var peak0 = khPeakAt(o.eps, 1, 0, o.margin, o.eta, o.phi, 2);
+  var P = 1, rows = [], dyn = [];
+  function newDyn(t, A) { return { start: t, A: A, A0: A, L: 0.02, C: 0.05, tau: o.tau0, extra: 0, s: 0, T: 0.8, D: 0 }; }
+  var D = newDyn(0, 0.9); dyn.push({ start: 0, end: null, renewals: 0 });
+  var peakCache = {};
+  for (var t = 0; t < o.years; t++) {
+    var age = t - D.start, renewed = false;
+    if (o.renew > 0 && age > 0 && age % o.every === 0) {
+      D.A += o.renew * (D.A0 - D.A); D.extra += o.rcost / 5; renewed = true; dyn[dyn.length - 1].renewals++;
+    }
+    var c = 1 - o.trustw * Math.max(0, 1 - D.T / 0.7);                         // share of what is owed that is actually paid
+    var wedge = Math.min(0.97, D.tau * c + o.phi * D.s);     // what private farmers and merchants lose: tax paid plus forced sales and price-fixing
+    var e = Math.pow(1 - wedge, o.eps);
+    var Yp = (1 - D.s) * P * e, Ys = D.s * P * o.eta, Y = Yp + Ys;
+    var Rtax = D.tau * c * Yp, Rtrade = o.margin * Ys, R = Rtax + Rtrade;
+    var forgone = D.tau * c * D.s * P * e;                    // tax the same trade would have paid in private hands
+    var M = o.m0 + o.m1 * (1 - D.A);
+    var X = D.extra * Y;
+    var G = o.works * Y;                                      // public works planned
+    var I = o.rate * D.D;                                     // interest owed
+    var court, works = G;
+    var canBorrow = D.D < o.debtCap * Math.max(Y, 0.05) ? o.borrow : 0;
+    if (o.rule === "fixed") {
+      var avail = R + canBorrow * Math.max(0, D.L + M + X + G + I - R);
+      var left = avail - M - X - I;
+      works = khClamp(left, 0, G); left -= works;
+      court = khClamp(left, 0, D.L);
+    } else court = D.L;
+    var S = court + M + X + works + I;
+    var gap = Math.max(0, S - R), B = canBorrow * gap;
+    var cover = Math.min(1, (R + B) / S);
+    var power = D.A + o.merc * (1 - D.A) * cover;
+    var q = works / S;                                        // share of spending that comes back as public goods
+    var pk = Math.round(c * 50) + "_" + Math.round(D.s * 50);
+    var peak = peakCache[pk] != null ? peakCache[pk] : (peakCache[pk] = khPeakAt(o.eps, Math.round(c * 50) / 50, Math.round(D.s * 50) / 50, o.margin, o.eta, o.phi, 2));
+    var stage = age < 15 ? 1 : (D.tau > peak || cover < 0.9) ? 5 : D.A >= 0.6 * D.A0 ? 2 : D.tau <= o.tau0 * 1.5 + 0.01 ? 3 : 4;
+    rows.push({ t: t, age: age, A: D.A, C: D.C, tau: D.tau, R: R, Rtax: Rtax, Rtrade: Rtrade, forgone: forgone, S: S, Y: Y, P: P,
+      L: court, M: M, X: X, G: works, I: I, B: B, debt: D.D, s: D.s, T: D.T, c: c, q: q, power: power, stage: stage, cover: cover,
+      peak: peak, dyn: dyn.length - 1, renewed: renewed });
+    if (D.C > power && age > 5) {
+      dyn[dyn.length - 1].end = t;
+      P = P * (1 - o.war);
+      D = newDyn(t, Math.min(0.95, D.C + 0.1));
+      dyn.push({ start: t, end: null, renewals: 0 });
+      continue;
+    }
+    // economy: capacity grows when people keep enough of what they make; public works raise the ceiling,
+    // and money lent to the ruler is money not lent to merchants
+    var cap = 2 * (0.85 + 5 * Math.min(0.06, works / Math.max(Y, 0.05)));
+    P = Math.max(0.05, P + P * (g * e * (1 - P / cap) - dp * (1 - e)) - o.crowd * B);
+    D.A = Math.max(0, D.A - dA * D.A * (1 + o.luxBite * court / 0.1));
+    D.L = D.L * (1 + o.lux);
+    D.extra = D.extra * 0.8;
+    D.C = Math.min(0.98, D.C + o.chal * D.C * (1 - D.C));
+    // trust drifts toward what people see: what returns to them, and whether the ruler competes with them
+    var Tstar = khClamp(0.25 + 2 * q - 1.2 * D.s, 0, 1);
+    D.T = D.T + 0.1 * (Tstar - D.T);
+    // after the conquest years, the ruler turns to trade when taxes fall well short of spending; once in, he does not leave
+    if (age >= 15) D.s = Math.min(o.smax, D.s + o.trade * Math.max(0, gap - B - 0.05 * S) / Math.max(Y, 0.05));
+    D.D = D.D + B;
+    if (o.rule === "cover") D.tau = Math.min(0.9, Math.max(0.02, D.tau + o.gain * (1 - canBorrow) * (S - R) / Math.max(Y, 0.05)));
+  }
+  dyn[dyn.length - 1].end = o.years;
+  var full = dyn.slice(0, -1).map(function (d) { return d.end - d.start; });
+  return { rows: rows, dyn: dyn, peak0: peak0, lens: full, params: o };
+}
+function khDynStats(res) {
+  return res.dyn.map(function (d, k) {
+    var rs = res.rows.filter(function (x) { return x.dyn === k; });
+    var best = 0, bestAge = 0, firstAbove = null, maxTau = 0, maxS = 0, firstTrade = null, sumTrade = 0, sumForg = 0, minT = 1, maxDebt = 0;
+    rs.forEach(function (x) {
+      if (x.R > best) { best = x.R; bestAge = x.age; }
+      if (x.tau > x.peak && firstAbove === null) firstAbove = x.age;
+      if (x.s > 0.005 && firstTrade === null) firstTrade = x.age;
+      maxTau = Math.max(maxTau, x.tau); maxS = Math.max(maxS, x.s); sumTrade += x.Rtrade; sumForg += x.forgone; minT = Math.min(minT, x.T);
+      maxDebt = Math.max(maxDebt, x.debt / Math.max(x.Y, 0.05));
+    });
+    var last = rs[rs.length - 1];
+    return { k: k, len: d.end - d.start, fell: d.end < res.params.years, maxTau: maxTau, firstAbove: firstAbove, bestAge: bestAge, bestR: best, endR: last.R,
+      maxS: maxS, firstTrade: firstTrade, sumTrade: sumTrade, sumForg: sumForg, endT: last.T, minT: minT, maxDebt: maxDebt, endCover: last.cover };
+  });
+}
+if (typeof module !== "undefined") module.exports = { khRun: khRun, khDynStats: khDynStats, khPeakAt: khPeakAt, khLongRev: khLongRev, KH_DEFAULTS: KH_DEFAULTS };
+
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var SVGNS = "http://www.w3.org/2000/svg";
+  var res = null, shown = 0, timer = null;
+  var STAGES = ["", "Conquest", "Rule by one", "Leisure", "Imitation", "Waste"];
+  var STAGE_TXT = ["", "the new rulers share power and spoils with their group, and taxes are light.", "the ruler takes power for himself and his house, still drawing on the group's loyalty.", "the dynasty enjoys prosperity: revenue is high, building flourishes, taxes are still light.", "rulers imitate their predecessors and spend more; taxes start rising to keep up.", "spending runs ahead of what taxes can bring in; higher rates yield less, and the army goes unpaid."];
+  initTips({
+    modeltype: ["Dynamical system", "A handful of quantities, such as cohesion, trust, the size of the economy, spending, debt and the tax rate, each updated once a year by simple rules that depend on the others. Cycles come out of those rules; they are not written in."],
+    asabiyya: ["Cohesion (ʿaṣabiyya)", "Ibn Khaldun's word for the solidarity that lets a group act together, fight and accept a leader. It is strongest among hardy frontier groups and fades among rulers settled in cities."],
+    luxury: ["Court spending", "The palace, ceremonies, gifts and officials. Ibn Khaldun saw it grow with each generation as rulers became used to comfort, and it is hard to cut back."],
+    merc: ["Paid soldiers", "As the ruling group's own fighters lose their cohesion, rulers hire clients and mercenaries. They cost money and fight only while they are paid."],
+    peak: ["Revenue peak", "The tax rate that brings in the most revenue once the economy has adjusted. Above it, people work, farm and trade so much less that higher rates collect less. Today this idea is called the Laffer curve. Here the peak moves: falling trust and the ruler's trading pull it down."],
+    trade: ["The ruler as trader", "Ibn Khaldun describes a ruler in financial straits who buys and sells on his own account to raise money. With far more money than his subjects, he buys cheap, forces prices, and pays no customs on his own goods, so the merchants who paid the tax lose heart or leave."],
+    margin: ["Profit on the ruler's trade", "What the ruler earns on what his own trade sells. Ibn Khaldun called these profits small next to the taxes lost. Set it below zero to model trade run at a loss that the treasury covers, which economists call a soft budget constraint."],
+    works: ["Public works", "Roads, security, markets and courts paid for from revenue. They raise what the economy can produce, and they are what taxpayers see in return. When the court grows, they become a smaller share of what is spent."],
+    trust: ["Trust", "How far people believe what they pay comes back to them and that the ruler plays fair. Here it rises with the share of spending that returns as public works and falls as the ruler takes over the market. When it falls, fewer people declare and pay what they owe."],
+    borrow: ["Borrowing", "Covering part of a shortfall with loans instead of higher taxes. Rates stay low for longer, but interest is owed every year after, and money lent to the ruler is not lent to merchants. Lenders stop once the debt reaches 60% of a year's output."],
+    eps: ["How much people cut back", "How strongly farming, work and trade shrink when taxes rise. At 1, a burden of 50% halves effort at once; higher values mean people cut back more."],
+    rule: ["How taxes are set", "Either the rulers raise rates to pay for whatever is spent and not borrowed, as Ibn Khaldun describes, or they hold the starting rate and let the court go short."],
+    renew: ["Renewal of cohesion", "New blood recruited into the ruling group, such as the slave-soldiers Egypt's rulers bought, or a religious reform movement, bringing back some of the solidarity lost since the conquest."],
+    chal: ["Outside groups", "Groups on the frontier, such as Bedouin or Berber tribes in Ibn Khaldun's Maghreb, whose cohesion grows under hardship until one can take over a weakened dynasty."],
+    plf: ["Finance bill", "The yearly budget law (projet de loi de finances) that the Tunisian government sends to parliament each October, setting spending, taxes and borrowing for the next year."],
+    passed: ["Past the peak", "The tax rate is above the rate that brings in the most revenue once the economy has adjusted, given this year's trust and the ruler's trading."]
+  });
+  var IDS = ["trade", "margin", "works", "trustw", "borrow", "rate", "lux", "tau0", "eps", "decay", "merc", "chal", "renew", "rcost"];
+  function params() { var p = { rule: $("rule").value }; IDS.forEach(function (id) { p[id] = +$(id).value; }); return p; }
+  function sgn(v) { return (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v * 100).toFixed(0) + "%"; }
+  var FMT = {
+    trade: function (v) { return +v ? (+v).toFixed(2) : "never"; }, margin: function (v) { return +v >= 0 ? sgn(+v) + " profit" : sgn(+v) + " loss"; },
+    works: function (v) { return pct(+v, 1) + " of output"; }, trustw: function (v) { return (+v).toFixed(2); },
+    borrow: function (v) { return +v ? pct(+v) : "none"; }, rate: function (v) { return pct(+v, 1); },
+    lux: function (v) { return pct(+v, 1); }, tau0: function (v) { return pct(+v); }, eps: function (v) { return (+v).toFixed(2); },
+    decay: function (v) { return pct(+v); }, merc: function (v) { return pct(+v); }, chal: function (v) { return pct(+v, 1) + " a year"; },
+    renew: function (v) { return +v ? pct(+v) : "none"; }, rcost: function (v) { return pct(+v) + " of output"; }
+  };
+  function syncOutputs() {
+    IDS.forEach(function (id) { $(id + "o").textContent = FMT[id]($(id).value); });
+    // folded groups show their current values in the summary line
+    Array.prototype.forEach.call(document.querySelectorAll(".sumval"), function (el) {
+      el.textContent = el.dataset.keys.split(",").map(function (k) {
+        return k === "rule" ? ($("rule").value === "cover" ? "cover spending" : "fixed rate") : FMT[k]($(k).value);
+      }).join(" · ");
+    });
+  }
+  function el(tag, attrs, parent, text) { var e = document.createElementNS(SVGNS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; parent.appendChild(e); return e; }
+  function drawTimeline(i) {
+    var svg = $("tl"); while (svg.firstChild) svg.removeChild(svg.firstChild);
+    var L = 10, W = 640, Y = 30, H = 34, n = res.rows.length, sx = function (t) { return L + W * t / n; };
+    var runStart = 0;
+    for (var t = 1; t <= i + 1; t++) {
+      var cur = res.rows[runStart], nx = res.rows[t];
+      if (t > i || !nx || nx.stage !== cur.stage || nx.dyn !== cur.dyn) {
+        el("rect", { x: sx(runStart), y: Y, width: Math.max(0.5, sx(t) - sx(runStart)), height: H, fill: "var(--st" + cur.stage + ")" }, svg);
+        runStart = t;
+      }
+    }
+    res.dyn.forEach(function (d, k) {
+      if (d.start > i) return;
+      el("line", { x1: sx(d.start), y1: Y - 6, x2: sx(d.start), y2: Y + H + 6, stroke: "var(--ink)", "stroke-width": 1.5 }, svg);
+      var end = Math.min(d.end, i + 1), len = d.end - d.start, mid = (sx(d.start) + sx(end)) / 2;
+      if (sx(end) - sx(d.start) > 70) el("text", { x: mid, y: Y - 9, "text-anchor": "middle", class: "m" }, svg, "Dynasty " + (k + 1) + (d.end <= i ? " · " + len + " yrs" : ""));
+    });
+    el("line", { x1: sx(i + 1), y1: Y - 4, x2: sx(i + 1), y2: Y + H + 4, stroke: "var(--ink)", "stroke-width": 2.5 }, svg);
+    [0, 100, 200, 300, 400].forEach(function (t) { el("text", { x: Math.min(sx(t), L + W - 4), y: Y + H + 22, "text-anchor": t === 400 ? "end" : t ? "middle" : "start", class: "m" }, svg, "year " + t); });
+    el("text", { x: L, y: 112, class: "m" }, svg, "Each band is one dynasty, colored by Ibn Khaldun's five stages.");
+  }
+  function drawDynasty(i) {
+    var svg = $("dz"); while (svg.firstChild) svg.removeChild(svg.firstChild);
+    var r = res.rows[i], d0 = r.t - r.age, span = Math.max(140, r.age + 10), L = 10, W = 640, Y = 26, H = 30;
+    var sx = function (a) { return L + W * a / span; };
+    var rs = res.rows.slice(d0, i + 1).filter(function (x) { return x.dyn === r.dyn; }), runStart = 0, firstPast = null, firstTrade = null;
+    rs.forEach(function (x) { if (firstPast === null && x.tau > x.peak) firstPast = x.age; if (firstTrade === null && x.s > 0.005) firstTrade = x.age; });
+    var narrow = svg.getBoundingClientRect().width < 500;
+    for (var k = 1; k <= rs.length; k++) {
+      if (k === rs.length || rs[k].stage !== rs[runStart].stage) {
+        var st = rs[runStart].stage, x1 = sx(rs[runStart].age), x2 = sx(k === rs.length ? r.age + 1 : rs[k].age);
+        el("rect", { x: x1, y: Y, width: Math.max(0.5, x2 - x1), height: H, fill: "var(--st" + st + ")" }, svg);
+        if (x2 - x1 > (narrow ? 26 : 16)) el("text", { x: (x1 + x2) / 2, y: Y + H / 2 + 4, "text-anchor": "middle", class: st <= 2 ? "wd" : "w" }, svg, x2 - x1 > (narrow ? 130 : 78) ? st + " " + STAGES[st] : String(st));
+        runStart = k;
+      }
+    }
+    el("rect", { x: sx(r.age + 1), y: Y, width: Math.max(0, sx(span) - sx(r.age + 1)), height: H, fill: "none", stroke: "var(--line)", "stroke-dasharray": "3 3" }, svg);
+    for (var gk = 0; gk * 40 <= span; gk++) {
+      el("line", { x1: sx(gk * 40), y1: Y + H, x2: sx(gk * 40), y2: Y + H + 6, stroke: "var(--muted)" }, svg);
+      el("text", { x: sx(gk * 40), y: Y + H + 18, "text-anchor": gk ? "middle" : "start", class: "m" }, svg, gk ? "year " + gk * 40 : "conquest");
+    }
+    var marks = [];
+    if (firstTrade !== null) marks.push({ a: firstTrade, t: "ruler trades, year " + firstTrade, c: "var(--trade)" });
+    if (firstPast !== null) marks.push({ a: firstPast, t: "rate passes peak, year " + firstPast, c: "var(--ink)" });
+    marks.sort(function (a, b) { return a.a - b.a; });
+    marks.forEach(function (m, j) {
+      var fx = sx(m.a), yy = j === 0 ? Y - 8 : Y + H + 34;
+      el("line", { x1: fx, y1: j === 0 ? Y - 4 : Y, x2: fx, y2: j === 0 ? Y + H : Y + H + 24, stroke: m.c, "stroke-width": 1.5, "stroke-dasharray": "3 2" }, svg);
+      if (j === 1 && Math.abs(sx(marks[0].a) - fx) < 4) yy = Y - 8;
+      el("text", { x: fx, y: j === 0 ? Y - 8 : Y + H + 34, "text-anchor": fx > 520 ? "end" : fx < 120 ? "start" : "middle", class: "m" }, svg, m.t);
+    });
+    el("line", { x1: sx(r.age + 1), y1: Y - 4, x2: sx(r.age + 1), y2: Y + H + 4, stroke: "var(--ink)", "stroke-width": 2.5 }, svg);
+    if (marks.length < 2) el("text", { x: L, y: 92, class: "m" }, svg, "Dynasty " + (r.dyn + 1) + ", year " + r.age + (narrow ? "" : ". Ticks mark generations of 40 years."));
+  }
+  function drawCharts(i) {
+    var R = res.rows.slice(0, i + 1), r = res.rows[i], p = res.params, base = { xMin: 0, xMax: 400, xTicks: [0, 100, 200, 300, 400], xFmt: String };
+    // the ruler's trade: what it brings in against the tax it displaces
+    var xmax = niceMax(Math.max.apply(null, res.rows.map(function (x) { return Math.max(x.forgone, x.Rtrade); })) * 1.1, 0.01);
+    var xmin = Math.min(0, Math.min.apply(null, res.rows.map(function (x) { return x.Rtrade; })));
+    xmin = xmin < 0 ? -niceMax(-xmin * 1.1, 0.005) : 0;
+    drawLines($("cvX"), Object.assign({}, base, { yMin: xmin, yMax: xmax, yTicks: 4, yFmt: function (v) { return v.toFixed(3); }, right: 150,
+      series: [
+        { pts: R.map(function (x) { return { x: x.t, y: x.forgone }; }), color: cssVar("--forest"), width: 2.5, label: "Tax displaced" },
+        { pts: R.map(function (x) { return { x: x.t, y: x.Rtrade }; }), color: cssVar("--leaf"), width: 2.5, label: p.margin < 0 ? "Trading loss" : "Trading profit" }
+      ] }));
+    var sumT = 0, sumF = 0; res.rows.forEach(function (x) { if (x.dyn === r.dyn && x.t <= r.t) { sumT += x.Rtrade; sumF += x.forgone; } });
+    $("tradeSum").textContent = sumF < 1e-4 ? "So far this dynasty, the ruler has not traded." :
+      "So far this dynasty: " + (sumT >= 0 ? "profit " + sumT.toFixed(2) : "losses " + (-sumT).toFixed(2)) + " against " + sumF.toFixed(2) + " of tax displaced" + (sumT > 0.001 ? ", " + (sumF / sumT).toFixed(1) + " times as much." : ".");
+    // the tax curve with this year's trust and trading, and without them
+    var curve = [], clean = [];
+    for (var k = 0; k <= 45; k++) { var tau = k / 50; curve.push({ x: tau, y: khLongRev(tau, p.eps, r.c, r.s, p.margin, p.eta, p.phi, 2) }); clean.push({ x: tau, y: khLongRev(tau, p.eps, 1, 0, p.margin, p.eta, p.phi, 2) }); }
+    var cmax = niceMax(Math.max.apply(null, clean.concat(curve).map(function (c) { return c.y; }).concat([r.R])) * 1.15, 0.2);
+    var trail = res.rows.slice(Math.max(0, i - 30), i + 1).filter(function (x) { return x.dyn === r.dyn; });
+    drawLines($("cvC"), { xMin: 0, xMax: 0.9, xTicks: [0, 0.2, 0.4, 0.6, 0.8], xFmt: function (v) { return pct(v); }, yMin: 0, yMax: cmax, yTicks: tickN(cmax), yFmt: function (v) { return v.toFixed(2); }, right: 16,
+      shade: { from: r.peak, to: 0.9, color: cssVar("--sun"), alpha: 0.2, label: "past the peak (" + pct(r.peak) + ")" },
+      series: [
+        { pts: clean, color: cssVar("--muted"), width: 1.5, dash: [2, 3], noDot: true },
+        { pts: curve, color: cssVar("--green"), width: 2.5, noDot: true },
+        { pts: trail.map(function (x) { return { x: x.tau, y: x.R }; }), color: cssVar("--ink-muted"), width: 1.5, noDot: true }
+      ],
+      dots: [{ x: r.tau, y: r.R, color: cssVar("--st" + r.stage), stroke: cssVar("--ink"), labelColor: cssVar("--ink"), r: 6, label: "year " + r.t, align: r.tau > 0.6 ? "right" : "left" }] });
+    drawLines($("cvT"), Object.assign({}, base, { yMin: 0, yMax: 1, yTicks: 4, yFmt: function (v) { return v.toFixed(2); }, right: 92,
+      series: [
+        { pts: R.map(function (x) { return { x: x.t, y: x.c }; }), color: cssVar("--muted"), width: 1.5, dash: [4, 3], label: "Paid" },
+        { pts: R.map(function (x) { return { x: x.t, y: x.T }; }), color: cssVar("--trust"), width: 2.5, label: "Trust" },
+        { pts: R.map(function (x) { return { x: x.t, y: x.s }; }), color: cssVar("--trade"), width: 2.5, label: "Ruler's trade" }
+      ] }));
+    drawLines($("cvA"), Object.assign({}, base, { yMin: 0, yMax: 1, yTicks: 4, yFmt: function (v) { return v.toFixed(2); }, right: 92,
+      series: [
+        { pts: R.map(function (x) { return { x: x.t, y: x.power }; }), color: cssVar("--ink"), width: 1.5, dash: [4, 3], label: "Power" },
+        { pts: R.map(function (x) { return { x: x.t, y: x.A }; }), color: cssVar("--ruler"), width: 2.5, label: "Rulers" },
+        { pts: R.map(function (x) { return { x: x.t, y: x.C }; }), color: cssVar("--chal"), width: 2.5, label: "Outsiders" }
+      ] }));
+    var mmax = niceMax(Math.max.apply(null, res.rows.map(function (x) { return Math.max(x.R, x.S, x.tau); })) * 1.05, 0.2);
+    var series = [
+      { pts: R.map(function (x) { return { x: x.t, y: x.tau }; }), color: cssVar("--muted"), width: 1.5, dash: [4, 3], label: "Tax rate" },
+      { pts: R.map(function (x) { return { x: x.t, y: x.S }; }), color: cssVar("--forest"), width: 2.5, label: "Spending" },
+      { pts: R.map(function (x) { return { x: x.t, y: x.R }; }), color: cssVar("--leaf"), width: 2.5, label: "Revenue" }
+    ];
+    if (res.rows.some(function (x) { return x.I > 0; })) series.push({ pts: R.map(function (x) { return { x: x.t, y: x.I }; }), color: cssVar("--ink"), width: 1.5, dash: [2, 3], label: "Interest" });
+    drawLines($("cvM"), Object.assign({}, base, { yMin: 0, yMax: mmax, yTicks: tickN(mmax), yFmt: function (v) { return v.toFixed(2); }, right: 92, series: series }));
+  }
+  function drawStats(i) {
+    var r = res.rows[i];
+    $("stN").innerHTML = (r.dyn + 1) + "<small>" + (i >= res.rows.length - 1 ? "in 400 years" : "by year " + r.t) + "</small>";
+    var lens = res.lens, avg = lens.length ? lens.reduce(function (a, b) { return a + b; }, 0) / lens.length : null;
+    $("stL").innerHTML = (avg ? Math.round(avg) + " yrs" : "400+ yrs") + "<small>" + (avg ? (avg / 40).toFixed(1) + " generations of 40 years" : "no dynasty fell") + "</small>";
+    $("stT").innerHTML = pct(r.tau) + "<small>revenue peaks at " + pct(r.peak) + " this year</small>";
+    var maxR = 0; res.rows.forEach(function (x) { if (x.dyn === r.dyn && x.t <= r.t) maxR = Math.max(maxR, x.R); });
+    $("stR").innerHTML = pct(Math.max(0, r.R) / maxR) + "<small>of this dynasty's best year so far</small>";
+    var ft = null; res.rows.forEach(function (x) { if (x.dyn === r.dyn && x.t <= r.t && ft === null && x.s > 0.005) ft = x.age; });
+    $("stS").innerHTML = pct(r.s) + "<small>" + (ft === null ? "the ruler has not traded" : "trading since year " + ft + " of this dynasty") + "</small>";
+    $("stTr").innerHTML = r.T.toFixed(2) + "<small>" + pct(r.c) + " of what is owed is paid</small>";
+    $("stD").innerHTML = (r.debt > 1e-4 ? pct(r.debt / Math.max(r.Y, 0.05)) : "none") + "<small>" + (r.debt > 1e-4 ? "of a year's output" : "no borrowing yet") + "</small>";
+    $("stQ").innerHTML = pct(r.q) + "<small>of spending is public works</small>";
+    $("status").textContent = "Year " + r.t + " · dynasty " + (r.dyn + 1) + ", year " + r.age;
+    $("stageNow").innerHTML = "<b>Stage " + r.stage + ", " + STAGES[r.stage].toLowerCase() + ":</b> " + STAGE_TXT[r.stage];
+    var gap = Math.round((r.tau - r.peak) * 100);
+    $("peakNow").innerHTML = "<b>Tax rate " + pct(r.tau) + ":</b> " + (gap > 0 ? gap + " points <span class=\"term\" tabindex=\"0\" data-term=\"passed\">past the revenue peak</span> of " + pct(r.peak) + "." : gap === 0 ? "at the revenue peak of " + pct(r.peak) + "." : -gap + " points below the revenue peak of " + pct(r.peak) + ".") + (r.renewed ? " Cohesion renewed this year." : "");
+  }
+  function drawAll(i) { drawTimeline(i); drawDynasty(i); drawCharts(i); drawStats(i); }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } $("pause").disabled = true; $("pause").textContent = "Pause"; }
+  function rerun(animate, atFirstFall) {
+    stop(); res = khRun(params());
+    if (animate && !reduced) { shown = 0; drawAll(0); $("pause").disabled = false; timer = setInterval(step, 30); }
+    else {
+      // on first load, stop on the last year of the first dynasty, where the story is clearest
+      shown = atFirstFall && res.dyn.length > 1 ? res.dyn[0].end : res.rows.length - 1;
+      drawAll(shown);
+      if (shown < res.rows.length - 1) { $("pause").disabled = false; $("pause").textContent = "Resume"; }
+    }
+  }
+  function step() { shown += 2; if (shown >= res.rows.length - 1) { shown = res.rows.length - 1; stop(); } drawAll(shown); }
+  IDS.forEach(function (id) { $(id).addEventListener("input", function () { syncOutputs(); rerun(false); }); });
+  $("rule").addEventListener("change", function () { rerun(false); });
+  $("play").addEventListener("click", function () { rerun(true); });
+  $("pause").addEventListener("click", function () {
+    if (timer) { clearInterval(timer); timer = null; $("pause").textContent = "Resume"; }
+    else if (shown < res.rows.length - 1) { timer = setInterval(step, 30); $("pause").textContent = "Pause"; }
+  });
+  /*FINDINGS-START*/
+  $("findLead").textContent = "From 400-year runs with the starting settings unless stated. The model has no randomness, and lengths count only dynasties that fell within the 400 years.";
+  $("findList").innerHTML = "<li><div class=\"stat\">85\u201389 yrs</div><h3>A ruler who turns trader shortens his dynasty</h3><p>In the first dynasty, taxes fall more than 5% short of spending in year 46 and the ruler starts trading. By its end he holds 60% of the market, trust has fallen from 0.80 to 0.16, and revenue is at 46% of its best year.</p></li><li><div class=\"stat\">4.1\u00d7</div><h3>Ibn Khaldun's comparison holds</h3><p>Over the first dynasty, his trade earns 0.29, counted in years of the starting economy's output, but displaces 1.16 in tax. Even a profitable trade costs the treasury.</p></li><li><div class=\"stat\">113\u2013114 yrs</div><h3>Staying out of trade buys a generation</h3><p>With everything else the same, a ruler who never trades keeps his dynasty about 25 years longer. Revenue in its last year is still 97\u201398% of its best.</p></li><li><div class=\"stat\">81 yrs</div><h3>Trading at a loss is worse</h3><p>If his trade loses 10% of its sales and the treasury covers it, dynasties average 81 years. The losses widen the shortfall that pushed him into trade.</p></li><li><div class=\"stat\">74\u201383 vs 94\u201395 yrs</div><h3>Trust depends on what comes back</h3><p>With no public works, trust collapses and dynasties last 74\u201383 years. With public works at 4% of output they last 94\u201395, and 115\u2013116 if the ruler also stays out of trade.</p></li><li><div class=\"stat\">Year 41 \u2192 52</div><h3>Borrowing delays the climb, then steepens it</h3><p>Borrowing 80% of each gap keeps rates under 20% until year 41, against year 63. Once lenders stop, interest reaches a quarter of spending and rates pass 50% in year 52, against year 83.</p></li><li><div class=\"stat\">139 yrs</div><h3>The root is spending that outgrows the base</h3><p>With a frugal court growing 0.5% a year, the rate never passes 16% and the ruler never needs to trade. In the model, trading and borrowing are responses to a shortfall, and both deepen it.</p></li>";
+  /*FINDINGS-END*/
+  var controls = { rule: { id: "rule", short: "Taxes", fmt: function (v) { return v === "cover" ? "cover spending" : "fixed"; } } };
+  var SHORT = { trade: "Turns to trade", margin: "Trade margin", works: "Public works", trustw: "Trust matters", borrow: "Borrowed", rate: "Interest", lux: "Court growth", tau0: "Starting rate", eps: "Cut back", decay: "Cohesion lost", merc: "Money for loyalty", chal: "Outsiders unite", renew: "Cohesion restored", rcost: "Renewal cost" };
+  var base = { rule: "cover" };
+  IDS.forEach(function (id) { controls[id] = { id: id, short: SHORT[id], fmt: FMT[id] }; base[id] = KH_DEFAULTS[id]; });
+  initScenarios({
+    mount: "scen", store: "khaldun.scenarios.v3", baseName: "a ruler who turns to trade when short of money, with no borrowing",
+    controls: controls, base: base,
+    scenarios: [
+      { id: "notrade", label: "The ruler stays out of trade", set: { trade: 0 } },
+      { id: "loss", label: "His trade runs at a loss", set: { margin: -0.1 } },
+      { id: "borrow", label: "Borrow most of the gap", set: { borrow: 0.8 } },
+      { id: "noworks", label: "Public works neglected", set: { works: 0 } },
+      { id: "works", label: "Public works kept up", set: { works: 0.04 } },
+      { id: "frugal", label: "A frugal court", set: { lux: 0.005 } },
+      { id: "fixed", label: "Rate held, the court makes do", set: { rule: "fixed" } },
+      { id: "flee", label: "Taxpayers cut back hard", set: { eps: 2 } }
+    ],
+    apply: function () { syncOutputs(); rerun(true); }
+  });
+  onThemeChange(function () { if (res) drawAll(shown); });
+  if (window.matchMedia && !window.matchMedia("(min-width: 861px)").matches) $("allset").open = false;
+  syncOutputs(); rerun(false, true);
+})();
+
+</script>
+</body></html>
