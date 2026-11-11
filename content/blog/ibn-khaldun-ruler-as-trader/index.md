@@ -8,6 +8,8 @@ tags:
   - governance
   - tunisia
   - public-finance
+image:
+  alt_text: "A brass balance on an old desk tips under a bundle of tied receipts against a few coins, beside a green ledger with a red wax seal, with shuttered shop fronts through the doorway"
 ---
 
 Ibn Khaldun finished the first draft of his *Muqaddimah* in 1377, and one sentence from its chapter on dynasties has traveled further than the rest of the book. At the beginning of a dynasty, he wrote, taxation yields a large revenue from small assessments, and at the end, a small revenue from large ones. Six centuries later, Arthur Laffer credited him with the idea behind the curve that carries Laffer's name.
