@@ -14,7 +14,7 @@ image:
 
 Ibn Khaldun finished the first draft of his *Muqaddimah* in 1377, and one sentence from its chapter on dynasties has traveled further than the rest of the book. At the beginning of a dynasty, he wrote, taxation yields a large revenue from small assessments, and at the end, a small revenue from large ones. Six centuries later, Arthur Laffer credited him with the idea behind the curve that carries Laffer's name.
 
-Two sections later, Ibn Khaldun wrote a warning that is quoted far less. It concerns what a ruler does once that curve has turned against him.
+The *Muqaddimah* is divided into six chapters, each made of short numbered sections. Two sections after the one on taxation, in the third chapter on dynasties and government, Ibn Khaldun wrote a warning that is quoted far less. It concerns what a ruler does once that curve has turned against him.
 
 ## The other warning
 
@@ -71,7 +71,7 @@ The model is stylized. Its numbers show how Ibn Khaldun's mechanisms behave toge
 
 ## References
 
-- Ibn Khaldun, *The Muqaddimah: An Introduction to History*, translated by Franz Rosenthal (Princeton: Princeton University Press, 1958; abridged edition 1967), chapter 3, sections 36, 38 and 41. Quotations from section 38 follow the Rosenthal translation as excerpted in the [Aspen Institute's selections](https://aspeninstitute.org/wp-content/uploads/files/content/docs/KHALDUN_MUQADDIMAH_SELECTIONS_(AS08).PDF).
+- Ibn Khaldun, *The Muqaddimah: An Introduction to History*, translated by Franz Rosenthal (Princeton: Princeton University Press, 1958; abridged edition by N. J. Dawood), chapter 3, sections 36, 38 and 41. Quotations from section 38 follow the Rosenthal translation as excerpted in the [Aspen Institute's selections](https://aspeninstitute.org/wp-content/uploads/files/content/docs/KHALDUN_MUQADDIMAH_SELECTIONS_(AS08).PDF).
 - Arthur B. Laffer, "[The Laffer Curve: Past, Present, and Future](https://www.heritage.org/node/17781)," Heritage Foundation, 2004.
 - János Kornai, "The Soft Budget Constraint," *Kyklos* 39, no. 1 (1986): 3–30.
 - Erzo F. P. Luttmer and Monica Singhal, "[Tax Morale](https://doi.org/10.1257/jep.28.4.149)," *Journal of Economic Perspectives* 28, no. 4 (2014): 149–168.
