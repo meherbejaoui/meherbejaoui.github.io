@@ -167,7 +167,7 @@
   .stage-now { font-size: 1rem; margin: 8px 0 0; }
   .stage-now b { font-weight: 700; }
   h3.sub { margin: 18px 0 8px; }
-  @media (max-width: 600px) { #dz text { font-size: 17px; } }
+  @media (max-width: 600px) { #dz text, #tl text { font-size: 19px; } }
   .then { max-width: 72ch; }
   .then p { font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.62; margin: 0 0 12px; }
   .then ol { font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.55; margin: 0 0 14px; padding-left: 1.3rem; display: flex; flex-direction: column; gap: 6px; }
@@ -1150,7 +1150,7 @@ if (typeof module !== "undefined") module.exports = { khRun: khRun, khDynStats: 
       el("line", { x1: sx(d.start), y1: Y - 6, x2: sx(d.start), y2: Y + H + 6, stroke: "var(--ink)", "stroke-width": 1.5 }, svg);
       var end = Math.min(d.end, i + 1), len = d.end - d.start, mid = (sx(d.start) + sx(end)) / 2;
       var room = sx(end) - sx(d.start) - 8, lab = L().dynasty(k + 1, d.end <= i ? len : null);
-      if (room < lab.length * 6.4) lab = room >= 34 ? "D" + (k + 1) : "";
+      var cw = svg.getBoundingClientRect().width < 500 ? 10.5 : 6.4; if (room < lab.length * cw) lab = room >= (cw > 7 ? 30 : 20) ? "D" + (k + 1) : "";
       if (lab) el("text", { x: mid, y: Y - 9, "text-anchor": "middle", class: "m" }, svg, lab);
     });
     el("line", { x1: sx(i + 1), y1: Y - 4, x2: sx(i + 1), y2: Y + H + 4, stroke: "var(--ink)", "stroke-width": 2.5 }, svg);
@@ -1196,7 +1196,8 @@ if (typeof module !== "undefined") module.exports = { khRun: khRun, khDynStats: 
     var xmax = niceMax(Math.max.apply(null, res.rows.map(function (x) { return Math.max(x.forgone, x.Rtrade); })) * 1.1, 0.01);
     var xmin = Math.min(0, Math.min.apply(null, res.rows.map(function (x) { return x.Rtrade; })));
     xmin = xmin < 0 ? -niceMax(-xmin * 1.1, 0.005) : 0;
-    drawLines($("cvX"), Object.assign({}, base, { yMin: xmin, yMax: xmax, yTicks: 4, yFmt: function (v) { return nf(v, 3); }, right: 160,
+    var xstep = niceMax((xmax - xmin) / 4, 0.0001); xmin = Math.floor(xmin / xstep - 1e-9) * xstep; xmax = Math.ceil(xmax / xstep - 1e-9) * xstep;
+    drawLines($("cvX"), Object.assign({}, base, { yMin: xmin, yMax: xmax, yTicks: Math.round((xmax - xmin) / xstep), yFmt: function (v) { return nf(v, 3); }, right: 160,
       series: [
         { pts: R.map(function (x) { return { x: x.t, y: x.forgone }; }), color: cssVar("--forest"), width: 2.5, label: L().taxDisplaced },
         { pts: R.map(function (x) { return { x: x.t, y: x.Rtrade }; }), color: cssVar("--leaf"), width: 2.5, label: p.margin < 0 ? L().tradingLoss : L().tradingProfit }
