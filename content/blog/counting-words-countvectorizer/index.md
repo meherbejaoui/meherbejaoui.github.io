@@ -1,4 +1,6 @@
 ---
+aliases:
+  - "/python/counting-words-in-python-with-scikit-learn's-countvectorizer/"
 title: "Counting words in Python with scikit-learn's CountVectorizer"
 summary: Using CountVectorizer to count words in multiple documents
 date: 2021-04-10

@@ -1,4 +1,6 @@
 ---
+aliases:
+  - "/python/Temperature-broken-records/"
 title: "Plotting climate data using pandas"
 summary: Plotting line charts and a scatter plot of daily temperature records over
   the period 2005-2014, using pandas and matplotlib

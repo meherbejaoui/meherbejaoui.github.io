@@ -1,4 +1,6 @@
 ---
+aliases:
+  - "/python/Olympic-games-analyses/"
 title: "Analysing Olympic Games medal table"
 summary: Analysis of Olympic Games medal table with pandas and matplotlib
 date: 2021-03-18

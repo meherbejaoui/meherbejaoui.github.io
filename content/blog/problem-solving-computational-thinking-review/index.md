@@ -1,4 +1,6 @@
 ---
+aliases:
+  - "/blog/problem-solving-using-computational-thinking-course-review/"
 title: "Problem Solving Using Computational Thinking - Course Review"
 summary: Reviewing the course Problem Solving Using Computational Thinking from
   the University of Michigan on Coursera

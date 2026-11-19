@@ -1,4 +1,6 @@
 ---
+aliases:
+  - "/python/kmeans-clustering-and-similarity-visualization-of-constitutions/"
 title: "K-Means clustering and similarity visualization of constitutions"
 summary: Using TF-IDF term weighting, K-Means clustering from sklearn and visualizing
   similarities of a text corpus of constitutions

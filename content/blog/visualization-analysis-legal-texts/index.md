@@ -1,4 +1,6 @@
 ---
+aliases:
+  - "/python/Visualization-and-analysis-of-legal-texts/"
 title: "Visualization and analysis of legal texts"
 summary: Using pandas and matplotlib, to generate and style Word Clouds, count words
   using the Counter collection and compare different documents

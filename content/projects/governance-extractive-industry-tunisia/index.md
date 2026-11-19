@@ -1,4 +1,6 @@
 ---
+aliases:
+  - "/blog/Governance-of-extractive-industry-in-Tunisia/"
 title: "Governance of extractive industry in Tunisia"
 summary: A long-form summary of my 2020 thesis on how Tunisia governs its oil, gas,
   and mining sectors, covering the legal framework, the institutions, the numbers,

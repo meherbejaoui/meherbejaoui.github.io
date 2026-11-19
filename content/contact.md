@@ -1,4 +1,6 @@
 ---
+aliases:
+  - "/about/"
 title: 'Contact'
 date: 2026-08-07
 type: landing
