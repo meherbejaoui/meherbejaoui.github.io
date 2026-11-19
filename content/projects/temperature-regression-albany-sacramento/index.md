@@ -1,4 +1,6 @@
 ---
+aliases:
+  - "/python/multiregression-analysis-of-temperature-data-in-albany-and-sacramento/"
 title: "Multiple Linear Regression Analysis of Temperature Data in Albany and Sacramento"
 summary: Unlock climate insights with a data-driven exploration of Albany and Sacramento
   temperatures. Leveraging NOAA datasets and Python tools, delve into their distinct

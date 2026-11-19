@@ -1,4 +1,6 @@
 ---
+aliases:
+  - "/python/bases-de-python/"
 title: "Les bases de Python"
 summary: Les bases du langage Python
 date: 2018-08-12

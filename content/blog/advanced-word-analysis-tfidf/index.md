@@ -1,4 +1,6 @@
 ---
+aliases:
+  - "/python/advanced-word-analysis-tfidf-with-tfidfvectorizer/"
 title: "Advanced word analysis with TF-IDF"
 summary: An explanation of text analysis using CountVectorizer and TfidfVectorizer
   from scikit-learn
