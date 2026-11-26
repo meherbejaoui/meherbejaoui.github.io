@@ -1,3 +1,5 @@
 ---
+aliases:
+  - "/categories/"
 title: Topics
 ---
